@@ -6,14 +6,13 @@ backend:
 media_folder: public/images/uploads
 public_folder: /images/uploads
 
-# Site URL for proper redirects
+# Site configuration
 site_url: https://neon-meerkat-c50769.netlify.app
-
-# Display URL for the CMS
 display_url: https://neon-meerkat-c50769.netlify.app
-
-# Logo for the CMS
 logo_url: https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wediing-icon-MWGi3zHWRSwveW4CaK9EM7s57pDP54.png
+
+# Local backend for development (uncomment for local development)
+# local_backend: true
 
 collections:
   - name: "wedding-config"
@@ -29,6 +28,7 @@ collections:
             name: "couple"
             widget: "object"
             collapsed: false
+            summary: "{{fields.bride_name}} & {{fields.groom_name}}"
             fields:
               - { label: "Bride Name", name: "bride_name", widget: "string", default: "Tani", hint: "Bride's name in English" }
               - { label: "Bride Name (Bengali)", name: "bride_name_local", widget: "string", default: "তানি", hint: "Bride's name in Bengali script" }
@@ -41,6 +41,7 @@ collections:
             name: "wedding"
             widget: "object"
             collapsed: false
+            summary: "{{fields.main_date}} at {{fields.main_venue}}"
             fields:
               - { label: "Main Wedding Date", name: "main_date", widget: "date", default: "2028-02-29", hint: "The main wedding ceremony date" }
               - { label: "Main Wedding Time", name: "main_time", widget: "string", default: "8:00 PM", hint: "Time of the main ceremony" }
@@ -51,10 +52,71 @@ collections:
             name: "contact"
             widget: "object"
             collapsed: true
+            summary: "{{fields.email}}"
             fields:
               - { label: "Phone", name: "phone", widget: "string", default: "+91 98765 43210" }
               - { label: "Email", name: "email", widget: "string", default: "tani.sunny.wedding@gmail.com" }
               - { label: "Address", name: "address", widget: "string", default: "Heritage Palace, West Bengal, India" }
+          
+          - label: "🎨 Branding & Images"
+            name: "branding"
+            widget: "object"
+            collapsed: true
+            summary: "{{fields.site_name}}"
+            fields:
+              - { label: "Site Name", name: "site_name", widget: "string", default: "Sacred Union" }
+              - { label: "Site Name (Bengali)", name: "site_name_local", widget: "string", default: "পবিত্র মিলন" }
+              - { label: "Tagline", name: "tagline", widget: "text", default: "Celebrating the eternal bond of love with Bengali traditions and cultural heritage." }
+              - { label: "Logo URL", name: "logo_url", widget: "string", default: "https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wediing-icon-MWGi3zHWRSwveW4CaK9EM7s57pDP54.png" }
+              - { label: "Hero Image URL", name: "hero_image_url", widget: "string", default: "https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wedding-pixar-D6EG6OvRCwxyNzdCoXbz3Yaifu5wlC.png" }
+          
+          - label: "🙏 Blessings & Quotes"
+            name: "blessings"
+            widget: "object"
+            collapsed: true
+            fields:
+              - label: "Main Blessing"
+                name: "main"
+                widget: "object"
+                fields:
+                  - { label: "Bengali Text", name: "bengali", widget: "string", default: "শুভস্য শীঘ্রং, শুভ বিবাহ শুভ হোক" }
+                  - { label: "Translation", name: "translation", widget: "string", default: "May this sacred union be blessed and prosperous" }
+              - label: "Footer Quote"
+                name: "footer"
+                widget: "object"
+                fields:
+                  - { label: "Bengali Text", name: "bengali", widget: "string", default: "তারপর পথ হারালো তোমায় আমায় নিয়ে" }
+                  - { label: "Translation", name: "translation", widget: "string", default: "Then the path was lost, taking you and me" }
+
+  - name: "events"
+    label: "🎉 Wedding Events"
+    description: "Manage wedding ceremony details"
+    files:
+      - label: "📅 Event Details"
+        name: "events-config"
+        file: "src/config/events-config.ts"
+        description: "Edit wedding events, dates, times, and descriptions"
+        fields:
+          - label: "Wedding Events"
+            name: "events"
+            widget: "list"
+            summary: "{{fields.name}} - {{fields.date}}"
+            fields:
+              - { label: "Event ID", name: "id", widget: "string", hint: "Unique identifier (e.g., mehendi, gaye-holud)" }
+              - { label: "Event Name", name: "name", widget: "string", hint: "Event name in English" }
+              - { label: "Bengali Name", name: "bengali_name", widget: "string", hint: "Event name in Bengali" }
+              - { label: "Date", name: "date", widget: "date", hint: "Event date" }
+              - { label: "Time", name: "time", widget: "string", hint: "Event time (e.g., 4:00 PM)" }
+              - { label: "Venue", name: "venue", widget: "string", hint: "Event venue" }
+              - { label: "Description", name: "description", widget: "text", hint: "Detailed description of the event" }
+              - { label: "Cultural Significance", name: "significance", widget: "text", hint: "Cultural and spiritual significance" }
+              - { label: "Dress Code", name: "dresscode", widget: "string", hint: "Dress code for guests" }
+              - { label: "Photo URL", name: "photo", widget: "string", required: false, hint: "Event photo URL" }
+              - label: "Traditional Rituals"
+                name: "rituals"
+                widget: "list"
+                summary: "{{fields.ritual}}"
+                field: { label: "Ritual", name: "ritual", widget: "string" }
 
   - name: "content"
     label: "📝 Website Content"
@@ -65,5 +127,91 @@ collections:
         file: "src/config/content-config.ts"
         description: "Edit homepage content and messages"
         fields:
-          - { label: "Welcome Message", name: "welcome_message", widget: "text", default: "Join us in celebrating our sacred union with Bengali traditions and blessings", hint: "Main welcome text on the homepage" }
-          - { label: "Countdown Title", name: "countdown_title", widget: "string", default: "Days Until Our Sacred Union", hint: "Title above the countdown timer" }
+          - label: "🏠 Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Welcome Message", name: "welcome_message", widget: "text", default: "Join us in celebrating our sacred union with Bengali traditions and blessings" }
+              - { label: "Countdown Title", name: "countdown_title", widget: "string", default: "Days Until Our Sacred Union" }
+          
+          - label: "🎊 Events Section"
+            name: "events"
+            widget: "object"
+            fields:
+              - { label: "Description", name: "description", widget: "text", default: "Join us in celebrating a traditional Bengali wedding with authentic rituals, cultural ceremonies, and joyous festivities spanning multiple days." }
+          
+          - label: "📸 Gallery Section"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - { label: "Description", name: "description", widget: "text", default: "Capturing precious moments from our journey together and the beautiful ceremonies that mark our sacred union in Bengali traditions." }
+          
+          - label: "🏛️ Culture Section"
+            name: "culture"
+            widget: "object"
+            fields:
+              - { label: "Description", name: "description", widget: "text", default: "Explore the rich traditions, customs, and cultural significance of Bengali weddings that have been passed down through generations." }
+          
+          - label: "💌 RSVP Section"
+            name: "rsvp"
+            widget: "object"
+            fields:
+              - { label: "Description", name: "description", widget: "text", default: "We would be honored by your presence at our wedding celebration. Please let us know if you'll be joining us for this sacred occasion." }
+              - { label: "Success Message", name: "success_message", widget: "text", default: "We're delighted that you'll be joining us for our special celebration. You'll receive a confirmation email shortly with all the details." }
+
+  - name: "gallery"
+    label: "📸 Photo Gallery"
+    description: "Manage wedding photos and gallery"
+    files:
+      - label: "🖼️ Gallery Images"
+        name: "gallery-config"
+        file: "src/config/gallery-config.ts"
+        description: "Add, edit, or remove gallery photos"
+        fields:
+          - label: "Gallery Images"
+            name: "gallery_images"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - { label: "Image ID", name: "id", widget: "number", hint: "Unique number for the image" }
+              - { label: "Image URL", name: "url", widget: "string", hint: "Direct URL to the image" }
+              - { label: "Caption", name: "caption", widget: "string", hint: "Description of the image" }
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["mehendi", "gaye-holud", "ceremony", "reception", "pre-wedding"]
+                hint: "Which event category this image belongs to"
+          
+          - label: "Gallery Categories"
+            name: "gallery_categories"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Category ID", name: "id", widget: "string", hint: "Unique identifier (e.g., mehendi)" }
+              - { label: "Category Name", name: "name", widget: "string", hint: "Category name in English" }
+              - { label: "Local Name", name: "local", widget: "string", hint: "Category name in Bengali" }
+
+  - name: "cultural"
+    label: "🏛️ Cultural Information"
+    description: "Manage cultural traditions and information"
+    files:
+      - label: "📜 Cultural Traditions"
+        name: "cultural-config"
+        file: "src/config/cultural-config.ts"
+        description: "Edit cultural information and traditions"
+        fields:
+          - label: "Cultural Information"
+            name: "cultural_info"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Unique identifier" }
+              - { label: "Title", name: "title", widget: "string", hint: "Title in English" }
+              - { label: "Bengali Title", name: "bengali_title", widget: "string", hint: "Title in Bengali" }
+              - { label: "Description", name: "description", widget: "text", hint: "Detailed description" }
+              - { label: "Significance", name: "significance", widget: "text", hint: "Cultural and spiritual significance" }
+              - label: "Traditions"
+                name: "traditions"
+                widget: "list"
+                summary: "{{fields.tradition}}"
+                field: { label: "Tradition", name: "tradition", widget: "string" }

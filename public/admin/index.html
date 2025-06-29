@@ -19,7 +19,7 @@
     }
     
     .setup-container {
-      max-width: 700px;
+      max-width: 800px;
       margin: 0 auto;
       background: white;
       border-radius: 12px;
@@ -71,6 +71,7 @@
       transition: transform 0.2s;
       border: none;
       cursor: pointer;
+      font-size: 14px;
     }
     
     .button:hover {
@@ -93,8 +94,8 @@
     }
     
     .step {
-      padding: 15px;
-      margin: 10px 0;
+      padding: 20px;
+      margin: 15px 0;
       background: #f8f9fa;
       border-left: 4px solid #DC143C;
       border-radius: 0 8px 8px 0;
@@ -113,19 +114,15 @@
       font-size: 14px;
     }
     
-    #netlify-identity-widget {
-      margin: 20px 0;
-    }
-    
-    .fix-section {
+    .auth-section {
       background: #e7f3ff;
       border: 2px solid #007bff;
       border-radius: 10px;
-      padding: 20px;
-      margin: 20px 0;
+      padding: 25px;
+      margin: 25px 0;
     }
     
-    .fix-section h3 {
+    .auth-section h3 {
       color: #004085;
       margin-top: 0;
     }
@@ -148,6 +145,52 @@
     .hidden {
       display: none;
     }
+    
+    .user-info {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+    
+    .cms-ready {
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    
+    .cms-ready h3 {
+      margin-top: 0;
+      color: white;
+    }
+    
+    .setup-instructions {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      color: #856404;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: left;
+    }
+    
+    .setup-instructions h4 {
+      margin-top: 0;
+      color: #856404;
+    }
+    
+    .setup-instructions ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    
+    .setup-instructions li {
+      margin: 8px 0;
+    }
   </style>
 </head>
 <body>
@@ -155,213 +198,316 @@
     <img src="https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wediing-icon-MWGi3zHWRSwveW4CaK9EM7s57pDP54.png" alt="Wedding Icon" class="logo" />
     
     <h1 class="title">Wedding Content Manager</h1>
-    <p class="subtitle">Manage your wedding website content easily</p>
+    <p class="subtitle">Manage your wedding website content with ease</p>
     
-    <div id="identity-status"></div>
+    <div id="auth-status"></div>
     
-    <!-- Fix for Invite Token Loop -->
-    <div class="fix-section">
-      <h3>🔧 Fix: Invite Token Loop Issue</h3>
-      <p><strong>Problem:</strong> Getting stuck in a loop after using access token to signup</p>
-      <p><strong>Solution:</strong> We'll bypass the invite system and create a direct user account.</p>
+    <!-- Authentication Section -->
+    <div class="auth-section">
+      <h3>🔐 Authentication Setup</h3>
+      <p>This CMS uses Netlify Identity for secure authentication. Follow the setup below:</p>
       
-      <div class="steps">
-        <div class="step">
-          <h4>Step 1: Clear Browser Data</h4>
-          <p>First, let's clear any stuck authentication data:</p>
-          <button onclick="clearAuthData()" class="button secondary">
-            Clear Authentication Data
-          </button>
-          <p><small>This will clear any stuck tokens or session data.</small></p>
-        </div>
+      <div id="setup-instructions" class="setup-instructions">
+        <h4>📋 Setup Instructions:</h4>
+        <ol>
+          <li><strong>Enable Netlify Identity:</strong>
+            <br>Go to <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank">Netlify Identity Settings</a>
+            <br>Click "Enable Identity" if not already enabled
+          </li>
+          
+          <li><strong>Enable Git Gateway:</strong>
+            <br>In the same page, scroll to "Services" section
+            <br>Click "Enable Git Gateway"
+          </li>
+          
+          <li><strong>Configure Registration:</strong>
+            <br>Set "Registration preferences" to "Open" or "Invite only"
+            <br>If using "Invite only", you'll need to invite users manually
+          </li>
+          
+          <li><strong>Add Users:</strong>
+            <br>Go to <a href="https://app.netlify.com/sites/neon-meerkat-c50769/identity" target="_blank">Identity Users</a>
+            <br>Click "Invite users" and add email addresses
+            <br>Or set registration to "Open" to allow self-registration
+          </li>
+        </ol>
         
-        <div class="step">
-          <h4>Step 2: Enable Git Gateway</h4>
-          <p>Go to Netlify and enable Git Gateway (this bypasses the invite system):</p>
-          <ol>
-            <li>Open <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank">Netlify Identity Settings</a></li>
-            <li>Scroll down to <strong>"Services"</strong> section</li>
-            <li>Click <strong>"Enable Git Gateway"</strong></li>
-            <li>Save the settings</li>
-          </ol>
-        </div>
-        
-        <div class="step">
-          <h4>Step 3: Create User Directly (No Invite)</h4>
-          <p>Create a user account without using invites:</p>
-          <ol>
-            <li>Go to <a href="https://app.netlify.com/sites/neon-meerkat-c50769/identity" target="_blank">Netlify Identity Users</a></li>
-            <li>Click <strong>"Add user"</strong> (NOT "Invite users")</li>
-            <li>Fill in:
-              <ul>
-                <li>Email: Your email address</li>
-                <li>Password: Choose a secure password</li>
-                <li><strong>✅ Check "Email confirmed"</strong> (IMPORTANT!)</li>
-              </ul>
-            </li>
-            <li>Click "Add user"</li>
-          </ol>
-        </div>
-        
-        <div class="step">
-          <h4>Step 4: Test Direct Login</h4>
-          <p>Now try logging in with your new credentials:</p>
-          <button onclick="testDirectLogin()" class="button success">
-            Test Login
-          </button>
+        <div class="warning status">
+          <strong>⚠️ Important:</strong> Make sure Git Gateway is enabled for the CMS to work properly!
         </div>
       </div>
       
-      <div class="warning status">
-        <strong>⚠️ Important:</strong>
-        <br>• Don't use invite links anymore
-        <br>• Always create users directly in Netlify dashboard
-        <br>• Make sure "Email confirmed" is checked
-        <br>• Clear browser data if you get stuck
+      <div id="auth-controls">
+        <button onclick="openLogin()" class="button">Login / Sign Up</button>
+        <button onclick="clearAuthData()" class="button secondary">Clear Auth Data</button>
+        <button onclick="checkAuthStatus()" class="button secondary">Check Status</button>
       </div>
     </div>
     
-    <div id="netlify-identity-widget"></div>
+    <!-- User Info Section (hidden by default) -->
+    <div id="user-info" class="user-info hidden">
+      <h4>👤 Logged in as: <span id="user-email"></span></h4>
+      <p>You can now access the Content Management System!</p>
+      <button onclick="logout()" class="button secondary">Logout</button>
+    </div>
     
-    <div style="margin-top: 30px;">
-      <button onclick="testCMSAccess()" class="button">
-        Test CMS Configuration
+    <!-- CMS Ready Section (hidden by default) -->
+    <div id="cms-ready" class="cms-ready hidden">
+      <h3>🎉 CMS Ready!</h3>
+      <p>You are authenticated and ready to edit content.</p>
+      <button onclick="initializeCMS()" class="button" style="background: white; color: #28a745;">
+        Launch Content Editor
       </button>
+    </div>
+    
+    <!-- Debug Section -->
+    <div style="margin-top: 30px;">
+      <details>
+        <summary style="cursor: pointer; color: #666;">🔧 Debug Information</summary>
+        <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: left;">
+          <h4>Configuration Status:</h4>
+          <div id="debug-info">
+            <p>Loading debug information...</p>
+          </div>
+        </div>
+      </details>
+    </div>
+    
+    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
+      <p><strong>Alternative:</strong> If the CMS doesn't work, you can edit files directly in the <span class="code">src/config/</span> directory.</p>
       <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank" class="button secondary">
         Open Netlify Settings
       </a>
     </div>
-    
-    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
-      <p><strong>Alternative:</strong> If the CMS still doesn't work, you can edit files directly in the <span class="code">src/config/</span> directory.</p>
-    </div>
   </div>
 
-  <!-- Include the script that builds the page and powers Decap CMS -->
+  <!-- Include Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
-  <!-- Enhanced Netlify Identity integration -->
+  <!-- Enhanced Authentication Script -->
   <script>
-    const statusDiv = document.getElementById('identity-status');
+    const statusDiv = document.getElementById('auth-status');
+    const userInfoDiv = document.getElementById('user-info');
+    const cmsReadyDiv = document.getElementById('cms-ready');
+    const setupInstructionsDiv = document.getElementById('setup-instructions');
+    const authControlsDiv = document.getElementById('auth-controls');
+    
+    let currentUser = null;
+    let cmsInitialized = false;
     
     function updateStatus(message, type = 'info') {
       statusDiv.innerHTML = `<div class="${type} status">${message}</div>`;
     }
     
-    // Clear authentication data
-    function clearAuthData() {
-      // Clear localStorage
-      localStorage.removeItem('gotrue.user');
-      localStorage.removeItem('netlify-cms-user');
+    function updateDebugInfo() {
+      const debugDiv = document.getElementById('debug-info');
+      const info = {
+        'Netlify Identity Available': !!window.netlifyIdentity,
+        'Current User': currentUser ? currentUser.email : 'None',
+        'User Token': currentUser ? 'Available' : 'None',
+        'Site URL': window.location.origin,
+        'Identity URL': window.netlifyIdentity ? window.netlifyIdentity.url : 'Not available',
+        'CMS Initialized': cmsInitialized
+      };
       
-      // Clear sessionStorage
-      sessionStorage.clear();
-      
-      // Clear cookies
-      document.cookie.split(";").forEach(function(c) { 
-        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
-      });
-      
-      updateStatus('✅ Authentication data cleared! Now try the steps above.', 'success');
-      
-      // Remove any invite token from URL
-      if (window.location.hash.includes('invite_token')) {
-        window.location.hash = '';
-        window.location.reload();
-      }
+      debugDiv.innerHTML = Object.entries(info)
+        .map(([key, value]) => `<strong>${key}:</strong> ${value}`)
+        .join('<br>');
     }
     
-    // Test direct login
-    function testDirectLogin() {
+    function showUserInfo(user) {
+      document.getElementById('user-email').textContent = user.email;
+      userInfoDiv.classList.remove('hidden');
+      cmsReadyDiv.classList.remove('hidden');
+      setupInstructionsDiv.style.display = 'none';
+      authControlsDiv.style.display = 'none';
+    }
+    
+    function hideUserInfo() {
+      userInfoDiv.classList.add('hidden');
+      cmsReadyDiv.classList.add('hidden');
+      setupInstructionsDiv.style.display = 'block';
+      authControlsDiv.style.display = 'block';
+    }
+    
+    function openLogin() {
       if (window.netlifyIdentity) {
         updateStatus('🔄 Opening login dialog...', 'info');
         window.netlifyIdentity.open();
       } else {
+        updateStatus('❌ Netlify Identity not available. Please check setup.', 'error');
+      }
+    }
+    
+    function logout() {
+      if (window.netlifyIdentity && currentUser) {
+        window.netlifyIdentity.logout();
+      }
+    }
+    
+    function clearAuthData() {
+      // Clear localStorage
+      Object.keys(localStorage).forEach(key => {
+        if (key.includes('gotrue') || key.includes('netlify') || key.includes('cms')) {
+          localStorage.removeItem(key);
+        }
+      });
+      
+      // Clear sessionStorage
+      sessionStorage.clear();
+      
+      updateStatus('✅ Authentication data cleared! Try logging in again.', 'success');
+      
+      // Remove any tokens from URL
+      if (window.location.hash) {
+        window.location.hash = '';
+      }
+      
+      // Refresh the page to reset state
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    }
+    
+    function checkAuthStatus() {
+      if (window.netlifyIdentity) {
+        const user = window.netlifyIdentity.currentUser();
+        if (user) {
+          updateStatus(`✅ Authenticated as: ${user.email}`, 'success');
+          currentUser = user;
+          showUserInfo(user);
+        } else {
+          updateStatus('ℹ️ Not authenticated. Please log in.', 'info');
+          hideUserInfo();
+        }
+      } else {
         updateStatus('❌ Netlify Identity not available', 'error');
       }
+      updateDebugInfo();
     }
     
-    // Test CMS configuration access
-    async function testCMSAccess() {
-      updateStatus('🔄 Testing CMS configuration access...', 'info');
-      
-      try {
-        const response = await fetch('/admin/config.yml');
-        if (response.ok) {
-          const configText = await response.text();
-          updateStatus('✅ Configuration file loaded successfully! CMS should work after authentication.', 'success');
-        } else {
-          updateStatus(`❌ Cannot access config.yml (Status: ${response.status}). Check file deployment.`, 'error');
+    function initializeCMS() {
+      if (currentUser && window.CMS) {
+        updateStatus('🚀 Initializing Content Management System...', 'info');
+        
+        try {
+          // Hide the setup container and show CMS
+          document.querySelector('.setup-container').style.display = 'none';
+          
+          // Initialize CMS
+          window.CMS.init();
+          cmsInitialized = true;
+          
+          updateStatus('✅ CMS initialized successfully!', 'success');
+        } catch (error) {
+          console.error('CMS initialization error:', error);
+          updateStatus(`❌ CMS initialization failed: ${error.message}`, 'error');
+          document.querySelector('.setup-container').style.display = 'block';
         }
-      } catch (error) {
-        updateStatus(`❌ Error accessing config.yml: ${error.message}`, 'error');
+      } else {
+        updateStatus('❌ Cannot initialize CMS. Please ensure you are logged in.', 'error');
       }
     }
     
-    // Check if Netlify Identity is available
+    // Initialize Netlify Identity
     if (window.netlifyIdentity) {
       updateStatus('🔄 Initializing authentication system...', 'info');
       
-      // Clear any existing invite token issues
-      const urlParams = new URLSearchParams(window.location.hash.substring(1));
-      if (urlParams.get('invite_token')) {
-        updateStatus('⚠️ Invite token detected. Clearing to prevent loop...', 'warning');
-        window.location.hash = '';
-        clearAuthData();
-      }
+      // Configure Netlify Identity
+      window.netlifyIdentity.init({
+        APIUrl: `${window.location.origin}/.netlify/identity`
+      });
       
-      window.netlifyIdentity.on("init", user => {
+      // Set up event listeners
+      window.netlifyIdentity.on('init', user => {
+        console.log('Identity initialized:', user);
+        currentUser = user;
+        
         if (user) {
-          updateStatus('✅ You are logged in! Loading CMS...', 'success');
-          // Hide the setup instructions and show CMS
-          setTimeout(() => {
-            document.querySelector('.setup-container').style.display = 'none';
-            // Initialize CMS
-            if (window.CMS) {
-              window.CMS.init();
-            }
-          }, 2000);
+          updateStatus('✅ Already logged in! Ready to use CMS.', 'success');
+          showUserInfo(user);
         } else {
-          updateStatus('👋 Please log in using the steps above. Do NOT use invite links.', 'info');
+          updateStatus('👋 Please log in to access the Content Management System.', 'info');
+          hideUserInfo();
+        }
+        updateDebugInfo();
+      });
+      
+      window.netlifyIdentity.on('login', user => {
+        console.log('User logged in:', user);
+        currentUser = user;
+        updateStatus('✅ Login successful! You can now access the CMS.', 'success');
+        showUserInfo(user);
+        updateDebugInfo();
+      });
+      
+      window.netlifyIdentity.on('logout', () => {
+        console.log('User logged out');
+        currentUser = null;
+        updateStatus('👋 You have been logged out.', 'info');
+        hideUserInfo();
+        updateDebugInfo();
+        
+        // Show setup container if CMS was initialized
+        if (cmsInitialized) {
+          document.querySelector('.setup-container').style.display = 'block';
+          cmsInitialized = false;
         }
       });
       
-      window.netlifyIdentity.on("login", user => {
-        updateStatus('✅ Login successful! Loading CMS...', 'success');
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      });
-      
-      window.netlifyIdentity.on("logout", () => {
-        updateStatus('👋 You have been logged out.', 'info');
-      });
-      
-      window.netlifyIdentity.on("error", err => {
+      window.netlifyIdentity.on('error', err => {
         console.error('Identity error:', err);
         
-        if (err.message && err.message.includes('Email not confirmed')) {
-          updateStatus(`❌ Email Confirmation Issue: Create a user directly in Netlify dashboard with "Email confirmed" checked.`, 'error');
-        } else if (err.message && err.message.includes('Invalid email or password')) {
-          updateStatus(`❌ Login Failed: Check your credentials or create a new user account directly in Netlify.`, 'error');
-        } else if (err.message && err.message.includes('Failed to fetch')) {
-          updateStatus(`❌ Network Error: Check your internet connection and try again.`, 'error');
-        } else {
-          updateStatus(`❌ Error: ${err.message || 'Authentication failed'}. Try clearing auth data and creating a direct user account.`, 'error');
+        let errorMessage = 'Authentication error occurred.';
+        
+        if (err.message) {
+          if (err.message.includes('Email not confirmed')) {
+            errorMessage = 'Email not confirmed. Please check your email or contact the administrator.';
+          } else if (err.message.includes('Invalid email or password')) {
+            errorMessage = 'Invalid email or password. Please try again.';
+          } else if (err.message.includes('Failed to fetch')) {
+            errorMessage = 'Network error. Please check your connection and try again.';
+          } else if (err.message.includes('User not found')) {
+            errorMessage = 'User not found. Please sign up or contact the administrator.';
+          } else {
+            errorMessage = err.message;
+          }
         }
+        
+        updateStatus(`❌ ${errorMessage}`, 'error');
+        updateDebugInfo();
       });
       
-      // Initialize the widget
-      window.netlifyIdentity.init({
-        APIUrl: "https://neon-meerkat-c50769.netlify.app/.netlify/identity"
+      window.netlifyIdentity.on('open', () => {
+        console.log('Identity widget opened');
+      });
+      
+      window.netlifyIdentity.on('close', () => {
+        console.log('Identity widget closed');
       });
       
     } else {
-      updateStatus('❌ Netlify Identity is not available. Please check your configuration.', 'error');
+      updateStatus('❌ Netlify Identity Widget not loaded. Please check your internet connection.', 'error');
     }
     
-    // Auto-test configuration on page load
-    setTimeout(testCMSAccess, 2000);
+    // Auto-check status on page load
+    setTimeout(() => {
+      checkAuthStatus();
+    }, 1000);
+    
+    // Test configuration access
+    setTimeout(async () => {
+      try {
+        const response = await fetch('/admin/config.yml');
+        if (response.ok) {
+          console.log('✅ CMS configuration accessible');
+        } else {
+          console.warn('⚠️ CMS configuration not accessible:', response.status);
+        }
+      } catch (error) {
+        console.error('❌ Error accessing CMS configuration:', error);
+      }
+    }, 2000);
   </script>
 </body>
 </html>
