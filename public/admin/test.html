@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CMS Configuration Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .status {
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+    .warning { background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; }
+    .error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+    .info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+    .step {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .step h3 {
+      margin-top: 0;
+      color: #495057;
+    }
+    .code {
+      background: #f1f3f4;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 14px;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 10px 5px;
+    }
+    .button:hover {
+      background: #0056b3;
+    }
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .checklist li:before {
+      content: "☐ ";
+      color: #6c757d;
+      font-weight: bold;
+    }
+    .checklist li.done:before {
+      content: "✅ ";
+    }
+  </style>
+</head>
+<body>
+  <h1>🎛️ CMS Configuration Checker</h1>
+  
+  <div class="info status">
+    <strong>Purpose:</strong> This page helps you verify that your Content Management System (CMS) is properly configured.
+  </div>
+
+  <div class="step">
+    <h3>Step 1: Check CMS Access</h3>
+    <p>Try to access your CMS admin panel:</p>
+    <a href="/admin" class="button" target="_blank">Open CMS Admin Panel</a>
+    
+    <div class="status warning">
+      <strong>Expected Result:</strong> You should see a login screen or the CMS interface.
+      <br><strong>If you see an error:</strong> The CMS is not properly configured.
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>Step 2: Configuration Checklist</h3>
+    <p>Verify these items are properly set up:</p>
+    
+    <ul class="checklist">
+      <li>CMS files exist at <span class="code">/admin/index.html</span> and <span class="code">/admin/config.yml</span></li>
+      <li>GitHub repository is specified in <span class="code">config.yml</span></li>
+      <li>GitHub OAuth app is created (if using GitHub auth)</li>
+      <li>Netlify OAuth provider is configured</li>
+      <li>Website is deployed and accessible</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <h3>Step 3: Test Authentication</h3>
+    <p>Follow these steps to test login:</p>
+    
+    <ol>
+      <li>Click the "Open CMS Admin Panel" button above</li>
+      <li>You should see a "Login with GitHub" button</li>
+      <li>Click it and authorize the application</li>
+      <li>You should be redirected to the CMS dashboard</li>
+    </ol>
+
+    <div class="status info">
+      <strong>Note:</strong> If you see "Error loading the CMS configuration", check your <span class="code">config.yml</span> file for syntax errors.
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>Step 4: Common Issues & Solutions</h3>
+    
+    <h4>🔴 "Error loading the CMS configuration"</h4>
+    <div class="status error">
+      <strong>Cause:</strong> Syntax error in <span class="code">config.yml</span><br>
+      <strong>Solution:</strong> Check YAML formatting, ensure proper indentation
+    </div>
+
+    <h4>🔴 "Repository not found"</h4>
+    <div class="status error">
+      <strong>Cause:</strong> Incorrect repository URL in <span class="code">config.yml</span><br>
+      <strong>Solution:</strong> Update the <span class="code">repo</span> field with your actual GitHub repository
+    </div>
+
+    <h4>🔴 "Authentication failed"</h4>
+    <div class="status error">
+      <strong>Cause:</strong> GitHub OAuth not properly configured<br>
+      <strong>Solution:</strong> Set up GitHub OAuth app and configure Netlify OAuth provider
+    </div>
+
+    <h4>🔴 "Cannot access /admin"</h4>
+    <div class="status error">
+      <strong>Cause:</strong> Files not deployed or routing issue<br>
+      <strong>Solution:</strong> Ensure <span class="code">public/admin/</span> files are deployed and <span class="code">_redirects</span> file exists
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>Step 5: Manual Configuration Check</h3>
+    <p>If the CMS isn't working, you can manually verify the configuration:</p>
+    
+    <h4>Check Repository URL:</h4>
+    <p>Open <span class="code">public/admin/config.yml</span> and verify the <span class="code">repo</span> field matches your GitHub repository.</p>
+    
+    <h4>Current Configuration:</h4>
+    <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 14px;">
+      backend:<br>
+      &nbsp;&nbsp;name: github<br>
+      &nbsp;&nbsp;repo: https://github.com/mrinmoymsarkar/wedding-invite<br>
+      &nbsp;&nbsp;branch: main
+    </div>
+    
+    <div class="status warning">
+      <strong>Important:</strong> Make sure to update the <span class="code">repo</span> field with your actual GitHub repository URL!
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>Step 6: Alternative Setup Options</h3>
+    
+    <h4>Option A: GitHub OAuth (Recommended)</h4>
+    <ol>
+      <li>Create GitHub OAuth App at: <a href="https://github.com/settings/applications/new" target="_blank">GitHub Developer Settings</a></li>
+      <li>Set Homepage URL to your website</li>
+      <li>Set Authorization callback URL to: <span class="code">https://api.netlify.com/auth/done</span></li>
+      <li>Configure OAuth in Netlify dashboard</li>
+    </ol>
+
+    <h4>Option B: Git Gateway (Simpler)</h4>
+    <ol>
+      <li>Enable Netlify Identity in your site settings</li>
+      <li>Enable Git Gateway in Identity settings</li>
+      <li>Update <span class="code">config.yml</span> to use <span class="code">git-gateway</span> instead of <span class="code">github</span></li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <h3>✅ Success Indicators</h3>
+    <p>You'll know the CMS is working when:</p>
+    
+    <ul class="checklist">
+      <li>You can access <span class="code">/admin</span> without errors</li>
+      <li>You can log in successfully</li>
+      <li>You see the CMS dashboard with content collections</li>
+      <li>You can edit and save content</li>
+      <li>Changes appear on your website after publishing</li>
+    </ul>
+  </div>
+
+  <div class="status success">
+    <strong>🎉 Once working:</strong> You'll be able to edit all wedding content through a user-friendly interface at <span class="code">yourwebsite.com/admin</span>
+  </div>
+
+  <hr style="margin: 40px 0;">
+  
+  <p style="text-align: center; color: #6c757d;">
+    <small>
+      This test page can be removed once your CMS is working properly.<br>
+      Delete <span class="code">public/admin/test.html</span> when you're done.
+    </small>
+  </p>
+</body>
+</html>
