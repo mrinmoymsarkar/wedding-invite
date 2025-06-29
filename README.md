@@ -7,7 +7,7 @@ This wedding website is designed to be easily customizable. All content can be e
 **The easiest way to edit content is now through the web-based admin panel!**
 
 ### Access the Admin Panel:
-1. **Go to**: `yourwebsite.com/admin` (replace with your actual domain)
+1. **Go to**: https://neon-meerkat-c50769.netlify.app/admin
 2. **Login** with your GitHub account
 3. **Edit content** through user-friendly forms
 4. **Publish changes** instantly
@@ -140,7 +140,7 @@ The website is fully responsive and works on:
 ## 🚀 Quick Start Guide
 
 ### Using CMS (Recommended):
-1. **Go to** `yourwebsite.com/admin`
+1. **Go to** https://neon-meerkat-c50769.netlify.app/admin
 2. **Login** with GitHub
 3. **Edit content** through forms
 4. **Publish** changes instantly
@@ -197,7 +197,7 @@ To enable the CMS admin panel with GitHub authentication:
    - Click "New OAuth App"
    - Fill in:
      - Application name: "Your Wedding Website CMS"
-     - Homepage URL: `https://your-website.netlify.app`
+     - Homepage URL: `https://neon-meerkat-c50769.netlify.app`
      - Authorization callback URL: `https://api.netlify.com/auth/done`
    - Click "Register application"
    - Copy the Client ID and Client Secret
@@ -242,6 +242,6 @@ If you prefer not to set up GitHub OAuth:
 ### Accessing the CMS
 
 Once set up, you can access the admin panel at:
-`https://your-website.netlify.app/admin`
+`https://neon-meerkat-c50769.netlify.app/admin`
 
 The CMS will allow you to edit all website content through a user-friendly interface without touching any code!
