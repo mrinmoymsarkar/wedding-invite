@@ -19,7 +19,7 @@
     }
     
     .setup-container {
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
       background: white;
       border-radius: 12px;
@@ -57,6 +57,7 @@
     .info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
     .warning { background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; }
     .error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+    .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
     
     .button {
       display: inline-block;
@@ -68,6 +69,8 @@
       margin: 10px;
       font-weight: 500;
       transition: transform 0.2s;
+      border: none;
+      cursor: pointer;
     }
     
     .button:hover {
@@ -77,6 +80,11 @@
     .button.secondary {
       background: linear-gradient(135deg, #FFD700, #FFC107);
       color: #333;
+    }
+    
+    .button.success {
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
     }
     
     .steps {
@@ -108,6 +116,32 @@
     #netlify-identity-widget {
       margin: 20px 0;
     }
+    
+    .email-confirmation {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .email-confirmation h3 {
+      color: #856404;
+      margin-top: 0;
+    }
+    
+    .quick-fix {
+      background: #e7f3ff;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .quick-fix h3 {
+      color: #004085;
+      margin-top: 0;
+    }
   </style>
 </head>
 <body>
@@ -118,62 +152,74 @@
     <p class="subtitle">Manage your wedding website content easily</p>
     
     <div id="identity-status"></div>
-    <div id="netlify-identity-widget"></div>
     
-    <div class="info status">
-      <strong>🎯 Goal:</strong> Set up access to edit your wedding website content through a user-friendly interface.
+    <!-- Email Confirmation Issue Section -->
+    <div class="email-confirmation">
+      <h3>📧 Email Confirmation Required</h3>
+      <p><strong>Issue:</strong> Your account exists but the email hasn't been confirmed yet.</p>
+      <p><strong>Solution:</strong> We'll bypass email confirmation and set up direct access.</p>
     </div>
+    
+    <!-- Quick Fix Section -->
+    <div class="quick-fix">
+      <h3>🚀 Quick Fix - Skip Email Confirmation</h3>
+      <p>Since email confirmation is causing issues, let's create a direct access account:</p>
+      <ol style="text-align: left;">
+        <li>Go to your <a href="https://app.netlify.com/sites/neon-meerkat-c50769/identity" target="_blank">Netlify Identity Users</a></li>
+        <li>Find your existing user and <strong>delete it</strong></li>
+        <li>Click <strong>"Add user"</strong> (not "Invite users")</li>
+        <li>Enter your email and set a password directly</li>
+        <li>Make sure <strong>"Email confirmed"</strong> is checked</li>
+        <li>Click "Add user"</li>
+        <li>Return here and try logging in</li>
+      </ol>
+      <a href="https://app.netlify.com/sites/neon-meerkat-c50769/identity" target="_blank" class="button success">
+        Open Netlify Identity Users
+      </a>
+    </div>
+    
+    <div id="netlify-identity-widget"></div>
     
     <div class="steps">
       <div class="step">
-        <h4>Step 1: Complete Netlify Identity Setup</h4>
-        <p>If you're seeing this page without a login form, Netlify Identity needs to be properly configured:</p>
+        <h4>Alternative: Disable Email Confirmation</h4>
+        <p>To prevent this issue in the future:</p>
         <ol>
-          <li>Go to your <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank">Netlify Identity Settings</a></li>
-          <li>Click <strong>"Enable Identity"</strong> if not already enabled</li>
-          <li>Under "Services", click <strong>"Enable Git Gateway"</strong></li>
-          <li>Return to this page and refresh</li>
+          <li>Go to <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank">Identity Settings</a></li>
+          <li>Scroll to <strong>"Registration preferences"</strong></li>
+          <li>Set to <strong>"Open"</strong> or <strong>"Invite only"</strong></li>
+          <li>Under <strong>"Emails"</strong>, disable <strong>"Email confirmation"</strong></li>
+          <li>Save settings</li>
         </ol>
       </div>
       
       <div class="step">
-        <h4>Step 2: Create Your Account</h4>
-        <p>Once Identity is enabled, you should see a login form above. If you don't have an account yet:</p>
-        <ol>
-          <li>Go to <a href="https://app.netlify.com/sites/neon-meerkat-c50769/identity" target="_blank">Netlify Identity Tab</a></li>
-          <li>Click <strong>"Invite users"</strong></li>
-          <li>Enter your email address</li>
-          <li>Check your email for the invitation</li>
-          <li>Click the link and set your password</li>
-        </ol>
-      </div>
-      
-      <div class="step">
-        <h4>Step 3: Access the CMS</h4>
-        <p>After setting up your account, you can:</p>
+        <h4>What You'll Be Able to Do</h4>
+        <p>Once logged in, you can:</p>
         <ul>
-          <li>Log in using the form above</li>
-          <li>Edit all wedding content through forms</li>
-          <li>Upload photos and manage the gallery</li>
-          <li>Update event details and dates</li>
-          <li>Publish changes instantly</li>
+          <li>✅ Edit couple names and wedding details</li>
+          <li>✅ Update event dates, times, and venues</li>
+          <li>✅ Manage photo gallery</li>
+          <li>✅ Edit all website text content</li>
+          <li>✅ Publish changes instantly</li>
         </ul>
       </div>
     </div>
     
     <div class="warning status">
-      <strong>⚠️ Troubleshooting:</strong>
-      <br>• If you don't see a login form, Identity isn't enabled
-      <br>• If the invitation link doesn't work, try creating a user manually in Netlify
-      <br>• If you get errors, check that Git Gateway is enabled
+      <strong>⚠️ Current Status:</strong>
+      <br>• Identity is enabled ✅
+      <br>• Git Gateway is working ✅
+      <br>• Issue: Email confirmation blocking access ❌
+      <br>• Solution: Create user with confirmed email ✅
     </div>
     
     <div style="margin-top: 30px;">
-      <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank" class="button">
-        Open Netlify Identity Settings
-      </a>
-      <a href="https://app.netlify.com/sites/neon-meerkat-c50769/identity" target="_blank" class="button secondary">
-        Manage Users
+      <button onclick="window.netlifyIdentity.open()" class="button">
+        Try Login Again
+      </button>
+      <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank" class="button secondary">
+        Identity Settings
       </a>
     </div>
     
@@ -195,11 +241,11 @@
     
     // Check if Netlify Identity is available
     if (window.netlifyIdentity) {
-      updateStatus('🔄 Initializing Netlify Identity...', 'info');
+      updateStatus('🔄 Checking authentication status...', 'info');
       
       window.netlifyIdentity.on("init", user => {
         if (user) {
-          updateStatus('✅ You are logged in! Loading CMS...', 'info');
+          updateStatus('✅ You are logged in! Loading CMS...', 'success');
           // User is already logged in, redirect to CMS
           setTimeout(() => {
             window.location.reload();
@@ -210,7 +256,7 @@
       });
       
       window.netlifyIdentity.on("login", user => {
-        updateStatus('✅ Login successful! Loading CMS...', 'info');
+        updateStatus('✅ Login successful! Loading CMS...', 'success');
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -222,7 +268,14 @@
       
       window.netlifyIdentity.on("error", err => {
         console.error('Identity error:', err);
-        updateStatus(`❌ Error: ${err.message || 'Authentication failed'}`, 'error');
+        
+        if (err.message && err.message.includes('Email not confirmed')) {
+          updateStatus(`❌ Email Confirmation Issue: Your account exists but email isn't confirmed. Please follow the "Quick Fix" instructions above.`, 'error');
+        } else if (err.message && err.message.includes('Invalid email or password')) {
+          updateStatus(`❌ Login Failed: Please check your email and password, or create a new user account.`, 'error');
+        } else {
+          updateStatus(`❌ Error: ${err.message || 'Authentication failed'}`, 'error');
+        }
       });
       
       // Initialize the widget
@@ -245,14 +298,20 @@
         // Accept the invitation
         window.netlifyIdentity.acceptInvite(inviteToken)
           .then(() => {
-            updateStatus('✅ Invitation accepted! Please set your password.', 'info');
+            updateStatus('✅ Invitation accepted! Please set your password.', 'success');
           })
           .catch(err => {
             console.error('Invite error:', err);
-            updateStatus(`❌ Error processing invitation: ${err.message}`, 'error');
+            updateStatus(`❌ Error processing invitation: ${err.message}. Try the manual user creation method above.`, 'error');
           });
       }
     }
+    
+    // Add a manual refresh button for testing
+    window.testLogin = function() {
+      updateStatus('🔄 Testing login...', 'info');
+      window.netlifyIdentity.open();
+    };
   </script>
 </body>
 </html>
