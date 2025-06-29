@@ -188,19 +188,60 @@ public/
 
 ## 🔐 Setting Up CMS Authentication
 
-To enable the CMS admin panel:
+To enable the CMS admin panel with GitHub authentication:
 
-1. **Deploy to Netlify** (if not already done)
-2. **Enable Netlify Identity**:
+### Option 1: GitHub OAuth App (Recommended)
+
+1. **Create a GitHub OAuth App**:
+   - Go to GitHub Settings > Developer settings > OAuth Apps
+   - Click "New OAuth App"
+   - Fill in:
+     - Application name: "Your Wedding Website CMS"
+     - Homepage URL: `https://your-website.netlify.app`
+     - Authorization callback URL: `https://api.netlify.com/auth/done`
+   - Click "Register application"
+   - Copy the Client ID and Client Secret
+
+2. **Configure Netlify**:
    - Go to your Netlify dashboard
-   - Navigate to Site settings > Identity
-   - Click "Enable Identity"
-3. **Enable Git Gateway**:
-   - In Identity settings, scroll to "Services"
-   - Enable "Git Gateway"
-4. **Invite Users**:
-   - Go to Identity tab
-   - Click "Invite users"
-   - Add email addresses of people who should edit content
+   - Navigate to Site settings > Access control > OAuth
+   - Click "Install provider" and select GitHub
+   - Enter your GitHub Client ID and Client Secret
+   - Save the settings
 
-That's it! Now you can access the admin panel and edit content easily.
+3. **Update Repository**:
+   - In `public/admin/config.yml`, update the `repo` field:
+   ```yaml
+   backend:
+     name: github
+     repo: your-github-username/your-repo-name
+     branch: main
+   ```
+
+### Option 2: Alternative - Use Decap CMS with Git Gateway
+
+If you prefer not to set up GitHub OAuth:
+
+1. **Enable Netlify Identity** (despite deprecation warning):
+   - Go to Netlify dashboard > Site settings > Identity
+   - Click "Enable Identity"
+   - In Services, enable "Git Gateway"
+
+2. **Update config to use git-gateway**:
+   ```yaml
+   backend:
+     name: git-gateway
+     branch: main
+   ```
+
+3. **Invite users**:
+   - Go to Identity tab in Netlify
+   - Click "Invite users"
+   - Add email addresses
+
+### Accessing the CMS
+
+Once set up, you can access the admin panel at:
+`https://your-website.netlify.app/admin`
+
+The CMS will allow you to edit all website content through a user-friendly interface without touching any code!
