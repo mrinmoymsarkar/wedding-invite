@@ -17,7 +17,8 @@ const Hero: React.FC = () => {
   });
 
   useEffect(() => {
-    const weddingDate = new Date(`${WEDDING_CONFIG.wedding.mainDate}T${WEDDING_CONFIG.wedding.mainTime.replace(' ', '')}:00+05:30`);
+    // Create wedding date from config
+    const weddingDate = new Date(`${WEDDING_CONFIG.wedding.mainDate}T20:00:00+05:30`); // 8:00 PM IST
 
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -35,8 +36,13 @@ const Hero: React.FC = () => {
       }
     };
 
+    // Calculate immediately
     calculateTimeLeft();
+    
+    // Set up interval to update every second
     const timer = setInterval(calculateTimeLeft, 1000);
+    
+    // Cleanup interval on component unmount
     return () => clearInterval(timer);
   }, []);
 
