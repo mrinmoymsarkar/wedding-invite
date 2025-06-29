@@ -2,7 +2,30 @@
 
 This wedding website is designed to be easily customizable. All content can be edited by modifying configuration files in the `src/config/` directory.
 
-## 📝 How to Edit Content
+## 🎉 NEW: Content Management System (CMS)
+
+**The easiest way to edit content is now through the web-based admin panel!**
+
+### Access the Admin Panel:
+1. **Go to**: `yourwebsite.com/admin` (replace with your actual domain)
+2. **Login** with your GitHub account
+3. **Edit content** through user-friendly forms
+4. **Publish changes** instantly
+
+### What You Can Edit Through CMS:
+- ✅ **Couple Names** (English & Bengali)
+- ✅ **Wedding Dates & Times**
+- ✅ **Venue Information**
+- ✅ **Contact Details**
+- ✅ **Event Descriptions**
+- ✅ **Photo Gallery**
+- ✅ **Cultural Information**
+- ✅ **All Website Text**
+- ✅ **Upload New Images**
+
+## 📝 Manual Editing (Alternative Method)
+
+If you prefer to edit files directly, you can still modify the configuration files:
 
 ### 1. **Main Wedding Information** (`src/config/wedding-config.ts`)
 
@@ -116,6 +139,13 @@ The website is fully responsive and works on:
 
 ## 🚀 Quick Start Guide
 
+### Using CMS (Recommended):
+1. **Go to** `yourwebsite.com/admin`
+2. **Login** with GitHub
+3. **Edit content** through forms
+4. **Publish** changes instantly
+
+### Manual Editing:
 1. **Update Basic Info**: Start with `wedding-config.ts` to change names, dates, and contact info
 2. **Update Events**: Modify `events-config.ts` with your ceremony details
 3. **Add Photos**: Replace image URLs in `gallery-config.ts` with your photos
@@ -125,10 +155,11 @@ The website is fully responsive and works on:
 ## 📞 Support
 
 If you need help customizing the website:
-1. Check this README for guidance
-2. Look at the configuration files for examples
-3. Make small changes and test them one at a time
-4. Keep backups of your original files
+1. Use the CMS admin panel for easy editing
+2. Check this README for guidance
+3. Look at the configuration files for examples
+4. Make small changes and test them one at a time
+5. Keep backups of your original files
 
 ## 🎯 File Structure
 
@@ -143,6 +174,33 @@ src/
 ├── components/       # React components (don't edit unless needed)
 ├── contexts/         # Language and theme settings
 └── data/            # Data files (auto-generated from config)
+
+public/
+├── admin/           # 🎛️ CMS ADMIN PANEL
+│   ├── index.html   # Admin interface
+│   └── config.yml   # CMS configuration
 ```
 
-**Remember**: Only edit files in the `src/config/` directory for content changes. The other files contain the website's functionality and styling.
+**Remember**: 
+- **Easiest**: Use the CMS admin panel at `/admin`
+- **Advanced**: Edit files in the `src/config/` directory for content changes
+- The other files contain the website's functionality and styling
+
+## 🔐 Setting Up CMS Authentication
+
+To enable the CMS admin panel:
+
+1. **Deploy to Netlify** (if not already done)
+2. **Enable Netlify Identity**:
+   - Go to your Netlify dashboard
+   - Navigate to Site settings > Identity
+   - Click "Enable Identity"
+3. **Enable Git Gateway**:
+   - In Identity settings, scroll to "Services"
+   - Enable "Git Gateway"
+4. **Invite Users**:
+   - Go to Identity tab
+   - Click "Invite users"
+   - Add email addresses of people who should edit content
+
+That's it! Now you can access the admin panel and edit content easily.
