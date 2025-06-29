@@ -1,7 +1,9 @@
 backend:
   name: github
-  repo: mrinmoymsarkar/wedding-invite # Update this with your actual GitHub repository
+  repo: mrinmoymsarkar/wedding-invite
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 media_folder: public/images/uploads
 public_folder: /images/uploads
