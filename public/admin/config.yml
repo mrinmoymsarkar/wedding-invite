@@ -70,12 +70,28 @@ collections:
               - { label: "Logo URL", name: "logo_url", widget: "string", default: "https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wediing-icon-MWGi3zHWRSwveW4CaK9EM7s57pDP54.png" }
               - { label: "Hero Image URL", name: "hero_image_url", widget: "string", default: "https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wedding-pixar-D6EG6OvRCwxyNzdCoXbz3Yaifu5wlC.png" }
 
+  - name: "content"
+    label: "📝 Website Content"
+    description: "Edit text content and descriptions"
+    files:
+      - label: "✏️ Hero Section"
+        name: "hero-content"
+        file: "src/config/content-config.ts"
+        description: "Edit homepage content and messages"
+        fields:
+          - { label: "Welcome Message", name: "welcome_message", widget: "text", default: "Join us in celebrating our sacred union with Bengali traditions and blessings", hint: "Main welcome text on the homepage" }
+          - { label: "Countdown Title", name: "countdown_title", widget: "string", default: "Days Until Our Sacred Union", hint: "Title above the countdown timer" }
+          - { label: "Events Description", name: "events_description", widget: "text", default: "Join us in celebrating a traditional Bengali wedding with authentic rituals, cultural ceremonies, and joyous festivities spanning multiple days.", hint: "Introduction text for the events section" }
+          - { label: "Gallery Description", name: "gallery_description", widget: "text", default: "Capturing precious moments from our journey together and the beautiful ceremonies that mark our sacred union in Bengali traditions.", hint: "Introduction text for the photo gallery" }
+          - { label: "RSVP Description", name: "rsvp_description", widget: "text", default: "We would be honored by your presence at our wedding celebration. Please let us know if you'll be joining us for this sacred occasion.", hint: "Introduction text for the RSVP form" }
+          - { label: "RSVP Success Message", name: "rsvp_success_message", widget: "text", default: "We're delighted that you'll be joining us for our special celebration. You'll receive a confirmation email shortly with all the details.", hint: "Message shown after successful RSVP submission" }
+
   - name: "events"
     label: "🎉 Wedding Events"
     description: "Manage all wedding ceremonies and events"
     files:
-      - label: "📋 Events Configuration"
-        name: "events-config"
+      - label: "📋 Events List"
+        name: "events-list"
         file: "src/config/events-config.ts"
         description: "Add, edit, or remove wedding events and ceremonies"
         fields:
@@ -104,8 +120,8 @@ collections:
     label: "📸 Photo Gallery"
     description: "Manage wedding photos and gallery"
     files:
-      - label: "🖼️ Gallery Configuration"
-        name: "gallery-config"
+      - label: "🖼️ Gallery Images"
+        name: "gallery-images"
         file: "src/config/gallery-config.ts"
         description: "Add, edit, or organize wedding photos"
         fields:
@@ -118,74 +134,3 @@ collections:
               - { label: "Image URL", name: "url", widget: "string", hint: "Direct link to the image" }
               - { label: "Caption", name: "caption", widget: "string", hint: "Description of the photo" }
               - { label: "Category", name: "category", widget: "select", options: ["mehendi", "gaye-holud", "ceremony", "reception", "pre-wedding"], hint: "Which event this photo belongs to" }
-
-  - name: "content"
-    label: "📝 Website Content"
-    description: "Edit text content and descriptions"
-    files:
-      - label: "✏️ Content Configuration"
-        name: "content-config"
-        file: "src/config/content-config.ts"
-        description: "Edit website text, descriptions, and messages"
-        fields:
-          - label: "🏠 Hero Section"
-            name: "hero"
-            widget: "object"
-            collapsed: false
-            fields:
-              - { label: "Welcome Message", name: "welcome_message", widget: "text", hint: "Main welcome text on the homepage" }
-              - { label: "Countdown Title", name: "countdown_title", widget: "string", hint: "Title above the countdown timer" }
-          
-          - label: "🎊 Events Section"
-            name: "events"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Description", name: "description", widget: "text", hint: "Introduction text for the events section" }
-          
-          - label: "📷 Gallery Section"
-            name: "gallery"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Description", name: "description", widget: "text", hint: "Introduction text for the photo gallery" }
-          
-          - label: "🏛️ Culture Section"
-            name: "culture"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Description", name: "description", widget: "text", hint: "Introduction text for the culture section" }
-          
-          - label: "💌 RSVP Section"
-            name: "rsvp"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Description", name: "description", widget: "text", hint: "Introduction text for the RSVP form" }
-              - { label: "Success Message", name: "success_message", widget: "text", hint: "Message shown after successful RSVP submission" }
-
-  - name: "cultural"
-    label: "🏛️ Cultural Information"
-    description: "Bengali wedding traditions and customs"
-    files:
-      - label: "📜 Cultural Configuration"
-        name: "cultural-config"
-        file: "src/config/cultural-config.ts"
-        description: "Edit information about Bengali wedding traditions"
-        fields:
-          - label: "Cultural Information"
-            name: "cultural_info"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "ID", name: "id", widget: "string", hint: "Unique identifier" }
-              - { label: "Title", name: "title", widget: "string", hint: "Title in English" }
-              - { label: "Bengali Title", name: "bengali_title", widget: "string", hint: "Title in Bengali" }
-              - { label: "Description", name: "description", widget: "text", hint: "Detailed description" }
-              - { label: "Cultural Significance", name: "significance", widget: "text", hint: "Why this tradition is important" }
-              - label: "Key Traditions"
-                name: "traditions"
-                widget: "list"
-                hint: "List of specific traditions or practices"
-                field: { label: "Tradition", name: "tradition", widget: "string" }
