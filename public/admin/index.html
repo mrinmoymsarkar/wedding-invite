@@ -8,21 +8,250 @@
   
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #FFF8DC 0%, #FFFFF0 100%);
+      min-height: 100vh;
+    }
+    
+    .setup-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(220, 20, 60, 0.15);
+      text-align: center;
+    }
+    
+    .logo {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+    }
+    
+    .title {
+      color: #8B0000;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    
+    .status {
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: left;
+    }
+    
+    .info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+    .warning { background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; }
+    .error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+    
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #DC143C, #8B0000);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      margin: 10px;
+      font-weight: 500;
+      transition: transform 0.2s;
+    }
+    
+    .button:hover {
+      transform: translateY(-2px);
+    }
+    
+    .button.secondary {
+      background: linear-gradient(135deg, #FFD700, #FFC107);
+      color: #333;
+    }
+    
+    .steps {
+      text-align: left;
+      margin: 30px 0;
+    }
+    
+    .step {
+      padding: 15px;
+      margin: 10px 0;
+      background: #f8f9fa;
+      border-left: 4px solid #DC143C;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .step h4 {
+      margin: 0 0 10px 0;
+      color: #8B0000;
+    }
+    
+    .code {
+      background: #f1f3f4;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 14px;
+    }
+    
+    #netlify-identity-widget {
+      margin: 20px 0;
+    }
+  </style>
 </head>
 <body>
+  <div class="setup-container">
+    <img src="https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wediing-icon-MWGi3zHWRSwveW4CaK9EM7s57pDP54.png" alt="Wedding Icon" class="logo" />
+    
+    <h1 class="title">Wedding Content Manager</h1>
+    <p class="subtitle">Manage your wedding website content easily</p>
+    
+    <div id="identity-status"></div>
+    <div id="netlify-identity-widget"></div>
+    
+    <div class="info status">
+      <strong>🎯 Goal:</strong> Set up access to edit your wedding website content through a user-friendly interface.
+    </div>
+    
+    <div class="steps">
+      <div class="step">
+        <h4>Step 1: Complete Netlify Identity Setup</h4>
+        <p>If you're seeing this page without a login form, Netlify Identity needs to be properly configured:</p>
+        <ol>
+          <li>Go to your <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank">Netlify Identity Settings</a></li>
+          <li>Click <strong>"Enable Identity"</strong> if not already enabled</li>
+          <li>Under "Services", click <strong>"Enable Git Gateway"</strong></li>
+          <li>Return to this page and refresh</li>
+        </ol>
+      </div>
+      
+      <div class="step">
+        <h4>Step 2: Create Your Account</h4>
+        <p>Once Identity is enabled, you should see a login form above. If you don't have an account yet:</p>
+        <ol>
+          <li>Go to <a href="https://app.netlify.com/sites/neon-meerkat-c50769/identity" target="_blank">Netlify Identity Tab</a></li>
+          <li>Click <strong>"Invite users"</strong></li>
+          <li>Enter your email address</li>
+          <li>Check your email for the invitation</li>
+          <li>Click the link and set your password</li>
+        </ol>
+      </div>
+      
+      <div class="step">
+        <h4>Step 3: Access the CMS</h4>
+        <p>After setting up your account, you can:</p>
+        <ul>
+          <li>Log in using the form above</li>
+          <li>Edit all wedding content through forms</li>
+          <li>Upload photos and manage the gallery</li>
+          <li>Update event details and dates</li>
+          <li>Publish changes instantly</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="warning status">
+      <strong>⚠️ Troubleshooting:</strong>
+      <br>• If you don't see a login form, Identity isn't enabled
+      <br>• If the invitation link doesn't work, try creating a user manually in Netlify
+      <br>• If you get errors, check that Git Gateway is enabled
+    </div>
+    
+    <div style="margin-top: 30px;">
+      <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank" class="button">
+        Open Netlify Identity Settings
+      </a>
+      <a href="https://app.netlify.com/sites/neon-meerkat-c50769/identity" target="_blank" class="button secondary">
+        Manage Users
+      </a>
+    </div>
+    
+    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
+      <p><strong>Alternative:</strong> If you prefer to edit files directly, you can modify the configuration files in the <span class="code">src/config/</span> directory.</p>
+    </div>
+  </div>
+
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
-  <!-- Netlify Identity integration -->
+  <!-- Enhanced Netlify Identity integration -->
   <script>
+    const statusDiv = document.getElementById('identity-status');
+    
+    function updateStatus(message, type = 'info') {
+      statusDiv.innerHTML = `<div class="${type} status">${message}</div>`;
+    }
+    
+    // Check if Netlify Identity is available
     if (window.netlifyIdentity) {
+      updateStatus('🔄 Initializing Netlify Identity...', 'info');
+      
       window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
+        if (user) {
+          updateStatus('✅ You are logged in! Loading CMS...', 'info');
+          // User is already logged in, redirect to CMS
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          updateStatus('👋 Please log in to access the content management system.', 'info');
         }
       });
+      
+      window.netlifyIdentity.on("login", user => {
+        updateStatus('✅ Login successful! Loading CMS...', 'info');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      });
+      
+      window.netlifyIdentity.on("logout", () => {
+        updateStatus('👋 You have been logged out.', 'info');
+      });
+      
+      window.netlifyIdentity.on("error", err => {
+        console.error('Identity error:', err);
+        updateStatus(`❌ Error: ${err.message || 'Authentication failed'}`, 'error');
+      });
+      
+      // Initialize the widget
+      window.netlifyIdentity.init({
+        APIUrl: "https://neon-meerkat-c50769.netlify.app/.netlify/identity"
+      });
+      
+    } else {
+      updateStatus('❌ Netlify Identity is not available. Please check your configuration.', 'error');
+    }
+    
+    // Handle invite token from URL
+    const urlParams = new URLSearchParams(window.location.hash.substring(1));
+    const inviteToken = urlParams.get('invite_token');
+    
+    if (inviteToken) {
+      updateStatus('🔑 Processing invitation token...', 'info');
+      
+      if (window.netlifyIdentity) {
+        // Accept the invitation
+        window.netlifyIdentity.acceptInvite(inviteToken)
+          .then(() => {
+            updateStatus('✅ Invitation accepted! Please set your password.', 'info');
+          })
+          .catch(err => {
+            console.error('Invite error:', err);
+            updateStatus(`❌ Error processing invitation: ${err.message}`, 'error');
+          });
+      }
     }
   </script>
 </body>
