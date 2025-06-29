@@ -117,7 +117,7 @@
       margin: 20px 0;
     }
     
-    .config-fix {
+    .fix-section {
       background: #e7f3ff;
       border: 2px solid #007bff;
       border-radius: 10px;
@@ -125,7 +125,7 @@
       margin: 20px 0;
     }
     
-    .config-fix h3 {
+    .fix-section h3 {
       color: #004085;
       margin-top: 0;
     }
@@ -144,6 +144,10 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -155,68 +159,81 @@
     
     <div id="identity-status"></div>
     
-    <!-- Configuration Fix Section -->
-    <div class="config-fix">
-      <h3>🔧 Configuration Issue Detected</h3>
-      <p><strong>Error:</strong> "Failed to load config.yml (Failed to fetch)"</p>
-      <p><strong>Solution:</strong> This is usually caused by authentication or file access issues.</p>
+    <!-- Fix for Invite Token Loop -->
+    <div class="fix-section">
+      <h3>🔧 Fix: Invite Token Loop Issue</h3>
+      <p><strong>Problem:</strong> Getting stuck in a loop after using access token to signup</p>
+      <p><strong>Solution:</strong> We'll bypass the invite system and create a direct user account.</p>
       
       <div class="steps">
         <div class="step">
-          <h4>Step 1: Enable Git Gateway</h4>
-          <p>Go to your Netlify site settings and enable Git Gateway:</p>
+          <h4>Step 1: Clear Browser Data</h4>
+          <p>First, let's clear any stuck authentication data:</p>
+          <button onclick="clearAuthData()" class="button secondary">
+            Clear Authentication Data
+          </button>
+          <p><small>This will clear any stuck tokens or session data.</small></p>
+        </div>
+        
+        <div class="step">
+          <h4>Step 2: Enable Git Gateway</h4>
+          <p>Go to Netlify and enable Git Gateway (this bypasses the invite system):</p>
           <ol>
             <li>Open <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank">Netlify Identity Settings</a></li>
-            <li>Scroll down to <strong>"Services"</strong></li>
+            <li>Scroll down to <strong>"Services"</strong> section</li>
             <li>Click <strong>"Enable Git Gateway"</strong></li>
             <li>Save the settings</li>
           </ol>
         </div>
         
         <div class="step">
-          <h4>Step 2: Create User Account</h4>
-          <p>Create a user account that can access the CMS:</p>
+          <h4>Step 3: Create User Directly (No Invite)</h4>
+          <p>Create a user account without using invites:</p>
           <ol>
             <li>Go to <a href="https://app.netlify.com/sites/neon-meerkat-c50769/identity" target="_blank">Netlify Identity Users</a></li>
-            <li>Click <strong>"Add user"</strong> (not "Invite users")</li>
-            <li>Enter your email and set a password</li>
-            <li>Make sure <strong>"Email confirmed"</strong> is checked</li>
+            <li>Click <strong>"Add user"</strong> (NOT "Invite users")</li>
+            <li>Fill in:
+              <ul>
+                <li>Email: Your email address</li>
+                <li>Password: Choose a secure password</li>
+                <li><strong>✅ Check "Email confirmed"</strong> (IMPORTANT!)</li>
+              </ul>
+            </li>
             <li>Click "Add user"</li>
           </ol>
         </div>
         
         <div class="step">
-          <h4>Step 3: Test Login</h4>
-          <p>Return here and try logging in with your new credentials.</p>
+          <h4>Step 4: Test Direct Login</h4>
+          <p>Now try logging in with your new credentials:</p>
+          <button onclick="testDirectLogin()" class="button success">
+            Test Login
+          </button>
         </div>
       </div>
       
-      <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank" class="button success">
-        Open Netlify Settings
-      </a>
+      <div class="warning status">
+        <strong>⚠️ Important:</strong>
+        <br>• Don't use invite links anymore
+        <br>• Always create users directly in Netlify dashboard
+        <br>• Make sure "Email confirmed" is checked
+        <br>• Clear browser data if you get stuck
+      </div>
     </div>
     
     <div id="netlify-identity-widget"></div>
     
-    <div class="warning status">
-      <strong>⚠️ Current Status:</strong>
-      <br>• CMS files are deployed ✅
-      <br>• Configuration file exists ✅
-      <br>• Issue: Authentication/access problem ❌
-      <br>• Solution: Enable Git Gateway and create user ✅
-    </div>
-    
     <div style="margin-top: 30px;">
       <button onclick="testCMSAccess()" class="button">
-        Test CMS Access
+        Test CMS Configuration
       </button>
-      <button onclick="window.netlifyIdentity.open()" class="button secondary">
-        Try Login
-      </button>
+      <a href="https://app.netlify.com/sites/neon-meerkat-c50769/settings/identity" target="_blank" class="button secondary">
+        Open Netlify Settings
+      </a>
     </div>
     
     <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
-      <p><strong>Alternative:</strong> If you prefer to edit files directly, you can modify the configuration files in the <span class="code">src/config/</span> directory.</p>
+      <p><strong>Alternative:</strong> If the CMS still doesn't work, you can edit files directly in the <span class="code">src/config/</span> directory.</p>
     </div>
   </div>
 
@@ -229,6 +246,39 @@
     
     function updateStatus(message, type = 'info') {
       statusDiv.innerHTML = `<div class="${type} status">${message}</div>`;
+    }
+    
+    // Clear authentication data
+    function clearAuthData() {
+      // Clear localStorage
+      localStorage.removeItem('gotrue.user');
+      localStorage.removeItem('netlify-cms-user');
+      
+      // Clear sessionStorage
+      sessionStorage.clear();
+      
+      // Clear cookies
+      document.cookie.split(";").forEach(function(c) { 
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+      });
+      
+      updateStatus('✅ Authentication data cleared! Now try the steps above.', 'success');
+      
+      // Remove any invite token from URL
+      if (window.location.hash.includes('invite_token')) {
+        window.location.hash = '';
+        window.location.reload();
+      }
+    }
+    
+    // Test direct login
+    function testDirectLogin() {
+      if (window.netlifyIdentity) {
+        updateStatus('🔄 Opening login dialog...', 'info');
+        window.netlifyIdentity.open();
+      } else {
+        updateStatus('❌ Netlify Identity not available', 'error');
+      }
     }
     
     // Test CMS configuration access
@@ -252,13 +302,27 @@
     if (window.netlifyIdentity) {
       updateStatus('🔄 Initializing authentication system...', 'info');
       
+      // Clear any existing invite token issues
+      const urlParams = new URLSearchParams(window.location.hash.substring(1));
+      if (urlParams.get('invite_token')) {
+        updateStatus('⚠️ Invite token detected. Clearing to prevent loop...', 'warning');
+        window.location.hash = '';
+        clearAuthData();
+      }
+      
       window.netlifyIdentity.on("init", user => {
         if (user) {
-          updateStatus('✅ You are logged in! Testing CMS access...', 'success');
-          // Test CMS access after login
-          setTimeout(testCMSAccess, 1000);
+          updateStatus('✅ You are logged in! Loading CMS...', 'success');
+          // Hide the setup instructions and show CMS
+          setTimeout(() => {
+            document.querySelector('.setup-container').style.display = 'none';
+            // Initialize CMS
+            if (window.CMS) {
+              window.CMS.init();
+            }
+          }, 2000);
         } else {
-          updateStatus('👋 Please log in to access the content management system.', 'info');
+          updateStatus('👋 Please log in using the steps above. Do NOT use invite links.', 'info');
         }
       });
       
@@ -277,13 +341,13 @@
         console.error('Identity error:', err);
         
         if (err.message && err.message.includes('Email not confirmed')) {
-          updateStatus(`❌ Email Confirmation Issue: Follow the steps above to create a user with confirmed email.`, 'error');
+          updateStatus(`❌ Email Confirmation Issue: Create a user directly in Netlify dashboard with "Email confirmed" checked.`, 'error');
         } else if (err.message && err.message.includes('Invalid email or password')) {
-          updateStatus(`❌ Login Failed: Please check your credentials or create a new user account.`, 'error');
+          updateStatus(`❌ Login Failed: Check your credentials or create a new user account directly in Netlify.`, 'error');
         } else if (err.message && err.message.includes('Failed to fetch')) {
           updateStatus(`❌ Network Error: Check your internet connection and try again.`, 'error');
         } else {
-          updateStatus(`❌ Error: ${err.message || 'Authentication failed'}`, 'error');
+          updateStatus(`❌ Error: ${err.message || 'Authentication failed'}. Try clearing auth data and creating a direct user account.`, 'error');
         }
       });
       
@@ -294,25 +358,6 @@
       
     } else {
       updateStatus('❌ Netlify Identity is not available. Please check your configuration.', 'error');
-    }
-    
-    // Handle invite token from URL
-    const urlParams = new URLSearchParams(window.location.hash.substring(1));
-    const inviteToken = urlParams.get('invite_token');
-    
-    if (inviteToken) {
-      updateStatus('🔑 Processing invitation token...', 'info');
-      
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.acceptInvite(inviteToken)
-          .then(() => {
-            updateStatus('✅ Invitation accepted! Please set your password.', 'success');
-          })
-          .catch(err => {
-            console.error('Invite error:', err);
-            updateStatus(`❌ Error processing invitation: ${err.message}. Try the manual user creation method above.`, 'error');
-          });
-      }
     }
     
     // Auto-test configuration on page load
