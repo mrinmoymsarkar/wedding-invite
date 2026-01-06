@@ -29,7 +29,7 @@ const PDFInvitation: React.FC = () => {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Wedding Invitation - Tani & Sunny</title>
+        <title>Wedding Invitation - Subhasree & Mrinmoy</title>
         <style>
           @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
           
@@ -426,7 +426,7 @@ const PDFInvitation: React.FC = () => {
           </div>
           
           <div class="hero-image-section">
-            <img src="${heroImageUrl}" alt="Tani & Sunny Wedding Illustration" class="hero-image" />
+            <img src="${heroImageUrl}" alt="Subhasree & Mrinmoy Wedding Illustration" class="hero-image" />
           </div>
           
           <div class="invitation-content">

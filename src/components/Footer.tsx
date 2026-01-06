@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-start gap-3 text-bengali-ivory/60 text-sm">
                 <MapPin className="h-4 w-4 text-bengali-gold/60 mt-0.5" />
-                <span className="font-body">Heritage Palace, West Bengal<br />India</span>
+                <span className="font-body">Shanai Bhavan, Siliguri<br />West Bengal, India</span>
               </div>
             </div>
           </motion.div>
@@ -119,16 +119,15 @@ const Footer: React.FC = () => {
             </h3>
             <div className="flex flex-col gap-4">
               {[
-                { event: 'Mehendi', date: 'Feb 27', time: '4:00 PM' },
-                { event: 'Gaye Holud', date: 'Feb 28', time: '10:00 AM' },
-                { event: 'Wedding', date: 'Feb 29', time: '8:00 PM' },
-                { event: 'Reception', date: 'Mar 01', time: '7:00 PM' }
+                { event: 'Gaye Holud', date: 'Mar 09', time: '' },
+                { event: 'Wedding', date: 'Mar 09', time: '6:03 PM' },
+                { event: 'Reception', date: 'Mar 22', time: '6:45 PM onwards' }
               ].map((item) => (
                 <div key={item.event} className="flex items-center gap-3 text-bengali-ivory/60">
                   <Calendar className="h-4 w-4 text-bengali-gold/60" />
                   <div>
                     <div className="font-body text-sm">{item.event} - {item.date}</div>
-                    <div className="font-body text-xs text-bengali-ivory/40">{item.time}</div>
+                    {item.time && <div className="font-body text-xs text-bengali-ivory/40">{item.time}</div>}
                   </div>
                 </div>
               ))}

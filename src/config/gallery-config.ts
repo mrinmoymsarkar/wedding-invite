@@ -1,12 +1,6 @@
 // Gallery Configuration - Edit this file to update gallery images
 export const GALLERY_CONFIG = [
   {
-    id: 1,
-    url: 'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg',
-    caption: 'Mehendi Ceremony - Intricate henna designs',
-    category: 'mehendi'
-  },
-  {
     id: 2,
     url: 'https://images.pexels.com/photos/3018976/pexels-photo-3018976.jpeg',
     caption: 'Gaye Holud - Turmeric blessing ceremony',
@@ -52,7 +46,6 @@ export const GALLERY_CONFIG = [
 
 export const GALLERY_CATEGORIES = [
   { id: 'all', name: 'All Photos', local: 'সব ছবি' },
-  { id: 'mehendi', name: 'Mehendi', local: 'মেহেন্দি' },
   { id: 'gaye-holud', name: 'Gaye Holud', local: 'গায়ে হলুদ' },
   { id: 'ceremony', name: 'Ceremony', local: 'বিয়ে' },
   { id: 'reception', name: 'Reception', local: 'অভ্যর্থনা' },

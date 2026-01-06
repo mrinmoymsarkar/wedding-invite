@@ -44,7 +44,7 @@ const CalendarButton: React.FC<CalendarButtonProps> = ({
 
   const generateGoogleCalendarUrl = () => {
     const { start, end } = formatDateForCalendar(event.date, event.time);
-    const title = encodeURIComponent(`${event.name} - Tani & Sunny Wedding`);
+    const title = encodeURIComponent(`${event.name} - Subhasree & Mrinmoy Wedding`);
     const details = encodeURIComponent(
       `${event.description}\n\nCultural Significance: ${event.significance}\n\nDress Code: ${event.dresscode}\n\nRituals:\n${event.rituals.map(ritual => `• ${ritual}`).join('\n')}`
     );
@@ -61,12 +61,12 @@ const CalendarButton: React.FC<CalendarButtonProps> = ({
     const icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//Tani & Sunny Wedding//Wedding Events//EN',
+      'PRODID:-//Subhasree & Mrinmoy Wedding//Wedding Events//EN',
       'BEGIN:VEVENT',
       `UID:${event.id}@tanisunny-wedding.com`,
       `DTSTART:${startFormatted}`,
       `DTEND:${endFormatted}`,
-      `SUMMARY:${event.name} - Tani & Sunny Wedding`,
+      `SUMMARY:${event.name} - Subhasree & Mrinmoy Wedding`,
       `DESCRIPTION:${event.description}\\n\\nCultural Significance: ${event.significance}\\n\\nDress Code: ${event.dresscode}\\n\\nRituals:\\n${event.rituals.map(ritual => `• ${ritual}`).join('\\n')}`,
       `LOCATION:${event.venue}`,
       'STATUS:CONFIRMED',
@@ -90,7 +90,7 @@ const CalendarButton: React.FC<CalendarButtonProps> = ({
 
   const generateOutlookUrl = () => {
     const { startLocal, endLocal } = formatDateForCalendar(event.date, event.time);
-    const title = encodeURIComponent(`${event.name} - Tani & Sunny Wedding`);
+    const title = encodeURIComponent(`${event.name} - Subhasree & Mrinmoy Wedding`);
     const body = encodeURIComponent(
       `${event.description}\n\nCultural Significance: ${event.significance}\n\nDress Code: ${event.dresscode}\n\nRituals:\n${event.rituals.map(ritual => `• ${ritual}`).join('\n')}`
     );

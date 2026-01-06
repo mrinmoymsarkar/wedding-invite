@@ -3,29 +3,11 @@ import { EventDetails } from '../types';
 // Wedding Events Configuration - Edit this file to update event details
 export const EVENTS_CONFIG: EventDetails[] = [
   {
-    id: 'mehendi',
-    name: 'Mehendi Ceremony',
-    bengaliName: 'মেহেন্দি',
-    date: '2028-02-27',
-    time: '4:00 PM',
-    venue: 'Bride\'s Family Home, West Bengal',
-    description: 'A beautiful pre-wedding ceremony where intricate henna designs are applied to the bride\'s hands and feet, symbolizing joy, beauty, and spiritual awakening.',
-    rituals: [
-      'Henna application for bride and female relatives',
-      'Traditional songs and dance',
-      'Blessing ceremony by elders',
-      'Evening feast with family and friends'
-    ],
-    significance: 'Mehendi is believed to bring good luck and fortune to the bride. The darker the henna color, the more the groom loves his bride according to tradition.',
-    dresscode: 'Bright colors - Yellow, Orange, Pink. Traditional Bengali sarees encouraged.',
-    photo: 'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg'
-  },
-  {
     id: 'gaye-holud',
     name: 'Gaye Holud',
     bengaliName: 'গায়ে হলুদ',
-    date: '2028-02-28',
-    time: '10:00 AM',
+    date: '2026-03-09',
+    time: '',
     venue: 'Community Hall, West Bengal',
     description: 'The most vibrant Bengali pre-wedding ritual where turmeric paste is applied to both bride and groom at their respective homes, symbolizing purification and prosperity.',
     rituals: [
@@ -43,9 +25,9 @@ export const EVENTS_CONFIG: EventDetails[] = [
     id: 'biye',
     name: 'Wedding Ceremony',
     bengaliName: 'বিয়ে',
-    date: '2028-02-29',
-    time: '8:00 PM',
-    venue: 'Heritage Palace, West Bengal',
+    date: '2026-03-09',
+    time: '6:03 PM',
+    venue: 'Shanai Bhavan, Siliguri',
     description: 'The sacred Bengali wedding ceremony performed according to traditional Vedic rituals, marking the eternal union of two souls and their families.',
     rituals: [
       'Boron (Welcome ceremony for groom)',
@@ -64,9 +46,9 @@ export const EVENTS_CONFIG: EventDetails[] = [
     id: 'reception',
     name: 'Reception',
     bengaliName: 'অভ্যর্থনা',
-    date: '2028-03-01',
-    time: '7:00 PM',
-    venue: 'Grand Ballroom, West Bengal',
+    date: '2026-03-22',
+    time: '6:45 PM onwards',
+    venue: 'RCF Hall, Alibag',
     description: 'A grand celebration to honor the newly married couple with family, friends, and the extended community, featuring traditional Bengali cuisine and cultural performances.',
     rituals: [
       'Welcome of guests by both families',

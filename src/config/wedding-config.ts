@@ -3,22 +3,22 @@ export const WEDDING_CONFIG = {
   // === COUPLE INFORMATION ===
   couple: {
     bride: {
-      name: 'Tani',
-      nameLocal: 'তানি'
+      name: 'Subhasree',
+      nameLocal: 'শুভশ্রী'
     },
     groom: {
-      name: 'Sunny', 
-      nameLocal: 'সানি'
+      name: 'Mrinmoy',
+      nameLocal: 'মৃন্ময়'
     },
-    coupleNames: 'Tani & Sunny',
-    coupleNamesLocal: 'তানি ও সানি'
+    coupleNames: 'Subhasree & Mrinmoy',
+    coupleNamesLocal: 'শুভশ্রী ও মৃন্ময়'
   },
 
   // === WEDDING DATE & VENUE ===
   wedding: {
-    mainDate: '2028-02-29',
-    mainTime: '8:00 PM',
-    mainVenue: 'Heritage Palace, West Bengal',
+    mainDate: '2026-03-09',
+    mainTime: '6:03 PM',
+    mainVenue: 'Shanai Bhavan, Siliguri',
     location: 'West Bengal, India'
   },
 
@@ -26,7 +26,7 @@ export const WEDDING_CONFIG = {
   contact: {
     phone: '+91 98765 43210',
     email: 'tani.sunny.wedding@gmail.com',
-    address: 'Heritage Palace, West Bengal, India'
+    address: 'Shanai Bhavan, Siliguri, West Bengal, India'
   },
 
   // === WEBSITE & BRANDING ===
@@ -52,6 +52,6 @@ export const WEDDING_CONFIG = {
 
   // === RSVP DEADLINE ===
   rsvp: {
-    deadline: 'February 15, 2028'
+    deadline: 'March 01, 2026'
   }
 };

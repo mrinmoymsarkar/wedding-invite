@@ -45,6 +45,6 @@ export const CONTENT_CONFIG = {
 
   // === FOOTER ===
   footer: {
-    copyright: '© 2028 Tani & Sunny Wedding. Made with love and Bengali traditions.'
+    copyright: '© 2026 Subhasree & Mrinmoy Wedding. Made with love and Bengali traditions.'
   }
 };
