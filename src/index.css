@@ -4,22 +4,40 @@
 
 @layer base {
   :root {
-    /* Royal Bengali Heritage Palette */
-    --royal-burgundy: #5D0F1A;
-    --deep-burgundy: #3D0A11;
-    --antique-gold: #C9A227;
-    --pale-gold: #E8D5A3;
-    --rich-cream: #FAF3E0;
-    --warm-ivory: #FFFEF7;
-    --deep-teal: #1A4D4D;
-    --sage-green: #4A6741;
-    --charcoal: #1C1C1C;
-    --warm-gray: #6B6B6B;
+    /* Vermillion Dusk - Bengali Wedding Palette */
+
+    /* Primary Reds - The heart of Bengali weddings */
+    --vermillion: #C73E3A;
+    --vermillion-deep: #9B2D2A;
+    --sindoor: #E25A4D;
+    --wine: #5C1A1B;
+    --wine-dark: #3D1011;
+
+    /* Sacred Golds - Temple bells and bridal jewelry */
+    --antique-brass: #C8A951;
+    --burnished-gold: #B8973A;
+    --champagne: #E8D5B5;
+    --marigold: #E8A838;
+
+    /* Warm Neutrals - Silk and sandalwood */
+    --parchment: #FAF6F0;
+    --pearl: #F5EDE4;
+    --sand: #E8DDD0;
+    --espresso: #2B1810;
+    --cocoa: #4A3728;
+
+    /* Accent Colors - Evening sky and alpana */
+    --twilight: #2D3A4A;
+    --dusty-rose: #C9A8A8;
+    --terracotta: #B55239;
+    --sage: #7A8B6E;
 
     /* Gradients */
-    --gradient-gold: linear-gradient(135deg, #C9A227 0%, #E8D5A3 50%, #C9A227 100%);
-    --gradient-burgundy: linear-gradient(135deg, #5D0F1A 0%, #8B1E3F 50%, #5D0F1A 100%);
-    --gradient-silk: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(250, 243, 224, 0.3) 50%, rgba(201, 162, 39, 0.1) 100%);
+    --gradient-vermillion: linear-gradient(135deg, #C73E3A 0%, #9B2D2A 100%);
+    --gradient-gold: linear-gradient(135deg, #C8A951 0%, #E8D5B5 50%, #B8973A 100%);
+    --gradient-dusk: linear-gradient(180deg, #FAF6F0 0%, #E8DDD0 50%, #C9A8A8 100%);
+    --gradient-silk: linear-gradient(135deg, rgba(200, 169, 81, 0.08) 0%, rgba(250, 246, 240, 0.4) 50%, rgba(200, 169, 81, 0.08) 100%);
+    --gradient-twilight: linear-gradient(180deg, #2D3A4A 0%, #3D1011 100%);
   }
 
   html {
@@ -30,15 +48,14 @@
 
   body {
     font-family: 'DM Sans', system-ui, sans-serif;
-    background-color: var(--warm-ivory);
-    color: var(--charcoal);
+    background-color: var(--parchment);
+    color: var(--espresso);
     overflow-x: hidden;
   }
 
-  /* Selection styling */
   ::selection {
-    background-color: var(--antique-gold);
-    color: var(--deep-burgundy);
+    background-color: var(--antique-brass);
+    color: var(--wine-dark);
   }
 }
 
@@ -46,8 +63,8 @@
   /* Elegant heading styles */
   .heading-display {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 400;
-    letter-spacing: 0.02em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
     line-height: 1.1;
   }
 
@@ -55,17 +72,16 @@
     font-family: 'Crimson Pro', Georgia, serif;
     font-weight: 400;
     font-style: italic;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
   }
 
-  /* Bengali text styling */
   .bengali-text {
     font-family: 'Noto Sans Bengali', system-ui, sans-serif;
     font-weight: 500;
     letter-spacing: 0.01em;
   }
 
-  /* Silk shimmer effect */
+  /* Silk shimmer effect - like Banarasi saree */
   .silk-shimmer {
     position: relative;
     overflow: hidden;
@@ -81,33 +97,37 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(201, 162, 39, 0.15) 50%,
+      rgba(200, 169, 81, 0.2) 45%,
+      rgba(232, 213, 181, 0.3) 50%,
+      rgba(200, 169, 81, 0.2) 55%,
       transparent 100%
     );
-    animation: silk-flow 8s ease-in-out infinite;
+    animation: silk-flow 6s ease-in-out infinite;
     pointer-events: none;
   }
 
   @keyframes silk-flow {
-    0%, 100% { left: -100%; opacity: 0; }
-    50% { left: 100%; opacity: 1; }
+    0% { left: -100%; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
   }
 
-  /* Ornate border pattern */
+  /* Ornate border - temple architecture inspired */
   .ornate-border {
     border: 1px solid transparent;
     background:
-      linear-gradient(var(--warm-ivory), var(--warm-ivory)) padding-box,
-      linear-gradient(135deg, var(--antique-gold) 0%, var(--pale-gold) 50%, var(--antique-gold) 100%) border-box;
+      linear-gradient(var(--parchment), var(--parchment)) padding-box,
+      linear-gradient(135deg, var(--antique-brass) 0%, var(--champagne) 50%, var(--burnished-gold) 100%) border-box;
   }
 
   .ornate-border-dark {
     background:
-      linear-gradient(var(--charcoal), var(--charcoal)) padding-box,
-      linear-gradient(135deg, var(--antique-gold) 0%, var(--pale-gold) 50%, var(--antique-gold) 100%) border-box;
+      linear-gradient(var(--wine-dark), var(--wine-dark)) padding-box,
+      linear-gradient(135deg, var(--antique-brass) 0%, var(--champagne) 50%, var(--burnished-gold) 100%) border-box;
   }
 
-  /* Bengali alpana pattern overlay */
+  /* Alpana pattern overlay - traditional floor art */
   .alpana-pattern-overlay {
     position: relative;
   }
@@ -117,15 +137,15 @@
     position: absolute;
     inset: 0;
     background-image:
-      radial-gradient(circle at 20% 30%, rgba(201, 162, 39, 0.08) 1px, transparent 1px),
-      radial-gradient(circle at 80% 70%, rgba(93, 15, 26, 0.06) 1px, transparent 1px),
-      radial-gradient(circle at 50% 50%, rgba(201, 162, 39, 0.04) 2px, transparent 2px);
-    background-size: 60px 60px, 80px 80px, 100px 100px;
+      radial-gradient(circle at 20% 30%, rgba(200, 169, 81, 0.06) 1px, transparent 1px),
+      radial-gradient(circle at 80% 70%, rgba(199, 62, 58, 0.04) 1px, transparent 1px),
+      radial-gradient(circle at 50% 50%, rgba(200, 169, 81, 0.03) 2px, transparent 2px);
+    background-size: 50px 50px, 70px 70px, 90px 90px;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.7;
   }
 
-  /* Noise texture overlay */
+  /* Noise texture - aged paper feel */
   .noise-overlay {
     position: relative;
   }
@@ -134,13 +154,13 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.025;
     pointer-events: none;
-    mix-blend-mode: overlay;
+    mix-blend-mode: multiply;
   }
 
-  /* Elegant divider */
+  /* Elegant divider - like zari border */
   .ornate-divider {
     display: flex;
     align-items: center;
@@ -152,10 +172,10 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--antique-gold), transparent);
+    background: linear-gradient(90deg, transparent, var(--antique-brass), transparent);
   }
 
-  /* Gold text gradient */
+  /* Text gradients */
   .text-gold-gradient {
     background: var(--gradient-gold);
     -webkit-background-clip: text;
@@ -163,47 +183,46 @@
     background-clip: text;
   }
 
-  .text-burgundy-gradient {
-    background: var(--gradient-burgundy);
+  .text-vermillion-gradient {
+    background: var(--gradient-vermillion);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Floating card with elegant shadow */
+  /* Floating card - like invitation card */
   .elegant-card {
-    background: rgba(255, 254, 247, 0.9);
+    background: linear-gradient(135deg, rgba(250, 246, 240, 0.95) 0%, rgba(245, 237, 228, 0.98) 100%);
     backdrop-filter: blur(20px);
     box-shadow:
-      0 4px 6px -1px rgba(93, 15, 26, 0.05),
-      0 10px 20px -5px rgba(93, 15, 26, 0.08),
-      0 25px 50px -12px rgba(93, 15, 26, 0.12);
-    border: 1px solid rgba(201, 162, 39, 0.15);
+      0 2px 4px rgba(43, 24, 16, 0.04),
+      0 8px 16px rgba(43, 24, 16, 0.06),
+      0 24px 48px rgba(43, 24, 16, 0.08);
+    border: 1px solid rgba(200, 169, 81, 0.12);
   }
 
   .elegant-card-dark {
-    background: rgba(28, 28, 28, 0.95);
+    background: linear-gradient(135deg, rgba(61, 16, 17, 0.98) 0%, rgba(43, 24, 16, 0.98) 100%);
     backdrop-filter: blur(20px);
     box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.3),
-      0 10px 20px -5px rgba(0, 0, 0, 0.4),
-      0 25px 50px -12px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(201, 162, 39, 0.1);
-    border: 1px solid rgba(201, 162, 39, 0.2);
+      0 4px 8px rgba(0, 0, 0, 0.3),
+      0 16px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(200, 169, 81, 0.08);
+    border: 1px solid rgba(200, 169, 81, 0.15);
   }
 
-  /* Button styles */
+  /* Primary button - vermillion with gold accent */
   .btn-royal {
     position: relative;
-    background: var(--royal-burgundy);
-    color: var(--rich-cream);
+    background: linear-gradient(135deg, var(--vermillion) 0%, var(--vermillion-deep) 100%);
+    color: var(--parchment);
     padding: 1rem 2.5rem;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    border: 1px solid var(--antique-gold);
+    border: 1px solid var(--antique-brass);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
   }
@@ -218,9 +237,11 @@
   }
 
   .btn-royal:hover {
-    color: var(--deep-burgundy);
+    color: var(--wine-dark);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(93, 15, 26, 0.3);
+    box-shadow:
+      0 8px 24px rgba(199, 62, 58, 0.25),
+      0 4px 8px rgba(200, 169, 81, 0.15);
   }
 
   .btn-royal:hover::before {
@@ -236,21 +257,22 @@
   .btn-outline-gold {
     position: relative;
     background: transparent;
-    color: var(--antique-gold);
+    color: var(--antique-brass);
     padding: 1rem 2.5rem;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    border: 1px solid var(--antique-gold);
+    border: 1px solid var(--antique-brass);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .btn-outline-gold:hover {
-    background: var(--antique-gold);
-    color: var(--deep-burgundy);
+    background: var(--antique-brass);
+    color: var(--wine-dark);
     transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200, 169, 81, 0.2);
   }
 
   /* Animated underline */
@@ -265,7 +287,7 @@
     left: 0;
     width: 0;
     height: 1px;
-    background: var(--antique-gold);
+    background: linear-gradient(90deg, var(--vermillion), var(--antique-brass));
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -273,11 +295,11 @@
     width: 100%;
   }
 
-  /* Scroll reveal animations */
+  /* Scroll reveal */
   .reveal-up {
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(30px);
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .reveal-up.revealed {
@@ -285,27 +307,27 @@
     transform: translateY(0);
   }
 
-  /* Stagger delay utilities */
+  /* Stagger utilities */
   .stagger-1 { transition-delay: 0.1s; }
   .stagger-2 { transition-delay: 0.2s; }
   .stagger-3 { transition-delay: 0.3s; }
   .stagger-4 { transition-delay: 0.4s; }
   .stagger-5 { transition-delay: 0.5s; }
 
-  /* Image frame with ornate corners */
+  /* Ornate frame - photo frame with corner accents */
   .ornate-frame {
     position: relative;
     padding: 1rem;
-    background: var(--rich-cream);
+    background: var(--pearl);
   }
 
   .ornate-frame::before,
   .ornate-frame::after {
     content: '';
     position: absolute;
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--antique-gold);
+    width: 35px;
+    height: 35px;
+    border: 2px solid var(--antique-brass);
   }
 
   .ornate-frame::before {
@@ -322,98 +344,144 @@
     border-top: none;
   }
 
-  /* Countdown box elegant style */
+  /* Countdown box */
   .countdown-box {
-    background: linear-gradient(135deg, rgba(93, 15, 26, 0.03) 0%, rgba(201, 162, 39, 0.05) 100%);
-    border: 1px solid rgba(201, 162, 39, 0.2);
+    background: linear-gradient(
+      135deg,
+      rgba(199, 62, 58, 0.03) 0%,
+      rgba(200, 169, 81, 0.05) 50%,
+      rgba(199, 62, 58, 0.03) 100%
+    );
+    border: 1px solid rgba(200, 169, 81, 0.15);
     padding: 1.5rem 1rem;
+    position: relative;
   }
 
-  /* Section divider with pattern */
+  .countdown-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--antique-brass), transparent);
+  }
+
+  /* Section divider */
   .section-divider {
-    height: 80px;
+    height: 60px;
     background:
-      linear-gradient(to right, transparent, rgba(201, 162, 39, 0.1), transparent),
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 10px,
-        rgba(201, 162, 39, 0.05) 10px,
-        rgba(201, 162, 39, 0.05) 20px
-      );
+      linear-gradient(to right, transparent, rgba(200, 169, 81, 0.08), transparent);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .section-divider::before {
-    content: '❧';
-    font-size: 2rem;
-    color: var(--antique-gold);
-    opacity: 0.6;
+    content: '✦';
+    font-size: 1rem;
+    color: var(--antique-brass);
+    opacity: 0.5;
+  }
+
+  /* Oil lamp glow effect */
+  .lamp-glow {
+    position: relative;
+  }
+
+  .lamp-glow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(232, 168, 56, 0.15) 0%,
+      rgba(232, 168, 56, 0.08) 30%,
+      transparent 70%
+    );
+    pointer-events: none;
+    animation: lamp-flicker 4s ease-in-out infinite;
+  }
+
+  @keyframes lamp-flicker {
+    0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
   }
 }
 
 @layer utilities {
-  /* Custom letter spacing */
-  .tracking-royal { letter-spacing: 0.25em; }
-  .tracking-elegant { letter-spacing: 0.15em; }
+  /* Letter spacing */
+  .tracking-royal { letter-spacing: 0.2em; }
+  .tracking-elegant { letter-spacing: 0.12em; }
 
-  /* Text shadow for headlines */
+  /* Text shadows */
   .text-shadow-gold {
-    text-shadow: 0 2px 20px rgba(201, 162, 39, 0.3);
+    text-shadow: 0 2px 16px rgba(200, 169, 81, 0.25);
   }
 
-  .text-shadow-burgundy {
-    text-shadow: 0 2px 20px rgba(93, 15, 26, 0.3);
+  .text-shadow-vermillion {
+    text-shadow: 0 2px 16px rgba(199, 62, 58, 0.2);
   }
 
   /* Background patterns */
   .bg-royal-pattern {
     background-image:
-      radial-gradient(circle at 25% 25%, rgba(201, 162, 39, 0.06) 1px, transparent 1px),
-      radial-gradient(circle at 75% 75%, rgba(93, 15, 26, 0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
+      radial-gradient(circle at 25% 25%, rgba(200, 169, 81, 0.04) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(199, 62, 58, 0.03) 1px, transparent 1px);
+    background-size: 35px 35px;
   }
 
   .bg-silk-texture {
     background:
-      linear-gradient(135deg, rgba(255, 254, 247, 0.9) 0%, rgba(250, 243, 224, 0.95) 100%),
+      linear-gradient(135deg, rgba(250, 246, 240, 0.95) 0%, rgba(245, 237, 228, 0.98) 100%),
       repeating-linear-gradient(
         45deg,
         transparent,
         transparent 2px,
-        rgba(201, 162, 39, 0.02) 2px,
-        rgba(201, 162, 39, 0.02) 4px
+        rgba(200, 169, 81, 0.015) 2px,
+        rgba(200, 169, 81, 0.015) 4px
       );
   }
 
-  /* Mask utilities for fades */
+  .bg-dusk {
+    background: linear-gradient(
+      180deg,
+      var(--parchment) 0%,
+      var(--sand) 60%,
+      var(--dusty-rose) 100%
+    );
+  }
+
+  /* Mask utilities */
   .mask-fade-bottom {
     mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
   }
 
-  /* Animation for floating elements */
+  /* Animations */
   @keyframes gentle-float {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(2deg); }
+    50% { transform: translateY(-12px) rotate(1deg); }
   }
 
   .animate-gentle-float {
-    animation: gentle-float 6s ease-in-out infinite;
+    animation: gentle-float 5s ease-in-out infinite;
   }
 
   @keyframes subtle-pulse {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.03); }
   }
 
   .animate-subtle-pulse {
     animation: subtle-pulse 4s ease-in-out infinite;
   }
 
-  /* Gradient text animation */
   @keyframes gradient-flow {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -421,43 +489,62 @@
 
   .animate-gradient-text {
     background-size: 200% 200%;
-    animation: gradient-flow 8s ease-in-out infinite;
+    animation: gradient-flow 6s ease-in-out infinite;
+  }
+
+  /* Marigold floating effect */
+  @keyframes marigold-fall {
+    0% {
+      transform: translateY(-10px) rotate(0deg);
+      opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-marigold {
+    animation: marigold-fall 12s linear infinite;
   }
 }
 
-/* Dark mode overrides */
+/* Dark mode */
 .dark {
-  --warm-ivory: #0a0a0a;
-  --rich-cream: #1a1a1a;
-  --charcoal: #f5f5f5;
-  --warm-gray: #a0a0a0;
+  --parchment: #1a1412;
+  --pearl: #241c18;
+  --sand: #2d241e;
+  --espresso: #f5ede4;
+  --cocoa: #c9baa8;
 }
 
 .dark body {
-  background-color: #0a0a0a;
-  color: #f5f5f5;
+  background-color: #1a1412;
+  color: #f5ede4;
 }
 
-/* Scrollbar styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--rich-cream);
+  background: var(--pearl);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--antique-gold);
-  border-radius: 4px;
+  background: linear-gradient(180deg, var(--antique-brass), var(--burnished-gold));
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--royal-burgundy);
+  background: var(--vermillion);
 }
 
 /* Focus states */
 *:focus-visible {
-  outline: 2px solid var(--antique-gold);
+  outline: 2px solid var(--antique-brass);
   outline-offset: 2px;
 }

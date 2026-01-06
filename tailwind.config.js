@@ -5,29 +5,51 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Royal Bengali Heritage palette
+        // Vermillion Dusk palette - Bengali Wedding
         bengali: {
-          'deep-red': '#5D0F1A',
-          'crimson': '#8B1E3F',
-          'gold': '#C9A227',
-          'amber': '#E8D5A3',
-          'cream': '#FAF3E0',
-          'ivory': '#FFFEF7',
-          'orange': '#B85C38',
-          'saffron': '#D4A574',
-          'burgundy': '#3D0A11',
-          'teal': '#1A4D4D',
-          'sage': '#4A6741'
+          'vermillion': '#C73E3A',
+          'vermillion-deep': '#9B2D2A',
+          'sindoor': '#E25A4D',
+          'wine': '#5C1A1B',
+          'wine-dark': '#3D1011',
+          'gold': '#C8A951',
+          'gold-burnished': '#B8973A',
+          'champagne': '#E8D5B5',
+          'marigold': '#E8A838',
+          'parchment': '#FAF6F0',
+          'pearl': '#F5EDE4',
+          'sand': '#E8DDD0',
+          'espresso': '#2B1810',
+          'terracotta': '#A85A45',
+          // Legacy aliases for compatibility
+          'deep-red': '#5C1A1B',
+          'crimson': '#C73E3A',
+          'amber': '#E8D5B5',
+          'cream': '#FAF6F0',
+          'ivory': '#F5EDE4',
+          'orange': '#A85A45',
+          'saffron': '#E8A838'
         },
-        royal: {
-          burgundy: '#5D0F1A',
-          'burgundy-deep': '#3D0A11',
-          gold: '#C9A227',
-          'gold-pale': '#E8D5A3',
-          cream: '#FAF3E0',
-          ivory: '#FFFEF7',
-          teal: '#1A4D4D',
-          charcoal: '#1C1C1C'
+        vermillion: {
+          DEFAULT: '#C73E3A',
+          deep: '#9B2D2A',
+          light: '#E25A4D'
+        },
+        wine: {
+          DEFAULT: '#5C1A1B',
+          dark: '#3D1011',
+          light: '#7A2A2C'
+        },
+        gold: {
+          DEFAULT: '#C8A951',
+          burnished: '#B8973A',
+          champagne: '#E8D5B5',
+          marigold: '#E8A838'
+        },
+        parchment: {
+          DEFAULT: '#FAF6F0',
+          pearl: '#F5EDE4',
+          sand: '#E8DDD0'
         },
         dark: {
           950: '#050505',
@@ -109,8 +131,8 @@ export default {
           '50%': { transform: 'scale(1) rotate(180deg)', opacity: '1' }
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 5px rgba(220, 20, 60, 0.3)' },
-          '50%': { boxShadow: '0 0 20px rgba(220, 20, 60, 0.6), 0 0 30px rgba(255, 215, 0, 0.3)' }
+          '0%, 100%': { boxShadow: '0 0 5px rgba(199, 62, 58, 0.3)' },
+          '50%': { boxShadow: '0 0 20px rgba(199, 62, 58, 0.6), 0 0 30px rgba(200, 169, 81, 0.3)' }
         },
         weddingDance: {
           '0%, 100%': { transform: 'translateX(0) rotate(0deg)' },
@@ -135,30 +157,30 @@ export default {
           '50%': { transform: 'translateY(-8px)' }
         },
         textGlow: {
-          '0%, 100%': { 
-            textShadow: '0 0 5px rgba(220, 20, 60, 0.3)',
+          '0%, 100%': {
+            textShadow: '0 0 5px rgba(199, 62, 58, 0.3)',
             transform: 'scale(1)'
           },
-          '50%': { 
-            textShadow: '0 0 20px rgba(220, 20, 60, 0.8), 0 0 30px rgba(255, 215, 0, 0.5)',
+          '50%': {
+            textShadow: '0 0 20px rgba(199, 62, 58, 0.8), 0 0 30px rgba(200, 169, 81, 0.5)',
             transform: 'scale(1.02)'
           }
         },
         borderDance: {
-          '0%, 100%': { 
-            borderColor: 'rgba(255, 215, 0, 0.3)',
+          '0%, 100%': {
+            borderColor: 'rgba(200, 169, 81, 0.3)',
             borderWidth: '2px'
           },
-          '25%': { 
-            borderColor: 'rgba(220, 20, 60, 0.5)',
+          '25%': {
+            borderColor: 'rgba(199, 62, 58, 0.5)',
             borderWidth: '3px'
           },
-          '50%': { 
-            borderColor: 'rgba(255, 193, 7, 0.4)',
+          '50%': {
+            borderColor: 'rgba(232, 168, 56, 0.4)',
             borderWidth: '2px'
           },
-          '75%': { 
-            borderColor: 'rgba(139, 0, 0, 0.6)',
+          '75%': {
+            borderColor: 'rgba(92, 26, 27, 0.6)',
             borderWidth: '3px'
           }
         },
@@ -183,17 +205,17 @@ export default {
           '75%': { borderRadius: '50px' }
         },
         gradientShift: {
-          '0%, 100%': { 
-            background: 'linear-gradient(45deg, rgba(220, 20, 60, 0.1), rgba(255, 215, 0, 0.1))'
+          '0%, 100%': {
+            background: 'linear-gradient(45deg, rgba(199, 62, 58, 0.1), rgba(200, 169, 81, 0.1))'
           },
-          '25%': { 
-            background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.1))'
+          '25%': {
+            background: 'linear-gradient(135deg, rgba(200, 169, 81, 0.1), rgba(232, 168, 56, 0.1))'
           },
-          '50%': { 
-            background: 'linear-gradient(225deg, rgba(255, 193, 7, 0.1), rgba(139, 0, 0, 0.1))'
+          '50%': {
+            background: 'linear-gradient(225deg, rgba(232, 168, 56, 0.1), rgba(92, 26, 27, 0.1))'
           },
-          '75%': { 
-            background: 'linear-gradient(315deg, rgba(139, 0, 0, 0.1), rgba(220, 20, 60, 0.1))'
+          '75%': {
+            background: 'linear-gradient(315deg, rgba(92, 26, 27, 0.1), rgba(199, 62, 58, 0.1))'
           }
         },
         floatingPetals: {
@@ -274,14 +296,14 @@ export default {
           '50%': { transform: 'scale(1.05)' }
         },
         aurora: {
-          '0%, 100%': { 
-            background: 'linear-gradient(45deg, rgba(220, 20, 60, 0.1), rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.1))'
+          '0%, 100%': {
+            background: 'linear-gradient(45deg, rgba(199, 62, 58, 0.1), rgba(200, 169, 81, 0.1), rgba(232, 168, 56, 0.1))'
           },
-          '33%': { 
-            background: 'linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.1), rgba(220, 20, 60, 0.1))'
+          '33%': {
+            background: 'linear-gradient(45deg, rgba(200, 169, 81, 0.1), rgba(232, 168, 56, 0.1), rgba(199, 62, 58, 0.1))'
           },
-          '66%': { 
-            background: 'linear-gradient(45deg, rgba(255, 193, 7, 0.1), rgba(220, 20, 60, 0.1), rgba(255, 215, 0, 0.1))'
+          '66%': {
+            background: 'linear-gradient(45deg, rgba(232, 168, 56, 0.1), rgba(199, 62, 58, 0.1), rgba(200, 169, 81, 0.1))'
           }
         },
         constellation: {
@@ -308,25 +330,28 @@ export default {
         }
       },
       backgroundImage: {
-        'alpana-pattern': `radial-gradient(circle at 25% 25%, #FFD700 2px, transparent 2px),
-                          radial-gradient(circle at 75% 75%, #DC143C 2px, transparent 2px)`,
+        'alpana-pattern': `radial-gradient(circle at 25% 25%, #C8A951 2px, transparent 2px),
+                          radial-gradient(circle at 75% 75%, #C73E3A 2px, transparent 2px)`,
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'wedding-pattern': `
-          radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 2px, transparent 2px),
-          radial-gradient(circle at 80% 80%, rgba(220, 20, 60, 0.1) 2px, transparent 2px),
-          radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.1) 1px, transparent 1px)
+          radial-gradient(circle at 20% 20%, rgba(200, 169, 81, 0.1) 2px, transparent 2px),
+          radial-gradient(circle at 80% 80%, rgba(199, 62, 58, 0.1) 2px, transparent 2px),
+          radial-gradient(circle at 40% 60%, rgba(232, 168, 56, 0.1) 1px, transparent 1px)
         `,
-        'aurora-gradient': 'linear-gradient(45deg, rgba(220, 20, 60, 0.1), rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.1))',
-        'magical-gradient': 'conic-gradient(from 0deg, rgba(220, 20, 60, 0.2), rgba(255, 215, 0, 0.2), rgba(255, 193, 7, 0.2), rgba(220, 20, 60, 0.2))'
+        'aurora-gradient': 'linear-gradient(45deg, rgba(199, 62, 58, 0.1), rgba(200, 169, 81, 0.1), rgba(232, 168, 56, 0.1))',
+        'magical-gradient': 'conic-gradient(from 0deg, rgba(199, 62, 58, 0.2), rgba(200, 169, 81, 0.2), rgba(232, 168, 56, 0.2), rgba(199, 62, 58, 0.2))',
+        'vermillion-gradient': 'linear-gradient(135deg, rgba(199, 62, 58, 0.1), rgba(92, 26, 27, 0.1))'
       },
       boxShadow: {
-        'cultural': '0 10px 40px rgba(220, 20, 60, 0.15)',
-        'gold': '0 10px 40px rgba(255, 215, 0, 0.15)',
-        'romantic': '0 15px 50px rgba(220, 20, 60, 0.2), 0 5px 15px rgba(255, 215, 0, 0.1)',
-        'wedding-glow': '0 0 30px rgba(220, 20, 60, 0.3), 0 0 60px rgba(255, 215, 0, 0.2)',
-        'magical': '0 0 50px rgba(220, 20, 60, 0.4), 0 0 100px rgba(255, 215, 0, 0.3)',
-        'dreamy': '0 20px 60px rgba(220, 20, 60, 0.15), 0 10px 30px rgba(255, 215, 0, 0.1)',
-        'ethereal': '0 0 40px rgba(255, 215, 0, 0.2), inset 0 0 40px rgba(220, 20, 60, 0.1)'
+        'cultural': '0 10px 40px rgba(199, 62, 58, 0.15)',
+        'gold': '0 10px 40px rgba(200, 169, 81, 0.2)',
+        'romantic': '0 15px 50px rgba(92, 26, 27, 0.2), 0 5px 15px rgba(200, 169, 81, 0.1)',
+        'wedding-glow': '0 0 30px rgba(199, 62, 58, 0.3), 0 0 60px rgba(200, 169, 81, 0.2)',
+        'magical': '0 0 50px rgba(199, 62, 58, 0.4), 0 0 100px rgba(200, 169, 81, 0.3)',
+        'dreamy': '0 20px 60px rgba(92, 26, 27, 0.15), 0 10px 30px rgba(200, 169, 81, 0.1)',
+        'ethereal': '0 0 40px rgba(200, 169, 81, 0.2), inset 0 0 40px rgba(199, 62, 58, 0.1)',
+        'vermillion': '0 10px 40px rgba(199, 62, 58, 0.25)',
+        'wine': '0 15px 50px rgba(92, 26, 27, 0.3)'
       },
       backdropBlur: {
         'xs': '2px',

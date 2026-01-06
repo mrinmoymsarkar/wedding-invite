@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Calendar } from 'lucide-react';
+import { Mail, MapPin, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -93,12 +93,8 @@ const Footer: React.FC = () => {
             </h3>
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3 text-bengali-ivory/60 text-sm">
-                <Phone className="h-4 w-4 text-bengali-gold/60" />
-                <span className="font-body">+91 98765 43210</span>
-              </div>
-              <div className="flex items-center gap-3 text-bengali-ivory/60 text-sm">
                 <Mail className="h-4 w-4 text-bengali-gold/60" />
-                <span className="font-body">tani.sunny.wedding@gmail.com</span>
+                <span className="font-body">msarkar07@live.in</span>
               </div>
               <div className="flex items-start gap-3 text-bengali-ivory/60 text-sm">
                 <MapPin className="h-4 w-4 text-bengali-gold/60 mt-0.5" />

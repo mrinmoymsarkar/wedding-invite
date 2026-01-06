@@ -24,8 +24,7 @@ export const WEDDING_CONFIG = {
 
   // === CONTACT INFORMATION ===
   contact: {
-    phone: '+91 98765 43210',
-    email: 'tani.sunny.wedding@gmail.com',
+    email: 'msarkar07@live.in',
     address: 'Shanai Bhavan, Siliguri, West Bengal, India'
   },
 

@@ -485,9 +485,9 @@ const PDFInvitation: React.FC = () => {
             <div class="contact-info">
               <div class="contact-title">${t('footer.contact_families')}</div>
               <div class="contact-details">
-                📞 +91 98765 43210<br>
-                ✉️ tani.sunny.wedding@gmail.com<br>
-                📍 Heritage Palace, West Bengal, India
+                ✉️ msarkar07@live.in<br>
+                📍 Wedding: Shanai Bhavan, Siliguri<br>
+                📍 Reception: RCF Hall, Alibag
               </div>
             </div>
             
@@ -541,11 +541,11 @@ const PDFInvitation: React.FC = () => {
               </div>
               
               <div class="rsvp-deadline">
-                ${language === 'bn' 
-                  ? 'অনুগ্রহ করে ১৫ ফেব্রুয়ারি, ২০২৮ এর মধ্যে উত্তর দিন'
+                ${language === 'bn'
+                  ? 'অনুগ্রহ করে ২৮ ফেব্রুয়ারি, ২০২৬ এর মধ্যে উত্তর দিন'
                   : language === 'mr'
-                  ? 'कृपया १५ फेब्रुवारी, २०२८ पर्यंत उत्तर द्या'
-                  : 'Please respond by February 15, 2028'
+                  ? 'कृपया २८ फेब्रुवारी, २०२६ पर्यंत उत्तर द्या'
+                  : 'Please respond by February 28, 2026'
                 }
               </div>
             </div>
