@@ -16,7 +16,7 @@ import AdminPage from './pages/AdminPage';
 
 function MainWebsite() {
   return (
-    <div className="min-h-screen bg-white dark:bg-dark-900 transition-colors duration-300 relative">
+    <div className="min-h-screen bg-bengali-ivory dark:bg-dark-900 transition-colors duration-500 relative">
       <AnimatedBackground />
       <Header />
       <main className="relative z-10">

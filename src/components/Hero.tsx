@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, MapPin, Heart, Sparkles } from 'lucide-react';
+import { Calendar, MapPin, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { WEDDING_CONFIG } from '../config/wedding-config';
@@ -17,8 +17,7 @@ const Hero: React.FC = () => {
   });
 
   useEffect(() => {
-    // Create wedding date from config
-    const weddingDate = new Date(`${WEDDING_CONFIG.wedding.mainDate}T20:00:00+05:30`); // 8:00 PM IST
+    const weddingDate = new Date(`${WEDDING_CONFIG.wedding.mainDate}T20:00:00+05:30`);
 
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -29,493 +28,263 @@ const Hero: React.FC = () => {
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
         setTimeLeft({ days, hours, minutes, seconds });
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
-    // Calculate immediately
     calculateTimeLeft();
-    
-    // Set up interval to update every second
     const timer = setInterval(calculateTimeLeft, 1000);
-    
-    // Cleanup interval on component unmount
     return () => clearInterval(timer);
   }, []);
 
-  // Floating hearts animation
-  const FloatingHearts = () => (
-    <div className="absolute inset-0 pointer-events-none">
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-bengali-crimson/20 dark:text-bengali-gold/20"
-          initial={{ 
-            x: Math.random() * (typeof window !== 'undefined' ? Math.min(window.innerWidth, 400) : 400),
-            y: (typeof window !== 'undefined' ? window.innerHeight : 800) + 50,
-            scale: 0
-          }}
-          animate={{ 
-            y: -50,
-            scale: [0, 1, 0],
-            rotate: [0, 360]
-          }}
-          transition={{
-            duration: 8 + Math.random() * 4,
-            repeat: Infinity,
-            delay: i * 2,
-            ease: "easeInOut"
-          }}
-        >
-          <Heart className="h-4 w-4 md:h-6 md:w-6" fill="currentColor" />
-        </motion.div>
-      ))}
-    </div>
-  );
+  // Elegant floating accent shapes
+  const FloatingAccents = () => (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Large decorative circle - top right */}
+      <motion.div
+        className="absolute -top-32 -right-32 w-96 h-96 rounded-full border border-bengali-gold/10"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+      />
 
-  // Sparkle animation
-  const SparkleEffect = () => (
-    <div className="absolute inset-0 pointer-events-none">
-      {[...Array(8)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-bengali-gold/30 dark:text-bengali-amber/30"
-          style={{
-            left: `${15 + (i * 10)}%`,
-            top: `${25 + Math.sin(i) * 25}%`
-          }}
-          animate={{
-            scale: [0, 1, 0],
-            rotate: [0, 180, 360],
-            opacity: [0, 1, 0]
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            delay: i * 0.4,
-            ease: "easeInOut"
-          }}
-        >
-          <Sparkles className="h-3 w-3 md:h-4 md:w-4" />
-        </motion.div>
-      ))}
+      {/* Medium circle - bottom left */}
+      <motion.div
+        className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full border border-bengali-deep-red/10"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Small accent - floating */}
+      <motion.div
+        className="absolute top-1/4 right-1/4 w-3 h-3 bg-bengali-gold/30 rounded-full"
+        animate={{
+          y: [-10, 10, -10],
+          opacity: [0.3, 0.6, 0.3]
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      <motion.div
+        className="absolute bottom-1/3 left-1/4 w-2 h-2 bg-bengali-deep-red/20 rounded-full"
+        animate={{
+          y: [10, -10, 10],
+          opacity: [0.2, 0.5, 0.2]
+        }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
     </div>
   );
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-20 pb-8 md:pb-16">
-      {/* Background with cultural pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bengali-cream via-white to-bengali-ivory dark:from-dark-900 dark:via-dark-800 dark:to-dark-700">
-        <div className="absolute inset-0 bg-alpana-pattern opacity-5"></div>
-        
-        {/* Enhanced animated decorative elements - reduced for mobile */}
-        <motion.div 
-          className="absolute top-20 left-4 md:left-10 w-16 h-16 md:w-32 md:h-32 border-2 md:border-4 border-bengali-gold/20 rounded-full"
-          animate={{ 
-            rotate: 360,
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ 
-            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-          }}
-        />
-        
-        <motion.div 
-          className="absolute bottom-20 right-4 md:right-10 w-12 h-12 md:w-24 md:h-24 border-2 md:border-4 border-bengali-crimson/20 rounded-full"
-          animate={{ 
-            rotate: -360,
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ 
-            rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-            scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }
-          }}
-        />
-        
-        <motion.div 
-          className="absolute top-1/2 left-1/4 w-8 h-8 md:w-16 md:h-16 border-2 md:border-4 border-bengali-amber/20 rounded-full"
-          animate={{ 
-            rotate: 360,
-            x: [0, 10, 0],
-            y: [0, -10, 0]
-          }}
-          transition={{ 
-            rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-            x: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-            y: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }
-          }}
-        />
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Sophisticated background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-bengali-ivory via-bengali-cream to-bengali-ivory dark:from-dark-900 dark:via-dark-800 dark:to-dark-900">
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 bg-royal-pattern opacity-40" />
 
-        {/* Additional decorative elements */}
-        <motion.div 
-          className="absolute top-1/3 right-1/3 w-10 h-10 md:w-20 md:h-20 border border-bengali-orange/15 rounded-full"
-          animate={{ 
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.7, 0.3]
-          }}
-          transition={{ 
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.5
-          }}
-        />
+        {/* Gradient overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-bengali-cream/50 to-bengali-cream dark:via-dark-900/50 dark:to-dark-900" />
       </div>
 
-      {/* Floating hearts */}
-      <FloatingHearts />
-      
-      {/* Sparkle effects */}
-      <SparkleEffect />
+      <FloatingAccents />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-32 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
           {/* Left side - Content */}
-          <div className="text-center lg:text-left order-2 lg:order-1">
-            {/* Bengali Blessing */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-6 md:mb-8"
-            >
-              <motion.p 
-                className="text-bengali-deep-red dark:text-bengali-gold font-bengali text-xl md:text-2xl lg:text-3xl mb-2"
-                animate={{ 
-                  textShadow: [
-                    "0 0 0px rgba(220, 20, 60, 0)",
-                    "0 0 10px rgba(220, 20, 60, 0.3)",
-                    "0 0 0px rgba(220, 20, 60, 0)"
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                {WEDDING_CONFIG.blessings.main.bengali}
-              </motion.p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">{t('hero.sacred_union')}</p>
-            </motion.div>
+          <div className="lg:col-span-6 text-center lg:text-left order-2 lg:order-1">
 
-            {/* Couple Names */}
+            {/* Elegant top blessing */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-6 md:mb-8"
+              className="mb-8"
             >
-              <motion.h1 
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-gray-900 dark:text-white mb-3 md:mb-4 leading-tight"
-                animate={{ 
-                  scale: [1, 1.02, 1]
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                {WEDDING_CONFIG.couple.coupleNames}
-              </motion.h1>
-              <motion.p 
-                className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bengali"
-                animate={{ 
-                  opacity: [0.8, 1, 0.8]
-                }}
-                transition={{ 
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1
-                }}
-              >
-                {WEDDING_CONFIG.couple.coupleNamesLocal}
-              </motion.p>
+              <p className="text-bengali-gold font-elegant italic text-lg md:text-xl tracking-wide">
+                {t('hero.sacred_union')}
+              </p>
             </motion.div>
 
-            {/* Wedding Date & Venue */}
+            {/* Main couple names - dramatic typography */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="mb-8 md:mb-12 space-y-3 md:space-y-4"
+              className="mb-6"
             >
-              <motion.div 
-                className="flex items-center justify-center lg:justify-start space-x-2 text-gray-700 dark:text-gray-300"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Calendar className="h-4 w-4 md:h-5 md:w-5 text-bengali-crimson dark:text-bengali-gold" />
-                </motion.div>
-                <span className="text-base md:text-lg">{t('hero.wedding_date')}</span>
-              </motion.div>
-              <motion.div 
-                className="flex items-center justify-center lg:justify-start space-x-2 text-gray-700 dark:text-gray-300"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <motion.div
-                  animate={{ y: [0, -3, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                >
-                  <MapPin className="h-4 w-4 md:h-5 md:w-5 text-bengali-crimson dark:text-bengali-gold" />
-                </motion.div>
-                <span className="text-base md:text-lg">{WEDDING_CONFIG.wedding.mainVenue}</span>
-              </motion.div>
+              <h1 className="heading-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-royal-charcoal dark:text-bengali-ivory leading-none">
+                {WEDDING_CONFIG.couple.coupleNames}
+              </h1>
             </motion.div>
 
-            {/* Call to Action */}
+            {/* Bengali names */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="space-y-4 md:space-y-6 mb-6 md:mb-8"
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mb-10"
             >
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <motion.button
-                  onClick={() => document.querySelector('#rsvp')?.scrollIntoView({ behavior: 'smooth' })}
-                  whileHover={{ 
-                    scale: 1.05,
-                    boxShadow: "0 10px 30px rgba(220, 20, 60, 0.4)"
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  animate={{
-                    boxShadow: [
-                      "0 5px 15px rgba(220, 20, 60, 0.2)",
-                      "0 8px 25px rgba(220, 20, 60, 0.3)",
-                      "0 5px 15px rgba(220, 20, 60, 0.2)"
-                    ]
-                  }}
-                  transition={{ 
-                    boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  className="bg-gradient-to-r from-bengali-deep-red to-bengali-crimson hover:from-bengali-crimson hover:to-bengali-deep-red text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center space-x-2"
-                >
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <Heart className="h-4 w-4 md:h-5 md:w-5" />
-                  </motion.div>
-                  <span>{t('hero.rsvp_button')}</span>
-                </motion.button>
-
-                {/* PDF Invitation Button */}
-                <PDFInvitation />
-              </div>
-              
-              <p className="text-gray-600 dark:text-gray-400 text-sm px-4 lg:px-0">
-                {CONTENT_CONFIG.hero.welcomeMessage}
+              <p className="bengali-text text-2xl md:text-3xl text-bengali-deep-red dark:text-bengali-gold">
+                {WEDDING_CONFIG.couple.coupleNamesLocal}
               </p>
             </motion.div>
 
-            {/* Traditional Blessing */}
+            {/* Elegant divider */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="w-32 h-px bg-gradient-to-r from-transparent via-bengali-gold to-transparent mx-auto lg:mx-0 mb-10"
+            />
+
+            {/* Wedding details */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="space-y-4 mb-12"
+            >
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-royal-charcoal/80 dark:text-bengali-ivory/80">
+                <Calendar className="h-5 w-5 text-bengali-gold" />
+                <span className="font-body text-lg tracking-wide">{t('hero.wedding_date')}</span>
+              </div>
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-royal-charcoal/80 dark:text-bengali-ivory/80">
+                <MapPin className="h-5 w-5 text-bengali-gold" />
+                <span className="font-body text-lg tracking-wide">{WEDDING_CONFIG.wedding.mainVenue}</span>
+              </div>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
+            >
+              <motion.button
+                onClick={() => document.querySelector('#rsvp')?.scrollIntoView({ behavior: 'smooth' })}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-royal flex items-center justify-center gap-3"
+              >
+                <Heart className="h-4 w-4" />
+                <span>{t('hero.rsvp_button')}</span>
+              </motion.button>
+
+              <PDFInvitation />
+            </motion.div>
+
+            {/* Traditional blessing */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="text-center lg:text-left"
+              transition={{ duration: 1, delay: 1.4 }}
+              className="max-w-md mx-auto lg:mx-0"
             >
-              <motion.p 
-                className="text-bengali-deep-red dark:text-bengali-gold font-bengali text-base md:text-lg italic px-4 lg:px-0"
-                animate={{ 
-                  opacity: [0.7, 1, 0.7]
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                {WEDDING_CONFIG.blessings.main.bengali}
-              </motion.p>
-              <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm mt-2 px-4 lg:px-0">
+              <p className="bengali-text text-bengali-deep-red/80 dark:text-bengali-gold/80 text-base md:text-lg italic mb-2">
+                "{WEDDING_CONFIG.blessings.main.bengali}"
+              </p>
+              <p className="font-elegant text-royal-charcoal/60 dark:text-bengali-ivory/60 text-sm italic">
                 {WEDDING_CONFIG.blessings.main.translation}
               </p>
             </motion.div>
           </div>
 
-          {/* Right side - Wedding Image with Loader */}
-          <div className="order-1 lg:order-2">
+          {/* Right side - Image */}
+          <div className="lg:col-span-6 order-1 lg:order-2">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="relative max-w-md mx-auto lg:max-w-none"
+              className="relative max-w-lg mx-auto lg:max-w-none"
             >
-              {/* Decorative background elements */}
+              {/* Ornate frame effect */}
+              <div className="absolute -inset-4 md:-inset-6">
+                <div className="absolute top-0 left-0 w-16 h-16 md:w-24 md:h-24 border-t-2 border-l-2 border-bengali-gold/40" />
+                <div className="absolute top-0 right-0 w-16 h-16 md:w-24 md:h-24 border-t-2 border-r-2 border-bengali-gold/40" />
+                <div className="absolute bottom-0 left-0 w-16 h-16 md:w-24 md:h-24 border-b-2 border-l-2 border-bengali-gold/40" />
+                <div className="absolute bottom-0 right-0 w-16 h-16 md:w-24 md:h-24 border-b-2 border-r-2 border-bengali-gold/40" />
+              </div>
+
+              {/* Image container */}
               <motion.div
-                className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-bengali-gold/20 to-bengali-crimson/20 rounded-2xl md:rounded-3xl blur-lg md:blur-xl"
-                animate={{
-                  scale: [1, 1.05, 1],
-                  rotate: [0, 1, -1, 0]
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              
-              {/* Main image container with loader */}
-              <motion.div
-                className="relative bg-white dark:bg-dark-800 rounded-xl md:rounded-2xl p-2 md:p-4 shadow-xl md:shadow-2xl"
-                whileHover={{ 
-                  scale: 1.02,
-                  rotateY: window.innerWidth >= 768 ? 5 : 0,
-                  rotateX: window.innerWidth >= 768 ? 5 : 0
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                style={{
-                  transformStyle: "preserve-3d",
-                  perspective: "1000px"
-                }}
+                className="relative elegant-card dark:elegant-card-dark rounded-sm overflow-hidden"
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.4 }}
               >
                 <HeroImageWithLoader
                   src={WEDDING_CONFIG.branding.heroImageUrl}
                   alt={`${WEDDING_CONFIG.couple.coupleNames} Wedding Illustration`}
                 />
-                
-                {/* Floating elements around the image - smaller on mobile */}
-                <motion.div
-                  className="absolute -top-1 -right-1 md:-top-2 md:-right-2 w-4 h-4 md:w-8 md:h-8 bg-bengali-gold rounded-full"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 180, 360]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                
-                <motion.div
-                  className="absolute -bottom-1 -left-1 md:-bottom-2 md:-left-2 w-3 h-3 md:w-6 md:h-6 bg-bengali-crimson rounded-full"
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    rotate: [360, 180, 0]
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1
-                  }}
-                />
-                
-                {/* Sparkle effects around image - reduced for mobile */}
-                {[...Array(4)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 md:w-2 md:h-2 bg-bengali-gold rounded-full"
-                    style={{
-                      top: `${20 + Math.random() * 60}%`,
-                      left: `${10 + Math.random() * 80}%`
-                    }}
-                    animate={{
-                      scale: [0, 1, 0],
-                      opacity: [0, 1, 0],
-                      rotate: [0, 180, 360]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: i * 0.7,
-                      ease: "easeInOut"
-                    }}
-                  />
-                ))}
+
+                {/* Subtle overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-bengali-burgundy/10 via-transparent to-transparent pointer-events-none" />
               </motion.div>
-              
-              {/* Glowing border effect */}
+
+              {/* Floating accent */}
               <motion.div
-                className="absolute inset-0 rounded-xl md:rounded-2xl border border-bengali-gold/30"
-                animate={{
-                  borderColor: [
-                    "rgba(255, 215, 0, 0.3)",
-                    "rgba(220, 20, 60, 0.3)",
-                    "rgba(255, 215, 0, 0.3)"
-                  ]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+                className="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 w-8 h-8 md:w-12 md:h-12 bg-bengali-gold/20 rounded-full blur-xl"
+                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
             </motion.div>
           </div>
         </div>
 
-        {/* Countdown Timer - Full width below */}
+        {/* Countdown Timer */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-12 md:mt-16"
+          transition={{ duration: 0.8, delay: 1.6 }}
+          className="mt-20 md:mt-24"
         >
-          <motion.div 
-            className="bg-white/70 dark:bg-dark-800/70 backdrop-blur-md rounded-xl md:rounded-2xl p-6 md:p-8 shadow-cultural max-w-4xl mx-auto"
-            whileHover={{ 
-              scale: 1.01,
-              boxShadow: "0 20px 60px rgba(220, 20, 60, 0.2)"
-            }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <h3 className="text-xl md:text-2xl font-heading font-semibold text-gray-900 dark:text-white mb-4 md:mb-6 text-center">
-              {CONTENT_CONFIG.hero.countdownTitle}
-            </h3>
-            <div className="grid grid-cols-4 gap-2 md:gap-4">
+          <div className="max-w-3xl mx-auto">
+            {/* Section label */}
+            <div className="text-center mb-8">
+              <p className="font-elegant italic text-bengali-gold text-lg tracking-wide">
+                {CONTENT_CONFIG.hero.countdownTitle}
+              </p>
+            </div>
+
+            {/* Countdown boxes */}
+            <div className="grid grid-cols-4 gap-3 md:gap-6">
               {[
                 { value: timeLeft.days, label: t('hero.countdown.days') },
                 { value: timeLeft.hours, label: t('hero.countdown.hours') },
                 { value: timeLeft.minutes, label: t('hero.countdown.minutes') },
                 { value: timeLeft.seconds, label: t('hero.countdown.seconds') }
               ].map((item, index) => (
-                <motion.div 
+                <motion.div
                   key={item.label}
-                  className="text-center"
-                  animate={{ 
-                    scale: index === 3 ? [1, 1.1, 1] : 1 // Animate seconds
-                  }}
-                  transition={{ 
-                    duration: 1,
-                    repeat: index === 3 ? Infinity : 0,
-                    ease: "easeInOut"
-                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.8 + index * 0.1 }}
+                  className="countdown-box text-center"
                 >
-                  <motion.div 
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-bengali-deep-red dark:text-bengali-gold mb-1 md:mb-2"
-                    animate={{ 
-                      color: index === 3 ? [
-                        "rgb(139, 0, 0)",
-                        "rgb(220, 20, 60)",
-                        "rgb(139, 0, 0)"
-                      ] : undefined
-                    }}
-                    transition={{ 
-                      duration: 1,
-                      repeat: index === 3 ? Infinity : 0
-                    }}
+                  <motion.div
+                    className="heading-display text-3xl sm:text-4xl md:text-5xl text-bengali-deep-red dark:text-bengali-gold mb-1"
+                    key={item.value}
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.2 }}
                   >
                     {item.value.toString().padStart(2, '0')}
                   </motion.div>
-                  <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400 uppercase tracking-wide">
+                  <div className="font-body text-xs md:text-sm text-royal-charcoal/60 dark:text-bengali-ivory/60 uppercase tracking-wider">
                     {item.label}
                   </div>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
+
+      {/* Bottom decorative element */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bengali-gold/30 to-transparent" />
     </section>
   );
 };

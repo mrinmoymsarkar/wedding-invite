@@ -5,17 +5,32 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Royal Bengali Heritage palette
         bengali: {
-          'deep-red': '#8B0000',
-          'crimson': '#DC143C',
-          'gold': '#FFD700',
-          'amber': '#FFC107',
-          'cream': '#FFF8DC',
-          'ivory': '#FFFFF0',
-          'orange': '#FF6B35',
-          'saffron': '#F4A460'
+          'deep-red': '#5D0F1A',
+          'crimson': '#8B1E3F',
+          'gold': '#C9A227',
+          'amber': '#E8D5A3',
+          'cream': '#FAF3E0',
+          'ivory': '#FFFEF7',
+          'orange': '#B85C38',
+          'saffron': '#D4A574',
+          'burgundy': '#3D0A11',
+          'teal': '#1A4D4D',
+          'sage': '#4A6741'
+        },
+        royal: {
+          burgundy: '#5D0F1A',
+          'burgundy-deep': '#3D0A11',
+          gold: '#C9A227',
+          'gold-pale': '#E8D5A3',
+          cream: '#FAF3E0',
+          ivory: '#FFFEF7',
+          teal: '#1A4D4D',
+          charcoal: '#1C1C1C'
         },
         dark: {
+          950: '#050505',
           900: '#0a0a0a',
           800: '#1a1a1a',
           700: '#2a2a2a',
@@ -25,8 +40,10 @@ export default {
       fontFamily: {
         'bengali': ['Noto Sans Bengali', 'system-ui', 'sans-serif'],
         'marathi': ['Noto Sans Devanagari', 'system-ui', 'sans-serif'],
-        'heading': ['Playfair Display', 'serif'],
-        'body': ['Inter', 'system-ui', 'sans-serif']
+        'heading': ['Cormorant Garamond', 'Georgia', 'serif'],
+        'display': ['Cormorant Garamond', 'Georgia', 'serif'],
+        'elegant': ['Crimson Pro', 'Georgia', 'serif'],
+        'body': ['DM Sans', 'system-ui', 'sans-serif']
       },
       animation: {
         'alpana': 'alpana 3s ease-in-out infinite',
