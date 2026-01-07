@@ -106,6 +106,67 @@ const AnimatedBackground: React.FC = () => {
           ease: "linear"
         }}
       />
+
+      {/* Distant Mountain Silhouette - Left side */}
+      <div className="absolute bottom-0 left-0 w-1/3 h-40 opacity-[0.04] dark:opacity-[0.02] pointer-events-none">
+        <svg viewBox="0 0 400 160" className="w-full h-full" preserveAspectRatio="none">
+          <path d="M0,160 L0,120 L50,80 L100,100 L150,50 L200,80 L250,40 L300,70 L350,60 L400,90 L400,160 Z" fill="currentColor" className="text-blue-900" />
+          <path d="M0,160 L0,130 L60,100 L120,115 L180,70 L240,95 L300,65 L360,85 L400,100 L400,160 Z" fill="currentColor" className="text-blue-800/60" />
+        </svg>
+      </div>
+
+      {/* Distant floating birds - top left */}
+      <motion.div
+        className="absolute top-[15%] left-[10%] opacity-[0.08]"
+        animate={{ x: [0, 150], y: [0, -20, 0] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      >
+        <svg width="24" height="12" viewBox="0 0 24 12" className="text-gray-700">
+          <path d="M0,6 Q6,0 12,6 Q18,0 24,6" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+        </svg>
+      </motion.div>
+      <motion.div
+        className="absolute top-[20%] left-[5%] opacity-[0.05]"
+        animate={{ x: [0, 200], y: [0, -15, 0] }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear", delay: 5 }}
+      >
+        <svg width="18" height="9" viewBox="0 0 24 12" className="text-gray-600">
+          <path d="M0,6 Q6,0 12,6 Q18,0 24,6" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+        </svg>
+      </motion.div>
+
+      {/* Subtle Wave Pattern - Right side bottom */}
+      <div className="absolute bottom-0 right-0 w-1/3 h-24 opacity-[0.03] dark:opacity-[0.02] pointer-events-none overflow-hidden">
+        <motion.svg
+          viewBox="0 0 400 100"
+          className="absolute bottom-0 w-[300%] h-full"
+          animate={{ x: [0, -400] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          preserveAspectRatio="none"
+        >
+          <path d="M0,50 Q100,20 200,50 T400,50 T600,50 T800,50 T1000,50 T1200,50 L1200,100 L0,100 Z" fill="currentColor" className="text-cyan-600" />
+        </motion.svg>
+        <motion.svg
+          viewBox="0 0 400 100"
+          className="absolute bottom-0 w-[300%] h-full"
+          animate={{ x: [-200, -600] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          preserveAspectRatio="none"
+        >
+          <path d="M0,60 Q100,35 200,60 T400,60 T600,60 T800,60 T1000,60 T1200,60 L1200,100 L0,100 Z" fill="currentColor" className="text-cyan-500/70" />
+        </motion.svg>
+      </div>
+
+      {/* Floating seagull - right side */}
+      <motion.div
+        className="absolute top-[25%] right-[15%] opacity-[0.06]"
+        animate={{ x: [0, -120], y: [0, 10, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      >
+        <svg width="20" height="10" viewBox="0 0 24 12" className="text-gray-500">
+          <path d="M0,6 Q6,0 12,6 Q18,0 24,6" stroke="currentColor" strokeWidth="2" fill="none"/>
+        </svg>
+      </motion.div>
     </div>
   );
 };

@@ -9,6 +9,20 @@ const Events: React.FC = () => {
 
   return (
     <section id="events" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Mountain Silhouette Top Divider */}
+      <div className="absolute top-0 left-0 right-0 h-24 pointer-events-none overflow-hidden">
+        <svg viewBox="0 0 1200 120" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
+          <path
+            d="M0,120 L0,80 L100,60 L200,75 L300,40 L400,55 L500,25 L600,50 L700,20 L800,45 L900,30 L1000,55 L1100,35 L1200,50 L1200,120 Z"
+            className="fill-bengali-parchment dark:fill-dark-950 opacity-50"
+          />
+          <path
+            d="M0,120 L0,90 L150,70 L300,85 L450,55 L600,70 L750,45 L900,65 L1050,50 L1200,60 L1200,120 Z"
+            className="fill-bengali-parchment dark:fill-dark-950"
+          />
+        </svg>
+      </div>
+
       {/* Background */}
       <div className="absolute inset-0 bg-bengali-cream dark:bg-dark-900">
         <div className="absolute inset-0 bg-royal-pattern opacity-30" />
@@ -139,8 +153,33 @@ const Events: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Bottom decorative line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-bengali-gold/20 to-transparent" />
+      {/* Wave Divider Bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none overflow-hidden">
+        <motion.svg
+          viewBox="0 0 1200 120"
+          className="absolute top-0 w-[200%] h-full"
+          animate={{ x: [0, -600] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60 T1500,60 T1800,60 T2100,60 T2400,60 L2400,120 L0,120 Z"
+            className="fill-bengali-parchment/50 dark:fill-dark-950/50"
+          />
+        </motion.svg>
+        <motion.svg
+          viewBox="0 0 1200 120"
+          className="absolute top-0 w-[200%] h-full"
+          animate={{ x: [-300, -900] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,70 Q150,40 300,70 T600,70 T900,70 T1200,70 T1500,70 T1800,70 T2100,70 T2400,70 L2400,120 L0,120 Z"
+            className="fill-bengali-parchment dark:fill-dark-950"
+          />
+        </motion.svg>
+      </div>
     </section>
   );
 };

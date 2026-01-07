@@ -1,11 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Languages, ChevronDown } from 'lucide-react';
 import { useLanguage, Language } from '../contexts/LanguageContext';
 
-const LanguageSelector: React.FC = () => {
+interface LanguageSelectorProps {
+  onOpenChange?: (isOpen: boolean) => void;
+  forceClose?: boolean;
+}
+
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onOpenChange, forceClose }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
+
+  // Close when forceClose changes to true
+  useEffect(() => {
+    if (forceClose) {
+      setIsOpen(false);
+    }
+  }, [forceClose]);
+
+  const handleToggle = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    onOpenChange?.(newState);
+  };
 
   const languages = [
     { code: 'en' as Language, name: 'English', nativeName: 'English', shortName: 'E' },
@@ -23,7 +41,7 @@ const LanguageSelector: React.FC = () => {
   return (
     <div className="relative">
       <motion.button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="flex items-center space-x-2 p-2 rounded-lg bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-600 transition-colors"

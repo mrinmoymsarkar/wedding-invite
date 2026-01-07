@@ -51,6 +51,10 @@ export default {
           pearl: '#F5EDE4',
           sand: '#E8DDD0'
         },
+        royal: {
+          charcoal: '#2B1810',
+          burgundy: '#5C1A1B'
+        },
         dark: {
           950: '#050505',
           900: '#0a0a0a',

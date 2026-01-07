@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, MapPin, Scroll, Heart, Star } from 'lucide-react';
+import { Calendar, Clock, MapPin, Scroll, Heart, Star, Mountain, Waves } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { EventDetails } from '../types';
 import CalendarIntegration from './CalendarIntegration';
@@ -57,6 +57,72 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
         <div className="w-full h-full bg-white dark:bg-dark-800 rounded-2xl" />
       </motion.div>
 
+      {/* Location-themed Background Elements */}
+      {event.id === 'biye' && (
+        <>
+          {/* Mountain silhouette for Siliguri */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-[5] opacity-[0.08]">
+            <svg viewBox="0 0 400 100" className="w-full h-full" preserveAspectRatio="none">
+              <path d="M0,100 L0,60 L40,40 L80,55 L120,25 L160,45 L200,15 L240,35 L280,20 L320,50 L360,30 L400,45 L400,100 Z" fill="currentColor" className="text-bengali-wine dark:text-bengali-gold" />
+              <path d="M0,100 L0,70 L50,55 L100,65 L150,45 L200,60 L250,40 L300,55 L350,50 L400,60 L400,100 Z" fill="currentColor" className="text-bengali-wine/50 dark:text-bengali-gold/50" />
+            </svg>
+          </div>
+          {/* Floating snow/mist particles */}
+          <motion.div
+            className="absolute top-10 right-10 w-2 h-2 rounded-full bg-white/20 pointer-events-none"
+            animate={{ y: [0, 100], opacity: [0, 0.5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 0 }}
+          />
+          <motion.div
+            className="absolute top-20 right-20 w-1.5 h-1.5 rounded-full bg-white/15 pointer-events-none"
+            animate={{ y: [0, 80], opacity: [0, 0.4, 0] }}
+            transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+          />
+          <motion.div
+            className="absolute top-5 left-1/4 w-1 h-1 rounded-full bg-white/20 pointer-events-none"
+            animate={{ y: [0, 120], opacity: [0, 0.3, 0] }}
+            transition={{ duration: 6, repeat: Infinity, delay: 2 }}
+          />
+        </>
+      )}
+
+      {event.id === 'reception' && (
+        <>
+          {/* Animated waves for Alibag beach */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none z-[5] overflow-hidden opacity-[0.12]">
+            <motion.svg
+              viewBox="0 0 400 50"
+              className="absolute bottom-0 w-[200%] h-full"
+              animate={{ x: [0, -400] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              preserveAspectRatio="none"
+            >
+              <path d="M0,25 Q50,10 100,25 T200,25 T300,25 T400,25 T500,25 T600,25 T700,25 T800,25 L800,50 L0,50 Z" fill="currentColor" className="text-blue-400/60" />
+            </motion.svg>
+            <motion.svg
+              viewBox="0 0 400 50"
+              className="absolute bottom-0 w-[200%] h-full"
+              animate={{ x: [-200, -600] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              preserveAspectRatio="none"
+            >
+              <path d="M0,30 Q50,20 100,30 T200,30 T300,30 T400,30 T500,30 T600,30 T700,30 T800,30 L800,50 L0,50 Z" fill="currentColor" className="text-blue-500/40" />
+            </motion.svg>
+          </div>
+          {/* Sun reflection sparkles */}
+          <motion.div
+            className="absolute top-1/3 right-1/4 w-1 h-1 rounded-full bg-yellow-300/30 pointer-events-none"
+            animate={{ scale: [0, 1, 0], opacity: [0, 0.6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+          />
+          <motion.div
+            className="absolute top-1/2 right-1/3 w-1.5 h-1.5 rounded-full bg-yellow-200/20 pointer-events-none"
+            animate={{ scale: [0, 1, 0], opacity: [0, 0.5, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, delay: 0.8 }}
+          />
+        </>
+      )}
+
       {/* Content Container */}
       <div className="relative z-10">
         {/* Event Image with Enhanced Effects */}
@@ -69,17 +135,93 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
             transition={{ duration: 0.6, ease: "easeOut" }}
           />
           
-          {/* Gradient Overlay */}
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
+          {/* Gradient Overlay - Location themed */}
+          <motion.div
+            className="absolute inset-0"
             animate={{
-              background: isHovered 
-                ? 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(220, 20, 60, 0.2), transparent)'
+              background: isHovered
+                ? event.id === 'biye'
+                  ? 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(100, 150, 180, 0.15), transparent)' // Mountain cool tones
+                  : event.id === 'reception'
+                  ? 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(255, 180, 100, 0.15), transparent)' // Beach warm sunset
+                  : 'linear-gradient(to top, rgba(0,0,0,0.8), rgba(220, 20, 60, 0.2), transparent)'
                 : 'linear-gradient(to top, rgba(0,0,0,0.7), transparent, transparent)'
             }}
             transition={{ duration: 0.3 }}
           />
           
+          {/* Location Badge */}
+          {event.id === 'biye' && (
+            <motion.div
+              className="absolute top-4 left-4 bg-white/90 dark:bg-dark-800/90 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-lg"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Mountain className="h-3.5 w-3.5 text-blue-600" />
+              <span className="text-xs font-medium text-gray-700 dark:text-gray-200">Himalayas</span>
+            </motion.div>
+          )}
+          {event.id === 'reception' && (
+            <motion.div
+              className="absolute top-4 left-4 bg-white/90 dark:bg-dark-800/90 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-lg"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Waves className="h-3.5 w-3.5 text-cyan-500" />
+              <span className="text-xs font-medium text-gray-700 dark:text-gray-200">Beach Town</span>
+            </motion.div>
+          )}
+
+          {/* Floating Birds for Mountains */}
+          {event.id === 'biye' && (
+            <>
+              <motion.div
+                className="absolute top-8 right-16 pointer-events-none"
+                animate={{ x: [-50, 100], y: [0, -10, 0] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              >
+                <svg width="16" height="8" viewBox="0 0 16 8" className="text-gray-600/40">
+                  <path d="M0,4 Q4,0 8,4 Q12,0 16,4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                </svg>
+              </motion.div>
+              <motion.div
+                className="absolute top-12 right-24 pointer-events-none"
+                animate={{ x: [-30, 120], y: [0, -5, 0] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 2 }}
+              >
+                <svg width="12" height="6" viewBox="0 0 16 8" className="text-gray-500/30">
+                  <path d="M0,4 Q4,0 8,4 Q12,0 16,4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                </svg>
+              </motion.div>
+            </>
+          )}
+
+          {/* Floating Seagulls for Beach */}
+          {event.id === 'reception' && (
+            <>
+              <motion.div
+                className="absolute top-10 right-12 pointer-events-none"
+                animate={{ x: [80, -50], y: [0, -8, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+              >
+                <svg width="18" height="10" viewBox="0 0 18 10" className="text-white/50">
+                  <path d="M0,5 Q4,1 9,5 Q14,1 18,5" stroke="currentColor" strokeWidth="2" fill="none"/>
+                </svg>
+              </motion.div>
+              <motion.div
+                className="absolute top-16 right-28 pointer-events-none"
+                animate={{ x: [60, -80], y: [0, -5, 0] }}
+                transition={{ duration: 9, repeat: Infinity, ease: "linear", delay: 3 }}
+              >
+                <svg width="14" height="8" viewBox="0 0 18 10" className="text-white/40">
+                  <path d="M0,5 Q4,1 9,5 Q14,1 18,5" stroke="currentColor" strokeWidth="2" fill="none"/>
+                </svg>
+              </motion.div>
+            </>
+          )}
+
           {/* Floating Elements */}
           <motion.div
             className="absolute top-4 right-4"
@@ -166,13 +308,14 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
                 text: event.time,
                 delay: 0.1
               },
-              { 
-                icon: MapPin, 
+              {
+                icon: MapPin,
                 text: event.venue,
-                delay: 0.2
+                delay: 0.2,
+                locationIcon: event.id === 'biye' ? Mountain : event.id === 'reception' ? Waves : null
               }
             ].map((item, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 className="flex items-center space-x-3 text-gray-600 dark:text-gray-400"
                 initial={{ x: -20, opacity: 0 }}
@@ -186,7 +329,18 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
                 >
                   <item.icon className="h-5 w-5 text-bengali-crimson dark:text-bengali-gold" />
                 </motion.div>
-                <span>{item.text}</span>
+                <span className="flex items-center gap-2">
+                  {item.text}
+                  {item.locationIcon && (
+                    <motion.span
+                      animate={{ y: [0, -2, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      title={event.id === 'biye' ? 'Foothills of the Himalayas' : 'Coastal Beach Town'}
+                    >
+                      <item.locationIcon className="h-4 w-4 text-bengali-gold opacity-80" />
+                    </motion.span>
+                  )}
+                </span>
               </motion.div>
             ))}
           </div>

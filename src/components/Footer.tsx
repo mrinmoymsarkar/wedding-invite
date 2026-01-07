@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MapPin, Calendar } from 'lucide-react';
+import { Mail, MapPin, Calendar, Mountain, Waves } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-royal-charcoal dark:bg-dark-950 text-bengali-ivory overflow-hidden">
+    <footer className="relative bg-bengali-wine-dark dark:bg-dark-950 text-white overflow-hidden">
       {/* Top decorative border */}
       <div className="h-px bg-gradient-to-r from-transparent via-bengali-gold/40 to-transparent" />
 
@@ -42,10 +42,10 @@ const Footer: React.FC = () => {
                 {t('footer.brand')}
               </div>
             </div>
-            <p className="font-body text-bengali-ivory/60 leading-relaxed mb-6 text-sm">
+            <p className="font-body text-white/70 leading-relaxed mb-6 text-sm">
               {t('footer.tagline')}
             </p>
-            <p className="bengali-text text-bengali-gold/80 text-sm">
+            <p className="bengali-text text-bengali-gold text-sm">
               {t('footer.blessing_footer')}
             </p>
           </motion.div>
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
                   onClick={() => scrollToSection(item.href)}
                   whileHover={{ x: 4 }}
                   transition={{ duration: 0.2 }}
-                  className="text-left font-body text-sm text-bengali-ivory/60 hover:text-bengali-gold transition-colors duration-300"
+                  className="text-left font-body text-sm text-white/70 hover:text-bengali-gold transition-colors duration-300"
                 >
                   {item.name}
                 </motion.button>
@@ -92,13 +92,17 @@ const Footer: React.FC = () => {
               {t('footer.contact_families')}
             </h3>
             <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-3 text-bengali-ivory/60 text-sm">
-                <Mail className="h-4 w-4 text-bengali-gold/60" />
+              <div className="flex items-center gap-3 text-white/70 text-sm">
+                <Mail className="h-4 w-4 text-bengali-gold" />
                 <span className="font-body">msarkar07@live.in</span>
               </div>
-              <div className="flex items-start gap-3 text-bengali-ivory/60 text-sm">
-                <MapPin className="h-4 w-4 text-bengali-gold/60 mt-0.5" />
-                <span className="font-body">Shanai Bhavan, Siliguri<br />West Bengal, India</span>
+              <div className="flex items-start gap-3 text-white/70 text-sm">
+                <Mountain className="h-4 w-4 text-blue-300 mt-0.5" />
+                <span className="font-body">Shanai Bhavan, Siliguri<br /><span className="text-xs text-white/50 italic">Foothills of the Himalayas</span></span>
+              </div>
+              <div className="flex items-start gap-3 text-white/70 text-sm">
+                <Waves className="h-4 w-4 text-cyan-300 mt-0.5" />
+                <span className="font-body">RCF Hall, Alibag<br /><span className="text-xs text-white/50 italic">Coastal Beach Town</span></span>
               </div>
             </div>
           </motion.div>
@@ -119,11 +123,11 @@ const Footer: React.FC = () => {
                 { event: 'Wedding', date: 'Mar 09', time: '6:03 PM' },
                 { event: 'Reception', date: 'Mar 22', time: '6:45 PM onwards' }
               ].map((item) => (
-                <div key={item.event} className="flex items-center gap-3 text-bengali-ivory/60">
-                  <Calendar className="h-4 w-4 text-bengali-gold/60" />
+                <div key={item.event} className="flex items-center gap-3 text-white/70">
+                  <Calendar className="h-4 w-4 text-bengali-gold" />
                   <div>
                     <div className="font-body text-sm">{item.event} - {item.date}</div>
-                    {item.time && <div className="font-body text-xs text-bengali-ivory/40">{item.time}</div>}
+                    {item.time && <div className="font-body text-xs text-white/50">{item.time}</div>}
                   </div>
                 </div>
               ))}
@@ -140,13 +144,13 @@ const Footer: React.FC = () => {
           className="mt-16 pt-8 border-t border-bengali-gold/10"
         >
           <div className="text-center">
-            <p className="font-body text-bengali-ivory/40 text-sm mb-4">
+            <p className="font-body text-white/50 text-sm mb-4">
               {t('footer.copyright')}
             </p>
-            <p className="bengali-text text-bengali-gold/60 text-sm mb-1">
+            <p className="bengali-text text-bengali-gold text-sm mb-1">
               {t('footer.quote')}
             </p>
-            <p className="font-elegant italic text-bengali-ivory/30 text-xs">
+            <p className="font-elegant italic text-white/40 text-xs">
               {t('footer.quote_translation')}
             </p>
           </div>
@@ -154,7 +158,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Bottom decorative element */}
-      <div className="h-1 bg-gradient-to-r from-bengali-burgundy via-bengali-gold/50 to-bengali-burgundy" />
+      <div className="h-1 bg-gradient-to-r from-bengali-wine via-bengali-gold to-bengali-wine" />
     </footer>
   );
 };

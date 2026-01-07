@@ -8,9 +8,30 @@ import LanguageSelector from './LanguageSelector';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [forceCloseLanguage, setForceCloseLanguage] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const { t } = useLanguage();
+
+  // Handle language menu open - close theme menu
+  const handleLanguageOpenChange = (isOpen: boolean) => {
+    setIsLanguageMenuOpen(isOpen);
+    if (isOpen) {
+      setIsThemeMenuOpen(false);
+    }
+  };
+
+  // Handle theme menu toggle - close language menu
+  const handleThemeToggle = () => {
+    const newState = !isThemeMenuOpen;
+    setIsThemeMenuOpen(newState);
+    if (newState) {
+      setForceCloseLanguage(true);
+      // Reset force close after a tick
+      setTimeout(() => setForceCloseLanguage(false), 0);
+    }
+  };
 
   // Track scroll position for header styling
   useEffect(() => {
@@ -101,13 +122,16 @@ const Header: React.FC = () => {
           <div className="flex items-center gap-4">
             {/* Language Selector */}
             <div data-tutorial="language-selector">
-              <LanguageSelector />
+              <LanguageSelector
+                onOpenChange={handleLanguageOpenChange}
+                forceClose={forceCloseLanguage}
+              />
             </div>
 
             {/* Theme Selector */}
             <div className="relative" data-tutorial="theme-selector">
               <motion.button
-                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
+                onClick={handleThemeToggle}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-2.5 rounded-full border border-bengali-gold/20 text-royal-charcoal/70 dark:text-bengali-ivory/70 hover:border-bengali-gold/40 hover:text-bengali-gold transition-all duration-300"

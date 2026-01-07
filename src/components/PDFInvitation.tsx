@@ -486,8 +486,14 @@ const PDFInvitation: React.FC = () => {
               <div class="contact-title">${t('footer.contact_families')}</div>
               <div class="contact-details">
                 ✉️ msarkar07@live.in<br>
-                📍 Wedding: Shanai Bhavan, Siliguri<br>
-                📍 Reception: RCF Hall, Alibag
+                <span style="display: inline-flex; align-items: center; gap: 6px;">
+                  🏔️ Wedding: Shanai Bhavan, Siliguri
+                  <span style="font-size: 0.8em; color: #8B0000; font-style: italic;">— Foothills of the Himalayas</span>
+                </span><br>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">
+                  🌊 Reception: RCF Hall, Alibag
+                  <span style="font-size: 0.8em; color: #8B0000; font-style: italic;">— Coastal Beach Town</span>
+                </span>
               </div>
             </div>
             
