@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Download, FileText, Heart, Calendar, MapPin, Clock, Users } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { weddingEvents } from '../data/events';
+import { WEDDING_CONFIG } from '../config/wedding-config';
 
 const PDFInvitation: React.FC = () => {
   const { t, language } = useLanguage();
@@ -20,7 +21,7 @@ const PDFInvitation: React.FC = () => {
     const currentUrl = window.location.origin + window.location.pathname;
     const rsvpUrl = `${currentUrl}#rsvp`;
     const qrCodeUrl = generateQRCode(currentUrl);
-    const heroImageUrl = 'https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wedding-pixar-D6EG6OvRCwxyNzdCoXbz3Yaifu5wlC.png';
+    const heroImageUrl = window.location.origin + '/images/hero.png';
 
     // PDF content with beautiful styling
     const pdfContent = `
@@ -467,12 +468,12 @@ const PDFInvitation: React.FC = () => {
                       ${event.time}
                     </div>
                     
-                    <div class="event-detail">
+                    <a href="${event.id === 'biye' ? WEDDING_CONFIG.venues.wedding.mapUrl : event.id === 'reception' ? WEDDING_CONFIG.venues.reception.mapUrl : '#'}" target="_blank" class="event-detail" style="text-decoration: none; color: inherit;">
                       <svg class="event-detail-icon" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z"/>
                       </svg>
-                      ${event.venue}
-                    </div>
+                      ${event.venue} 📍
+                    </a>
                   </div>
                   
                   <div class="event-description">
@@ -486,14 +487,14 @@ const PDFInvitation: React.FC = () => {
               <div class="contact-title">${t('footer.contact_families')}</div>
               <div class="contact-details">
                 ✉️ msarkar07@live.in<br>
-                <span style="display: inline-flex; align-items: center; gap: 6px;">
-                  🏔️ Wedding: Shanai Bhavan, Siliguri
-                  <span style="font-size: 0.8em; color: #8B0000; font-style: italic;">— Foothills of the Himalayas</span>
-                </span><br>
-                <span style="display: inline-flex; align-items: center; gap: 6px;">
-                  🌊 Reception: RCF Hall, Alibag
-                  <span style="font-size: 0.8em; color: #8B0000; font-style: italic;">— Coastal Beach Town</span>
-                </span>
+                <a href="${WEDDING_CONFIG.venues.wedding.mapUrl}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: inherit;">
+                  🏔️ Wedding: ${WEDDING_CONFIG.venues.wedding.name}
+                  <span style="font-size: 0.8em; color: #8B0000; font-style: italic;">— ${WEDDING_CONFIG.venues.wedding.description}</span>
+                </a><br>
+                <a href="${WEDDING_CONFIG.venues.reception.mapUrl}" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: inherit;">
+                  🌊 Reception: ${WEDDING_CONFIG.venues.reception.name}
+                  <span style="font-size: 0.8em; color: #8B0000; font-style: italic;">— ${WEDDING_CONFIG.venues.reception.description}</span>
+                </a>
               </div>
             </div>
             

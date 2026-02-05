@@ -48,7 +48,7 @@ export const EVENTS_CONFIG: EventDetails[] = [
     bengaliName: 'অভ্যর্থনা',
     date: '2026-03-22',
     time: '6:45 PM onwards',
-    venue: 'RCF Hall, Alibag',
+    venue: 'RCF Community Hall, Alibag',
     description: 'A grand celebration to honor the newly married couple with family, friends, and the extended community, featuring traditional Bengali cuisine and cultural performances.',
     rituals: [
       'Welcome of guests by both families',

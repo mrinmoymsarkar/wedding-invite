@@ -3,6 +3,7 @@ import { Calendar, Clock, MapPin, Scroll, Heart, Star, Mountain, Waves } from 'l
 import { motion } from 'framer-motion';
 import { EventDetails } from '../types';
 import CalendarIntegration from './CalendarIntegration';
+import { WEDDING_CONFIG } from '../config/wedding-config';
 
 interface EnhancedEventCardProps {
   event: EventDetails;
@@ -174,9 +175,9 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
             </motion.div>
           )}
 
-          {/* Floating Birds for Mountains */}
+          {/* Floating Birds for Mountains - hidden on mobile */}
           {event.id === 'biye' && (
-            <>
+            <div className="hidden sm:block">
               <motion.div
                 className="absolute top-8 right-16 pointer-events-none"
                 animate={{ x: [-50, 100], y: [0, -10, 0] }}
@@ -195,12 +196,12 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
                   <path d="M0,4 Q4,0 8,4 Q12,0 16,4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
                 </svg>
               </motion.div>
-            </>
+            </div>
           )}
 
-          {/* Floating Seagulls for Beach */}
+          {/* Floating Seagulls for Beach - hidden on mobile */}
           {event.id === 'reception' && (
-            <>
+            <div className="hidden sm:block">
               <motion.div
                 className="absolute top-10 right-12 pointer-events-none"
                 animate={{ x: [80, -50], y: [0, -8, 0] }}
@@ -219,7 +220,7 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
                   <path d="M0,5 Q4,1 9,5 Q14,1 18,5" stroke="currentColor" strokeWidth="2" fill="none"/>
                 </svg>
               </motion.div>
-            </>
+            </div>
           )}
 
           {/* Floating Elements */}
@@ -312,7 +313,8 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
                 icon: MapPin,
                 text: event.venue,
                 delay: 0.2,
-                locationIcon: event.id === 'biye' ? Mountain : event.id === 'reception' ? Waves : null
+                locationIcon: event.id === 'biye' ? Mountain : event.id === 'reception' ? Waves : null,
+                mapUrl: event.id === 'biye' ? WEDDING_CONFIG.venues.wedding.mapUrl : event.id === 'reception' ? WEDDING_CONFIG.venues.reception.mapUrl : null
               }
             ].map((item, idx) => (
               <motion.div
@@ -329,18 +331,29 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
                 >
                   <item.icon className="h-5 w-5 text-bengali-crimson dark:text-bengali-gold" />
                 </motion.div>
-                <span className="flex items-center gap-2">
-                  {item.text}
-                  {item.locationIcon && (
-                    <motion.span
-                      animate={{ y: [0, -2, 0] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      title={event.id === 'biye' ? 'Foothills of the Himalayas' : 'Coastal Beach Town'}
-                    >
-                      <item.locationIcon className="h-4 w-4 text-bengali-gold opacity-80" />
-                    </motion.span>
-                  )}
-                </span>
+                {item.mapUrl ? (
+                  <a
+                    href={item.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-bengali-crimson dark:hover:text-bengali-gold transition-colors"
+                  >
+                    {item.text}
+                    {item.locationIcon && (
+                      <motion.span
+                        animate={{ y: [0, -2, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        title={event.id === 'biye' ? WEDDING_CONFIG.venues.wedding.description : WEDDING_CONFIG.venues.reception.description}
+                      >
+                        <item.locationIcon className="h-4 w-4 text-bengali-gold opacity-80" />
+                      </motion.span>
+                    )}
+                  </a>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    {item.text}
+                  </span>
+                )}
               </motion.div>
             ))}
           </div>

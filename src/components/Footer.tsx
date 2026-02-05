@@ -1,7 +1,8 @@
 import React from 'react';
-import { Mail, MapPin, Calendar, Mountain, Waves } from 'lucide-react';
+import { Mail, Calendar, Mountain, Waves } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
+import { WEDDING_CONFIG } from '../config/wedding-config';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -96,14 +97,14 @@ const Footer: React.FC = () => {
                 <Mail className="h-4 w-4 text-bengali-gold" />
                 <span className="font-body">msarkar07@live.in</span>
               </div>
-              <div className="flex items-start gap-3 text-white/70 text-sm">
+              <a href={WEDDING_CONFIG.venues.wedding.mapUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 text-white/70 text-sm hover:text-bengali-gold transition-colors">
                 <Mountain className="h-4 w-4 text-blue-300 mt-0.5" />
-                <span className="font-body">Shanai Bhavan, Siliguri<br /><span className="text-xs text-white/50 italic">Foothills of the Himalayas</span></span>
-              </div>
-              <div className="flex items-start gap-3 text-white/70 text-sm">
+                <span className="font-body">{WEDDING_CONFIG.venues.wedding.name}<br /><span className="text-xs text-white/50 italic">{WEDDING_CONFIG.venues.wedding.description}</span></span>
+              </a>
+              <a href={WEDDING_CONFIG.venues.reception.mapUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 text-white/70 text-sm hover:text-bengali-gold transition-colors">
                 <Waves className="h-4 w-4 text-cyan-300 mt-0.5" />
-                <span className="font-body">RCF Hall, Alibag<br /><span className="text-xs text-white/50 italic">Coastal Beach Town</span></span>
-              </div>
+                <span className="font-body">{WEDDING_CONFIG.venues.reception.name}<br /><span className="text-xs text-white/50 italic">{WEDDING_CONFIG.venues.reception.description}</span></span>
+              </a>
             </div>
           </motion.div>
 

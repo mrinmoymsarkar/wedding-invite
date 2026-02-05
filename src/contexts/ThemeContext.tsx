@@ -20,22 +20,32 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     const root = window.document.documentElement;
-    
-    const getSystemTheme = () => {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    // Get theme based on IST time (UTC+5:30)
+    // Light mode: 6 AM - 6 PM IST, Dark mode: 6 PM - 6 AM IST
+    const getISTTimeBasedTheme = (): 'light' | 'dark' => {
+      const now = new Date();
+      // Convert to IST (UTC+5:30)
+      const utcHours = now.getUTCHours();
+      const utcMinutes = now.getUTCMinutes();
+      const istTotalMinutes = (utcHours * 60 + utcMinutes) + 330; // Add 5 hours 30 minutes
+      const istHours = Math.floor((istTotalMinutes % 1440) / 60); // 1440 = 24 * 60
+
+      // Day time: 6 AM (6) to 6 PM (18)
+      return (istHours >= 6 && istHours < 18) ? 'light' : 'dark';
     };
 
     const applyTheme = (newTheme: Theme) => {
       let applied: 'light' | 'dark';
-      
+
       if (newTheme === 'auto') {
-        applied = getSystemTheme();
+        applied = getISTTimeBasedTheme();
       } else {
         applied = newTheme;
       }
 
       setActualTheme(applied);
-      
+
       if (applied === 'dark') {
         root.classList.add('dark');
       } else {
@@ -46,16 +56,19 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     applyTheme(theme);
     localStorage.setItem('theme', theme);
 
-    // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = () => {
-      if (theme === 'auto') {
+    // Check every minute for time-based theme changes when in auto mode
+    let intervalId: number | undefined;
+    if (theme === 'auto') {
+      intervalId = window.setInterval(() => {
         applyTheme('auto');
+      }, 60000); // Check every minute
+    }
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
       }
     };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
   }, [theme]);
 
   return (

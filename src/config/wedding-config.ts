@@ -22,6 +22,20 @@ export const WEDDING_CONFIG = {
     location: 'West Bengal, India'
   },
 
+  // === VENUE LOCATIONS & MAPS ===
+  venues: {
+    wedding: {
+      name: 'Shanai Bhavan, Siliguri',
+      description: 'Foothills of the Himalayas',
+      mapUrl: 'https://share.google/6A601QXhp2j736PsD'
+    },
+    reception: {
+      name: 'RCF Community Hall, Alibag',
+      description: 'Coastal Beach Town',
+      mapUrl: 'https://share.google/NsXqBa2vQ1lTeOFD4'
+    }
+  },
+
   // === CONTACT INFORMATION ===
   contact: {
     email: 'msarkar07@live.in',
@@ -34,7 +48,7 @@ export const WEDDING_CONFIG = {
     siteNameLocal: 'পবিত্র মিলন',
     tagline: 'Celebrating the eternal bond of love with Bengali traditions and cultural heritage.',
     logoUrl: 'https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wediing-icon-MWGi3zHWRSwveW4CaK9EM7s57pDP54.png',
-    heroImageUrl: 'https://1fimd9lwq61lrowk.public.blob.vercel-storage.com/wedding-pixar-D6EG6OvRCwxyNzdCoXbz3Yaifu5wlC.png'
+    heroImageUrl: '/images/hero.png'
   },
 
   // === MAIN BLESSINGS & QUOTES ===
