@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import EnhancedEventCard from './EnhancedEventCard';
-import { weddingEvents } from '../data/events';
+import { useWeddingEvents } from '../data/events';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Events: React.FC = () => {
   const { t } = useLanguage();
+  const weddingEvents = useWeddingEvents();
 
   return (
     <section id="events" className="relative py-24 md:py-32 overflow-hidden">
@@ -53,7 +54,7 @@ const Events: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="font-elegant italic text-bengali-gold text-lg mb-4"
           >
-            Celebrate With Us
+            {t('events.celebrate_with_us')}
           </motion.p>
 
           <h2 className="heading-display text-4xl md:text-5xl lg:text-6xl text-royal-charcoal dark:text-bengali-ivory mb-4">
@@ -109,21 +110,21 @@ const Events: React.FC = () => {
                 {
                   title: t('events.cultural_etiquette'),
                   items: [
-                    'Please remove shoes before entering ceremonial areas',
-                    'Modest dress is appreciated for religious ceremonies',
-                    'Photography may be restricted during sacred rituals',
-                    'Touching elders\' feet is a sign of respect',
-                    'Wait for the couple\'s blessing before taking gifts'
+                    t('events.etiquette_1'),
+                    t('events.etiquette_2'),
+                    t('events.etiquette_3'),
+                    t('events.etiquette_4'),
+                    t('events.etiquette_5')
                   ]
                 },
                 {
                   title: t('events.practical_details'),
                   items: [
-                    'Parking will be available at all venues',
-                    'Vegetarian and non-vegetarian meals will be served',
-                    'Special arrangements for elderly guests',
-                    'Contact family for accommodation assistance',
-                    'Traditional Bengali sweets will be distributed'
+                    t('events.practical_1'),
+                    t('events.practical_2'),
+                    t('events.practical_3'),
+                    t('events.practical_4'),
+                    t('events.practical_5')
                   ]
                 }
               ].map((section, sectionIndex) => (

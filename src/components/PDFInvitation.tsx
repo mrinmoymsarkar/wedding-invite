@@ -2,11 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Download, FileText, Heart, Calendar, MapPin, Clock, Users } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { weddingEvents } from '../data/events';
+import { useWeddingEvents } from '../data/events';
 import { WEDDING_CONFIG } from '../config/wedding-config';
 
 const PDFInvitation: React.FC = () => {
   const { t, language } = useLanguage();
+  const weddingEvents = useWeddingEvents();
 
   const generateQRCode = (text: string, size: number = 150) => {
     // Using QR Server API for QR code generation

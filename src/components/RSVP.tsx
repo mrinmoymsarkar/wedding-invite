@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Check, AlertCircle, Calendar } from 'lucide-react';
-import { weddingEvents } from '../data/events';
+import { useWeddingEvents } from '../data/events';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface RSVPForm {
@@ -17,6 +17,7 @@ interface RSVPForm {
 
 const RSVP: React.FC = () => {
   const { t } = useLanguage();
+  const weddingEvents = useWeddingEvents();
   const [formData, setFormData] = useState<RSVPForm>({
     guestName: '',
     email: '',
