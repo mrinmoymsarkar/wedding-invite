@@ -294,21 +294,21 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
           {/* Date, Time, Venue with Icons */}
           <div className="space-y-3 mb-6">
             {[
-              { 
-                icon: Calendar, 
-                text: new Date(event.date).toLocaleDateString('en-US', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
+              {
+                icon: Calendar,
+                text: new Date(event.date).toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
                 }),
                 delay: 0
               },
-              { 
-                icon: Clock, 
+              ...(event.time ? [{
+                icon: Clock,
                 text: event.time,
                 delay: 0.1
-              },
+              }] : []),
               {
                 icon: MapPin,
                 text: event.venue,

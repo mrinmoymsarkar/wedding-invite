@@ -77,6 +77,23 @@ const Events: React.FC = () => {
           </p>
         </motion.div>
 
+        {/* Calendar Overview */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="flex justify-center mb-16 md:mb-20"
+        >
+          <div className="w-full max-w-md md:max-w-lg elegant-card dark:elegant-card-dark rounded-xl p-3 md:p-4">
+            <img
+              src="/images/march-calendar.svg"
+              alt="March 2026 Wedding Calendar"
+              className="w-full h-auto"
+            />
+          </div>
+        </motion.div>
+
         {/* Events Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
           {weddingEvents.map((event, index) => (
