@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Camera } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { GALLERY_CONFIG, GALLERY_CATEGORIES } from '../config/gallery-config';
 import { CONTENT_CONFIG } from '../config/content-config';
 import ImageWithLoader from './ImageWithLoader';
 
 const Gallery: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeCategory, setActiveCategory] = useState<string>('memories');
 
-  const filteredImages = activeCategory === 'all'
-    ? GALLERY_CONFIG
-    : GALLERY_CONFIG.filter(img => img.category === activeCategory);
+  const isComingSoon = activeCategory !== 'memories';
+  const filteredImages = activeCategory === 'memories'
+    ? GALLERY_CONFIG.filter(img => img.category === 'memories')
+    : [];
 
   const openLightbox = (index: number) => {
     setSelectedImage(index);
@@ -110,50 +111,71 @@ const Gallery: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Gallery Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredImages.map((image, index) => (
-              <motion.div
-                key={image.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                whileHover={{ y: -4 }}
-                className="group cursor-pointer"
-                onClick={() => openLightbox(index)}
-              >
-                <div className="relative aspect-square overflow-hidden rounded-lg elegant-card dark:elegant-card-dark">
-                  <ImageWithLoader
-                    src={image.url}
-                    alt={image.caption}
-                    className="w-full h-full"
-                  />
+        {/* Gallery Grid or Coming Soon */}
+        {isComingSoon ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center justify-center py-24 md:py-32"
+          >
+            <Camera className="h-16 w-16 text-bengali-gold/40 mb-6" />
+            <h3 className="heading-display text-2xl md:text-3xl text-royal-charcoal/70 dark:text-bengali-ivory/70 mb-3">
+              {language === 'bn' ? 'শীঘ্রই আসছে' : language === 'mr' ? 'लवकरच येत आहे' : 'Coming Soon'}
+            </h3>
+            <p className="font-body text-royal-charcoal/50 dark:text-bengali-ivory/50 text-center max-w-md">
+              {language === 'bn'
+                ? 'এই মুহূর্তগুলো শীঘ্রই যোগ করা হবে। অনুগ্রহ করে পরে আবার দেখুন!'
+                : language === 'mr'
+                ? 'हे क्षण लवकरच जोडले जातील. कृपया नंतर पुन्हा भेट द्या!'
+                : 'These moments will be added soon. Please check back later!'}
+            </p>
+          </motion.div>
+        ) : (
+          <motion.div
+            layout
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredImages.map((image, index) => (
+                <motion.div
+                  key={image.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4 }}
+                  whileHover={{ y: -4 }}
+                  className="group cursor-pointer"
+                  onClick={() => openLightbox(index)}
+                >
+                  <div className="relative aspect-square overflow-hidden rounded-lg elegant-card dark:elegant-card-dark">
+                    <ImageWithLoader
+                      src={image.url}
+                      alt={image.caption}
+                      className="w-full h-full"
+                    />
 
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-royal-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <p className="font-body text-bengali-ivory text-sm">
-                        {image.caption}
-                      </p>
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-royal-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <p className="font-body text-bengali-ivory text-sm">
+                          {image.caption}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Corner accent */}
+                    <div className="absolute top-2 right-2 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute top-0 right-0 w-full h-px bg-bengali-gold/60" />
+                      <div className="absolute top-0 right-0 h-full w-px bg-bengali-gold/60" />
                     </div>
                   </div>
-
-                  {/* Corner accent */}
-                  <div className="absolute top-2 right-2 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute top-0 right-0 w-full h-px bg-bengali-gold/60" />
-                    <div className="absolute top-0 right-0 h-full w-px bg-bengali-gold/60" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
 
         {/* Lightbox */}
         <AnimatePresence>

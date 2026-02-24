@@ -54,31 +54,30 @@ const Tutorial: React.FC = () => {
     }
   ];
 
-  // Prevent scrolling when tutorial is visible
+  // Scroll to top and prevent scrolling when tutorial is visible
   useEffect(() => {
     if (isVisible) {
-      // Store current scroll position
-      const scrollY = window.scrollY;
-      
-      // Prevent scrolling
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.height = '100%';
-      
-      // Prevent touch events on body
-      document.body.style.touchAction = 'none';
-      
+      // Scroll to top so tutorial targets (header buttons) are in view
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Small delay to let scroll finish before locking
+      const lockTimer = setTimeout(() => {
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = '0px';
+        document.body.style.width = '100%';
+        document.body.style.height = '100%';
+        document.body.style.touchAction = 'none';
+      }, 400);
+
       return () => {
-        // Restore scrolling
+        clearTimeout(lockTimer);
         document.body.style.overflow = '';
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.width = '';
         document.body.style.height = '';
         document.body.style.touchAction = '';
-        window.scrollTo(0, scrollY);
       };
     }
   }, [isVisible]);
@@ -182,7 +181,8 @@ const Tutorial: React.FC = () => {
 
   useEffect(() => {
     if (isVisible && !isMobile) {
-      setTimeout(updateTooltipPosition, 100);
+      // Delay enough for scroll-to-top to finish before calculating positions
+      setTimeout(updateTooltipPosition, 500);
     }
   }, [isVisible, currentStep, isMobile]);
 
