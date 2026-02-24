@@ -85,8 +85,8 @@ collections:
                 name: "footer"
                 widget: "object"
                 fields:
-                  - { label: "Bengali Text", name: "bengali", widget: "string", default: "তারপর পথ হারালো তোমায় আমায় নিয়ে" }
-                  - { label: "Translation", name: "translation", widget: "string", default: "Then the path was lost, taking you and me" }
+                  - { label: "Bengali Text", name: "bengali", widget: "string", default: "দুটি হৃদয়ের মিলন, একটি পথের শুরু" }
+                  - { label: "Translation", name: "translation", widget: "string", default: "Two hearts unite, one journey begins" }
 
   - name: "events"
     label: "🎉 Wedding Events"

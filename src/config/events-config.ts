@@ -20,7 +20,7 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
         'Blessing with rice and fish'
       ],
       significance: 'Turmeric is considered auspicious and purifying in Bengali culture. This ceremony marks the beginning of the wedding festivities and blesses the couple with prosperity.',
-      dresscode: 'Yellow is mandatory. Traditional Bengali attire preferred.',
+      dresscode: 'Wear yellow or orange shades. Light comfortable traditional attire preferred.',
       photo: 'https://images.pexels.com/photos/3018976/pexels-photo-3018976.jpeg'
     },
     {
@@ -41,7 +41,7 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
         'Conch shell and traditional blessings'
       ],
       significance: 'The most sacred moment where two souls unite in the presence of Agni (fire) as witness. The seven rounds represent seven lifetimes of togetherness.',
-      dresscode: 'Traditional Bengali wedding attire. Red and white for bride, cream dhoti for groom.',
+      dresscode: 'Elegant traditional attire — sarees, kurtas, or sherwanis in jewel tones or pastels. Please avoid red and white.',
       photo: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg'
     },
     {
@@ -60,7 +60,7 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
         'Blessing ceremony by community elders'
       ],
       significance: 'The reception celebrates the union with the wider community and marks the beginning of the couple\'s new journey together.',
-      dresscode: 'Formal traditional or contemporary attire. All colors welcome.',
+      dresscode: 'Formal or semi-formal attire — sarees, suits, or gowns in rich fabrics. All colors welcome.',
       photo: 'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg'
     }
   ],
@@ -82,7 +82,7 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
         'ধান ও মাছ দিয়ে আশীর্বাদ'
       ],
       significance: 'বাঙালি সংস্কৃতিতে হলুদকে মঙ্গলকর ও শুদ্ধিকারক বলে মনে করা হয়। এই অনুষ্ঠান বিবাহ উৎসবের সূচনা করে এবং দম্পতিকে সমৃদ্ধির আশীর্বাদ দেয়।',
-      dresscode: 'হলুদ রঙের পোশাক বাধ্যতামূলক। ঐতিহ্যবাহী বাঙালি পোশাক পছন্দনীয়।',
+      dresscode: 'হলুদ বা কমলা রঙের পোশাক পরুন। হালকা আরামদায়ক ঐতিহ্যবাহী পোশাক পছন্দনীয়।',
       photo: 'https://images.pexels.com/photos/3018976/pexels-photo-3018976.jpeg'
     },
     {
@@ -103,7 +103,7 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
         'শঙ্খধ্বনি ও ঐতিহ্যবাহী আশীর্বাদ'
       ],
       significance: 'সবচেয়ে পবিত্র মুহূর্ত যেখানে অগ্নিকে সাক্ষী রেখে দুটি আত্মা এক হয়। সাতটি পরিক্রমা সাত জন্মের একসঙ্গে থাকার প্রতীক।',
-      dresscode: 'ঐতিহ্যবাহী বাঙালি বিবাহের পোশাক। কনের জন্য লাল ও সাদা, বরের জন্য ক্রিম রঙের ধুতি।',
+      dresscode: 'মার্জিত ঐতিহ্যবাহী পোশাক — শাড়ি, কুর্তা বা শেরওয়ানি। লাল ও সাদা রঙ এড়িয়ে চলুন।',
       photo: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg'
     },
     {
@@ -122,7 +122,7 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
         'সমাজের বয়োজ্যেষ্ঠদের আশীর্বাদ অনুষ্ঠান'
       ],
       significance: 'রিসেপশনে বৃহত্তর সমাজের সাথে মিলনকে উদযাপন করা হয় এবং দম্পতির নতুন জীবনযাত্রার সূচনা হয়।',
-      dresscode: 'আনুষ্ঠানিক ঐতিহ্যবাহী বা আধুনিক পোশাক। সব রঙ স্বাগত।',
+      dresscode: 'আনুষ্ঠানিক বা আধা-আনুষ্ঠানিক পোশাক — শাড়ি, স্যুট বা গাউন। সব রঙ স্বাগত।',
       photo: 'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg'
     }
   ],
@@ -144,7 +144,7 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
         'तांदूळ आणि माशाने आशीर्वाद'
       ],
       significance: 'बंगाली संस्कृतीत हळदीला शुभ आणि शुद्धीकारक मानले जाते. हा समारंभ विवाह उत्सवाची सुरुवात करतो आणि जोडप्याला समृद्धीचा आशीर्वाद देतो.',
-      dresscode: 'पिवळा रंग अनिवार्य. पारंपारिक बंगाली पोशाख प्राधान्य.',
+      dresscode: 'पिवळा किंवा केशरी रंगाचे कपडे घाला. हलके आरामदायी पारंपारिक पोशाख प्राधान्य.',
       photo: 'https://images.pexels.com/photos/3018976/pexels-photo-3018976.jpeg'
     },
     {
@@ -165,7 +165,7 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
         'शंखनाद आणि पारंपारिक आशीर्वाद'
       ],
       significance: 'सर्वात पवित्र क्षण जेथे अग्नीला साक्षी ठेवून दोन आत्मे एक होतात. सात फेरे सात जन्मांच्या सहजीवनाचे प्रतीक आहेत.',
-      dresscode: 'पारंपारिक बंगाली विवाह पोशाख. वधूसाठी लाल आणि पांढरा, वरासाठी क्रीम रंगाचे धोतर.',
+      dresscode: 'सुंदर पारंपारिक पोशाख — साड्या, कुर्ते किंवा शेरवानी. कृपया लाल आणि पांढरा रंग टाळा.',
       photo: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg'
     },
     {
@@ -184,7 +184,7 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
         'समाजातील वडीलधाऱ्यांकडून आशीर्वाद समारंभ'
       ],
       significance: 'स्वागत समारंभ व्यापक समाजासह मिलनाचा उत्सव साजरा करतो आणि जोडप्याच्या नवीन प्रवासाची सुरुवात दर्शवतो.',
-      dresscode: 'औपचारिक पारंपारिक किंवा आधुनिक पोशाख. सर्व रंगांचे स्वागत.',
+      dresscode: 'औपचारिक किंवा अर्ध-औपचारिक पोशाख — साड्या, सूट किंवा गाऊन. सर्व रंगांचे स्वागत.',
       photo: 'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg'
     }
   ]

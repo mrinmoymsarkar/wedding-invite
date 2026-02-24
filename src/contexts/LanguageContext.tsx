@@ -157,13 +157,13 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.brand': 'Sacred Union',
     'footer.tagline': 'Celebrating the eternal bond of love with Bengali traditions and cultural heritage.',
-    'footer.blessing_footer': 'তারপর পথ হারালো তোমায় আমায় নিয়ে',
+    'footer.blessing_footer': 'দুটি হৃদয়ের মিলন, একটি পথের শুরু',
     'footer.quick_links': 'Quick Links',
     'footer.contact_families': 'Contact Families',
     'footer.wedding_timeline': 'Wedding Timeline',
     'footer.copyright': '© 2026 Subhasree & Mrinmoy Wedding. Made with love and Bengali traditions.',
-    'footer.quote': 'তারপর পথ হারালো তোমায় আমায় নিয়ে',
-    'footer.quote_translation': 'Then the path was lost, taking you and me',
+    'footer.quote': 'দুটি হৃদয়ের মিলন, একটি পথের শুরু',
+    'footer.quote_translation': 'Two hearts unite, one journey begins',
 
     // Common
     'common.required': 'required',
@@ -288,13 +288,13 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.brand': 'শুভ মিলন',
     'footer.tagline': 'বাঙালি ঐতিহ্য ও সংস্কৃতির সাথে ভালোবাসার চিরন্তন বন্ধন উদযাপন।',
-    'footer.blessing_footer': 'তারপর পথ হারালো তোমায় আমায় নিয়ে',
+    'footer.blessing_footer': 'দুটি হৃদয়ের মিলন, একটি পথের শুরু',
     'footer.quick_links': 'দ্রুত লিঙ্ক',
     'footer.contact_families': 'পরিবারের যোগাযোগ',
     'footer.wedding_timeline': 'বিবাহের সময়সূচী',
     'footer.copyright': '© ২০২৬ শুভশ্রী ও মৃন্ময় বিবাহ। ভালোবাসা ও বাঙালি ঐতিহ্যের সাথে তৈরি।',
-    'footer.quote': 'তারপর পথ হারালো তোমায় আমায় নিয়ে',
-    'footer.quote_translation': 'তারপর পথ হারালো তোমায় আমায় নিয়ে',
+    'footer.quote': 'দুটি হৃদয়ের মিলন, একটি পথের শুরু',
+    'footer.quote_translation': 'দুটি হৃদয়ের মিলন, একটি পথের শুরু',
 
     // Common
     'common.required': 'আবশ্যক',
@@ -419,13 +419,13 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.brand': 'शुभमंगल',
     'footer.tagline': 'बंगाली परंपरा आणि सांस्कृतिक वारशासह प्रेमाच्या शाश्वत बंधनाचा उत्सव.',
-    'footer.blessing_footer': 'तारपर पथ हारालो तोमाय आमाय निये',
+    'footer.blessing_footer': 'दोन हृदयांचे मिलन, एका प्रवासाची सुरुवात',
     'footer.quick_links': 'महत्त्वाचे दुवे',
     'footer.contact_families': 'कुटुंबांशी संपर्क',
     'footer.wedding_timeline': 'विवाह वेळापत्रक',
     'footer.copyright': '© २०२६ शुभश्री आणि मृन्मय विवाह. प्रेम आणि बंगाली परंपरांनी बनवले.',
-    'footer.quote': 'तारपर पथ हारालो तोमाय आमाय निये',
-    'footer.quote_translation': 'मग वाट हरवली, तुला आणि मला घेऊन',
+    'footer.quote': 'दोन हृदयांचे मिलन, एका प्रवासाची सुरुवात',
+    'footer.quote_translation': 'दोन हृदयांचे मिलन, एका प्रवासाची सुरुवात',
 
     // Common
     'common.required': 'आवश्यक',

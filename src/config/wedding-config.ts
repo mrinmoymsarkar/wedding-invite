@@ -58,8 +58,8 @@ export const WEDDING_CONFIG = {
       translation: 'May this sacred union be blessed and prosperous'
     },
     footer: {
-      bengali: 'তারপর পথ হারালো তোমায় আমায় নিয়ে',
-      translation: 'Then the path was lost, taking you and me'
+      bengali: 'দুটি হৃদয়ের মিলন, একটি পথের শুরু',
+      translation: 'Two hearts unite, one journey begins'
     }
   },
 
