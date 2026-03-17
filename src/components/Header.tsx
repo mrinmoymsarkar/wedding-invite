@@ -1,37 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, Monitor } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, Sun, Moon, Monitor, Settings, Camera } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, Language } from '../contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import LanguageSelector from './LanguageSelector';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
-  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
-  const [forceCloseLanguage, setForceCloseLanguage] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const settingsRef = useRef<HTMLDivElement>(null);
   const { theme, setTheme } = useTheme();
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
 
-  // Handle language menu open - close theme menu
-  const handleLanguageOpenChange = (isOpen: boolean) => {
-    setIsLanguageMenuOpen(isOpen);
-    if (isOpen) {
-      setIsThemeMenuOpen(false);
-    }
-  };
-
-  // Handle theme menu toggle - close language menu
-  const handleThemeToggle = () => {
-    const newState = !isThemeMenuOpen;
-    setIsThemeMenuOpen(newState);
-    if (newState) {
-      setForceCloseLanguage(true);
-      // Reset force close after a tick
-      setTimeout(() => setForceCloseLanguage(false), 0);
-    }
-  };
+  // Close settings dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (settingsRef.current && !settingsRef.current.contains(e.target as Node)) {
+        setIsSettingsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Track scroll position for header styling
   useEffect(() => {
@@ -54,6 +45,12 @@ const Header: React.FC = () => {
     { value: 'light', icon: Sun, label: 'Light' },
     { value: 'dark', icon: Moon, label: 'Dark' },
     { value: 'auto', icon: Monitor, label: 'Auto' }
+  ];
+
+  const languages = [
+    { code: 'en' as Language, nativeName: 'English', name: 'English' },
+    { code: 'bn' as Language, nativeName: 'বাংলা', name: 'Bengali' },
+    { code: 'mr' as Language, nativeName: 'मराठी', name: 'Marathi' }
   ];
 
   const scrollToSection = (href: string) => {
@@ -119,37 +116,67 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Controls */}
-          <div className="flex items-center gap-4">
-            {/* Language Selector */}
-            <div data-tutorial="language-selector">
-              <LanguageSelector
-                onOpenChange={handleLanguageOpenChange}
-                forceClose={forceCloseLanguage}
-              />
-            </div>
+          <div className="flex items-center gap-3">
+            {/* Camera - Photo Upload */}
+            <Link to="/photos">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2.5 rounded-full border border-bengali-gold/20 text-royal-charcoal/70 dark:text-bengali-ivory/70 hover:border-bengali-gold/40 hover:text-bengali-gold transition-all duration-300 cursor-pointer"
+              >
+                <Camera className="h-4 w-4" />
+              </motion.div>
+            </Link>
 
-            {/* Theme Selector */}
-            <div className="relative" data-tutorial="theme-selector">
+            {/* Settings - Language + Theme */}
+            <div className="relative" ref={settingsRef} data-tutorial="settings">
               <motion.button
-                onClick={handleThemeToggle}
+                onClick={() => setIsSettingsOpen(!isSettingsOpen)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-2.5 rounded-full border border-bengali-gold/20 text-royal-charcoal/70 dark:text-bengali-ivory/70 hover:border-bengali-gold/40 hover:text-bengali-gold transition-all duration-300"
               >
-                {theme === 'light' && <Sun className="h-4 w-4" />}
-                {theme === 'dark' && <Moon className="h-4 w-4" />}
-                {theme === 'auto' && <Monitor className="h-4 w-4" />}
+                <Settings className="h-4 w-4" />
               </motion.button>
 
               <AnimatePresence>
-                {isThemeMenuOpen && (
+                {isSettingsOpen && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95, y: -10 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute right-0 mt-3 w-36 elegant-card dark:elegant-card-dark rounded-lg py-2 overflow-hidden"
+                    className="absolute right-0 mt-3 w-48 elegant-card dark:elegant-card-dark rounded-lg py-2 overflow-hidden"
                   >
+                    {/* Language Section */}
+                    <p className="px-4 py-1.5 text-xs font-body text-royal-charcoal/40 dark:text-bengali-ivory/40 uppercase tracking-wider">
+                      Language
+                    </p>
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code);
+                          setIsSettingsOpen(false);
+                        }}
+                        className={`w-full px-4 py-2 text-left text-sm flex items-center justify-between transition-colors duration-200 ${
+                          language === lang.code
+                            ? 'text-bengali-deep-red dark:text-bengali-gold bg-bengali-gold/5'
+                            : 'text-royal-charcoal/70 dark:text-bengali-ivory/70 hover:bg-bengali-gold/5'
+                        }`}
+                      >
+                        <span className="font-body">{lang.nativeName}</span>
+                        <span className="text-xs opacity-50">{lang.name}</span>
+                      </button>
+                    ))}
+
+                    {/* Divider */}
+                    <div className="my-2 h-px bg-bengali-gold/10" />
+
+                    {/* Theme Section */}
+                    <p className="px-4 py-1.5 text-xs font-body text-royal-charcoal/40 dark:text-bengali-ivory/40 uppercase tracking-wider">
+                      Theme
+                    </p>
                     {themeOptions.map((option) => {
                       const Icon = option.icon;
                       return (
@@ -157,9 +184,9 @@ const Header: React.FC = () => {
                           key={option.value}
                           onClick={() => {
                             setTheme(option.value as any);
-                            setIsThemeMenuOpen(false);
+                            setIsSettingsOpen(false);
                           }}
-                          className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 transition-colors duration-200 ${
+                          className={`w-full px-4 py-2 text-left text-sm flex items-center gap-3 transition-colors duration-200 ${
                             theme === option.value
                               ? 'text-bengali-deep-red dark:text-bengali-gold bg-bengali-gold/5'
                               : 'text-royal-charcoal/70 dark:text-bengali-ivory/70 hover:bg-bengali-gold/5'

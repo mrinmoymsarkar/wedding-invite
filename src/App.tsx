@@ -12,7 +12,10 @@ import RSVP from './components/RSVP';
 import Footer from './components/Footer';
 import Tutorial from './components/Tutorial';
 import AnimatedBackground from './components/AnimatedBackground';
+import PhotoUploadCTA from './components/PhotoUploadCTA';
 import AdminPage from './pages/AdminPage';
+import PhotoUploadPage from './pages/PhotoUploadPage';
+import PhotoGalleryPage from './pages/PhotoGalleryPage';
 
 function MainWebsite() {
   return (
@@ -21,8 +24,10 @@ function MainWebsite() {
       <Header />
       <main className="relative z-10">
         <Hero />
+        <PhotoUploadCTA />
         <Events />
         <Gallery />
+        <PhotoUploadCTA />
         <Culture />
         <RSVP />
       </main>
@@ -40,6 +45,8 @@ function App() {
           <Router>
             <Routes>
               <Route path="/admin-dashboard" element={<AdminPage />} />
+              <Route path="/photos" element={<PhotoUploadPage />} />
+              <Route path="/photos/gallery" element={<PhotoGalleryPage />} />
               <Route path="/*" element={<MainWebsite />} />
             </Routes>
           </Router>
