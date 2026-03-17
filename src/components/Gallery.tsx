@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Camera } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Camera, Users, Upload } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { GALLERY_CONFIG, GALLERY_CATEGORIES } from '../config/gallery-config';
 import { CONTENT_CONFIG } from '../config/content-config';
@@ -8,13 +9,13 @@ import ImageWithLoader from './ImageWithLoader';
 
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || '';
 const FOLDER = 'wedding-photos';
-
-// No separate uploads category — uploaded photos merge into their event sections
+const RECEPTION_DATE = new Date('2026-03-22T23:59:00+05:30');
 
 const Gallery: React.FC = () => {
   const { t, language } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string>('memories');
+  const allEventsPast = new Date() > RECEPTION_DATE;
+  const [activeCategory, setActiveCategory] = useState<string>(allEventsPast ? 'all' : 'memories');
   const [uploadedPhotos, setUploadedPhotos] = useState<{ id: number; url: string; caption: string; category: string }[]>([]);
 
   // Load uploaded photos from localStorage + Cloudinary list
@@ -172,7 +173,7 @@ const Gallery: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Gallery Grid or Coming Soon */}
+        {/* Gallery Grid or Coming Soon / No Photos */}
         {isComingSoon ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -181,61 +182,143 @@ const Gallery: React.FC = () => {
             className="flex flex-col items-center justify-center py-24 md:py-32"
           >
             <Camera className="h-16 w-16 text-bengali-gold/40 mb-6" />
-            <h3 className="heading-display text-2xl md:text-3xl text-royal-charcoal/70 dark:text-bengali-ivory/70 mb-3">
-              {language === 'bn' ? 'শীঘ্রই আসছে' : language === 'mr' ? 'लवकरच येत आहे' : 'Coming Soon'}
-            </h3>
-            <p className="font-body text-royal-charcoal/50 dark:text-bengali-ivory/50 text-center max-w-md">
-              {language === 'bn'
-                ? 'এই মুহূর্তগুলো শীঘ্রই যোগ করা হবে। অনুগ্রহ করে পরে আবার দেখুন!'
-                : language === 'mr'
-                ? 'हे क्षण लवकरच जोडले जातील. कृपया नंतर पुन्हा भेट द्या!'
-                : 'These moments will be added soon. Please check back later!'}
-            </p>
+            {allEventsPast ? (
+              <>
+                <h3 className="heading-display text-2xl md:text-3xl text-royal-charcoal/70 dark:text-bengali-ivory/70 mb-3">
+                  {language === 'bn' ? 'এখনো কোনো ছবি নেই' : language === 'mr' ? 'अजून फोटो नाहीत' : 'No photos yet'}
+                </h3>
+                <p className="font-body text-royal-charcoal/50 dark:text-bengali-ivory/50 text-center max-w-md mb-6">
+                  {language === 'bn'
+                    ? 'এই বিভাগে প্রথম ছবি শেয়ার করুন!'
+                    : language === 'mr'
+                    ? 'या विभागात पहिला फोटो शेअर करा!'
+                    : 'Be the first to share photos in this section!'}
+                </p>
+                <Link
+                  to="/photos"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-bengali-deep-red hover:bg-bengali-vermillion dark:bg-bengali-gold dark:hover:bg-bengali-marigold text-bengali-ivory dark:text-royal-charcoal font-body font-medium transition-colors"
+                >
+                  <Upload className="h-4 w-4" />
+                  {language === 'bn' ? 'ছবি আপলোড করুন' : language === 'mr' ? 'फोटो अपलोड करा' : 'Upload Photos'}
+                </Link>
+              </>
+            ) : (
+              <>
+                <h3 className="heading-display text-2xl md:text-3xl text-royal-charcoal/70 dark:text-bengali-ivory/70 mb-3">
+                  {language === 'bn' ? 'শীঘ্রই আসছে' : language === 'mr' ? 'लवकरच येत आहे' : 'Coming Soon'}
+                </h3>
+                <p className="font-body text-royal-charcoal/50 dark:text-bengali-ivory/50 text-center max-w-md">
+                  {language === 'bn'
+                    ? 'এই মুহূর্তগুলো শীঘ্রই যোগ করা হবে। অনুগ্রহ করে পরে আবার দেখুন!'
+                    : language === 'mr'
+                    ? 'हे क्षण लवकरच जोडले जातील. कृपया नंतर पुन्हा भेट द्या!'
+                    : 'These moments will be added soon. Please check back later!'}
+                </p>
+              </>
+            )}
           </motion.div>
         ) : (
-          <motion.div
-            layout
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredImages.map((image, index) => (
-                <motion.div
-                  key={image.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4 }}
-                  whileHover={{ y: -4 }}
-                  className="group cursor-pointer"
-                  onClick={() => openLightbox(index)}
-                >
-                  <div className="relative aspect-square overflow-hidden rounded-lg elegant-card dark:elegant-card-dark">
-                    <ImageWithLoader
-                      src={image.url}
-                      alt={image.caption}
-                      className="w-full h-full"
-                    />
-
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-royal-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <p className="font-body text-bengali-ivory text-sm">
-                          {image.caption}
-                        </p>
+          <>
+            {/* Config / curated images */}
+            {configImages.length > 0 && (
+              <motion.div
+                layout
+                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+              >
+                <AnimatePresence mode="popLayout">
+                  {configImages.map((image, index) => (
+                    <motion.div
+                      key={image.id}
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.4 }}
+                      whileHover={{ y: -4 }}
+                      className="group cursor-pointer"
+                      onClick={() => openLightbox(index)}
+                    >
+                      <div className="relative aspect-square overflow-hidden rounded-lg elegant-card dark:elegant-card-dark">
+                        <ImageWithLoader
+                          src={image.url}
+                          alt={image.caption}
+                          className="w-full h-full"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-royal-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="absolute bottom-0 left-0 right-0 p-4">
+                            <p className="font-body text-bengali-ivory text-sm">{image.caption}</p>
+                          </div>
+                        </div>
+                        <div className="absolute top-2 right-2 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="absolute top-0 right-0 w-full h-px bg-bengali-gold/60" />
+                          <div className="absolute top-0 right-0 h-full w-px bg-bengali-gold/60" />
+                        </div>
                       </div>
-                    </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            )}
 
-                    {/* Corner accent */}
-                    <div className="absolute top-2 right-2 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute top-0 right-0 w-full h-px bg-bengali-gold/60" />
-                      <div className="absolute top-0 right-0 h-full w-px bg-bengali-gold/60" />
-                    </div>
+            {/* Uploaded by Guests sub-section */}
+            {uploadImages.length > 0 && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  className="flex items-center gap-4 mt-16 mb-8"
+                >
+                  <div className="flex-1 h-px bg-gradient-to-r from-transparent to-bengali-gold/20" />
+                  <div className="flex items-center gap-2 text-royal-charcoal/50 dark:text-bengali-ivory/50">
+                    <Users className="h-4 w-4" />
+                    <span className="font-body text-sm tracking-wide">
+                      {language === 'bn' ? 'অতিথিদের তোলা ছবি' : language === 'mr' ? 'पाहुण्यांनी काढलेले फोटो' : 'Uploaded by Guests'}
+                    </span>
                   </div>
+                  <div className="flex-1 h-px bg-gradient-to-l from-transparent to-bengali-gold/20" />
                 </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+
+                <motion.div
+                  layout
+                  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+                >
+                  <AnimatePresence mode="popLayout">
+                    {uploadImages.map((image, index) => (
+                      <motion.div
+                        key={image.id}
+                        layout
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.4 }}
+                        whileHover={{ y: -4 }}
+                        className="group cursor-pointer"
+                        onClick={() => openLightbox(configImages.length + index)}
+                      >
+                        <div className="relative aspect-square overflow-hidden rounded-lg elegant-card dark:elegant-card-dark">
+                          <ImageWithLoader
+                            src={image.url}
+                            alt={image.caption}
+                            className="w-full h-full"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-royal-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="absolute bottom-0 left-0 right-0 p-4">
+                              <p className="font-body text-bengali-ivory text-sm">{image.caption}</p>
+                            </div>
+                          </div>
+                          <div className="absolute top-2 right-2 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="absolute top-0 right-0 w-full h-px bg-bengali-gold/60" />
+                            <div className="absolute top-0 right-0 h-full w-px bg-bengali-gold/60" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </motion.div>
+              </>
+            )}
+          </>
         )}
 
         {/* Lightbox */}

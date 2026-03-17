@@ -48,7 +48,8 @@ export const GALLERY_CATEGORIES = [
   { id: 'all', name: 'All Photos', local: 'সব ছবি' },
   { id: 'memories', name: 'Memories', local: 'স্মৃতি' },
   { id: 'gaye-holud', name: 'Gaye Holud', local: 'গায়ে হলুদ' },
-  { id: 'ceremony', name: 'Ceremony', local: 'বিয়ে' },
+  { id: 'ceremony', name: 'Wedding', local: 'বিয়ে' },
   { id: 'reception', name: 'Reception', local: 'অভ্যর্থনা' },
-  { id: 'pre-wedding', name: 'Pre-Wedding', local: 'প্রি-ওয়েডিং' }
+  { id: 'pre-wedding', name: 'Pre-Wedding', local: 'প্রি-ওয়েডিং' },
+  { id: 'post-wedding', name: 'Post-Wedding', local: 'পোস্ট-ওয়েডিং' }
 ];
