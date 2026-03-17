@@ -238,6 +238,10 @@ const PhotoUploadPage: React.FC = () => {
           </h1>
           <p className="font-body text-sm text-royal-charcoal/60 dark:text-bengali-ivory/60 mb-8">
             Enter the access code to upload photos
+            <br />
+            <span className="text-xs text-royal-charcoal/40 dark:text-bengali-ivory/40">
+              Hint: Our wedding date in DDMMYYYY format :)
+            </span>
           </p>
           <form onSubmit={handlePasscodeSubmit} className="space-y-4">
             <input
