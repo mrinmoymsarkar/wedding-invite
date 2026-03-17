@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Camera } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -6,15 +6,76 @@ import { GALLERY_CONFIG, GALLERY_CATEGORIES } from '../config/gallery-config';
 import { CONTENT_CONFIG } from '../config/content-config';
 import ImageWithLoader from './ImageWithLoader';
 
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || '';
+const FOLDER = 'wedding-photos';
+
+// No separate uploads category — uploaded photos merge into their event sections
+
 const Gallery: React.FC = () => {
   const { t, language } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('memories');
+  const [uploadedPhotos, setUploadedPhotos] = useState<{ id: number; url: string; caption: string; category: string }[]>([]);
 
-  const isComingSoon = activeCategory !== 'memories';
-  const filteredImages = activeCategory === 'memories'
-    ? GALLERY_CONFIG.filter(img => img.category === 'memories')
-    : [];
+  // Load uploaded photos from localStorage + Cloudinary list
+  useEffect(() => {
+    const loadUploads = async () => {
+      const photos: { id: number; url: string; caption: string; category: string }[] = [];
+      const seenIds = new Set<string>();
+
+      // localStorage first (has correct category from upload)
+      const localMap = new Map<string, { url: string; category: string }>();
+      try {
+        const local = JSON.parse(localStorage.getItem('wedding-uploaded-photos') || '[]');
+        local.forEach((p: any, i: number) => {
+          localMap.set(p.id, { url: p.url, category: p.category || '' });
+          if (!seenIds.has(p.id)) {
+            seenIds.add(p.id);
+            photos.push({
+              id: 20000 + i,
+              url: p.url,
+              caption: '',
+              category: p.category || '',
+            });
+          }
+        });
+      } catch { /* ignore */ }
+
+      // Cloudinary list endpoint (supplements with photos from other devices)
+      if (CLOUD_NAME) {
+        try {
+          const res = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${FOLDER}.json`);
+          if (res.ok) {
+            const data = await res.json();
+            (data.resources || []).forEach((r: any, i: number) => {
+              const publicId = r.public_id;
+              if (!seenIds.has(publicId)) {
+                seenIds.add(publicId);
+                photos.push({
+                  id: 10000 + i,
+                  url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/w_800,q_auto,f_auto/${publicId}.${r.format}`,
+                  caption: r.context?.custom?.caption || '',
+                  category: r.context?.custom?.category || '',
+                });
+              }
+            });
+          }
+        } catch { /* ignore */ }
+      }
+
+      setUploadedPhotos(photos);
+    };
+
+    loadUploads();
+  }, []);
+
+  const allCategories = GALLERY_CATEGORIES;
+
+  // Merge config images + uploaded photos for the active category
+  const configImages = GALLERY_CONFIG.filter(img => activeCategory === 'all' || img.category === activeCategory);
+  const uploadImages = uploadedPhotos.filter(p => activeCategory === 'all' || p.category === activeCategory);
+  const filteredImages = [...configImages, ...uploadImages];
+  const isComingSoon = activeCategory !== 'all' && activeCategory !== 'memories' && filteredImages.length === 0;
 
   const openLightbox = (index: number) => {
     setSelectedImage(index);
@@ -90,7 +151,7 @@ const Gallery: React.FC = () => {
           viewport={{ once: true }}
           className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12 md:mb-16"
         >
-          {GALLERY_CATEGORIES.map((category, index) => (
+          {allCategories.map((category, index) => (
             <motion.button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
