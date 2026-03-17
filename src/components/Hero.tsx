@@ -15,27 +15,38 @@ const Hero: React.FC = () => {
     minutes: 0,
     seconds: 0
   });
+  const [isCountingUp, setIsCountingUp] = useState(false);
 
   useEffect(() => {
-    const weddingDate = new Date(`${WEDDING_CONFIG.wedding.mainDate}T20:00:00+05:30`);
+    const receptionDate = new Date('2026-03-22T18:45:00+05:30');
+    const weddingDate = new Date(`${WEDDING_CONFIG.wedding.mainDate}T18:03:00+05:30`);
 
-    const calculateTimeLeft = () => {
+    const calculate = () => {
       const now = new Date();
-      const difference = weddingDate.getTime() - now.getTime();
+      const toReception = receptionDate.getTime() - now.getTime();
 
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      if (toReception > 0) {
+        // Countdown to reception
+        setIsCountingUp(false);
+        const days = Math.floor(toReception / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((toReception % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((toReception % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((toReception % (1000 * 60)) / 1000);
         setTimeLeft({ days, hours, minutes, seconds });
       } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        // Count up from wedding date
+        setIsCountingUp(true);
+        const sinceWedding = now.getTime() - weddingDate.getTime();
+        const days = Math.floor(sinceWedding / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((sinceWedding % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((sinceWedding % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((sinceWedding % (1000 * 60)) / 1000);
+        setTimeLeft({ days, hours, minutes, seconds });
       }
     };
 
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
+    calculate();
+    const timer = setInterval(calculate, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -245,7 +256,7 @@ const Hero: React.FC = () => {
             {/* Section label */}
             <div className="text-center mb-8">
               <p className="font-elegant italic text-bengali-gold text-lg tracking-wide">
-                {CONTENT_CONFIG.hero.countdownTitle}
+                {isCountingUp ? 'Happily Married For' : CONTENT_CONFIG.hero.countdownTitle}
               </p>
             </div>
 

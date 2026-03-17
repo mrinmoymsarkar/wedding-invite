@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, MapPin, Scroll, Heart, Star, Mountain, Waves } from 'lucide-react';
+import { Calendar, Clock, MapPin, Scroll, Heart, Star, Mountain, Waves, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { EventDetails } from '../types';
 import CalendarIntegration from './CalendarIntegration';
@@ -12,6 +12,7 @@ interface EnhancedEventCardProps {
 
 const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const isPast = new Date(event.date) < new Date(new Date().toDateString());
 
   return (
     <motion.div
@@ -224,20 +225,32 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
           )}
 
           {/* Floating Elements */}
-          <motion.div
-            className="absolute top-4 right-4"
-            animate={{
-              rotate: [0, 360],
-              scale: [1, 1.2, 1]
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <Star className="h-6 w-6 text-bengali-gold" fill="currentColor" />
-          </motion.div>
+          {isPast ? (
+            <motion.div
+              className="absolute top-4 right-4 bg-emerald-600/90 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-lg z-10"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <CheckCircle className="h-3.5 w-3.5 text-white" />
+              <span className="text-xs font-semibold text-white">Celebrated</span>
+            </motion.div>
+          ) : (
+            <motion.div
+              className="absolute top-4 right-4"
+              animate={{
+                rotate: [0, 360],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Star className="h-6 w-6 text-bengali-gold" fill="currentColor" />
+            </motion.div>
+          )}
 
           {/* Event Title with Animation */}
           <motion.div 
@@ -358,15 +371,17 @@ const EnhancedEventCard: React.FC<EnhancedEventCardProps> = ({ event, index }) =
             ))}
           </div>
 
-          {/* Calendar Integration */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 + 0.8 }}
-            className="mb-6"
-          >
-            <CalendarIntegration event={event} />
-          </motion.div>
+          {/* Calendar Integration - only for upcoming events */}
+          {!isPast && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 + 0.8 }}
+              className="mb-6"
+            >
+              <CalendarIntegration event={event} />
+            </motion.div>
+          )}
 
           {/* Description with Typewriter Effect */}
           <motion.p 

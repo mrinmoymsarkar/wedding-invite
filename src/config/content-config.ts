@@ -3,7 +3,7 @@ export const CONTENT_CONFIG = {
   // === HERO SECTION ===
   hero: {
     welcomeMessage: 'Join us in celebrating our sacred union with Bengali traditions and blessings',
-    countdownTitle: 'Days Until Our Sacred Union'
+    countdownTitle: 'Days Until Our Reception'
   },
 
   // === EVENTS SECTION ===

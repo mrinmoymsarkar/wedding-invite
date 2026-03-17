@@ -96,7 +96,12 @@ const Events: React.FC = () => {
 
         {/* Events Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
-          {weddingEvents.map((event, index) => (
+          {[...weddingEvents].sort((a, b) => {
+            const now = new Date().toDateString();
+            const aPast = new Date(a.date) < new Date(now) ? 1 : 0;
+            const bPast = new Date(b.date) < new Date(now) ? 1 : 0;
+            return aPast - bPast;
+          }).map((event, index) => (
             <motion.div
               key={event.id}
               initial={{ opacity: 0, y: 30 }}
