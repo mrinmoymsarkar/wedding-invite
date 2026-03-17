@@ -51,11 +51,11 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
       date: '2026-03-22',
       time: '6:45 PM onwards',
       venue: 'RCF Community Hall, Alibag',
-      description: 'A grand celebration to honor the newly married couple with family, friends, and the extended community, featuring traditional Bengali cuisine and cultural performances.',
+      description: 'A grand celebration to honor the newly married couple with family, friends, and the extended community, featuring dinner and cultural performances.',
       rituals: [
         'Welcome of guests by both families',
         'Cultural performances and music',
-        'Traditional Bengali feast',
+        'Dinner',
         'Photography and video sessions',
         'Blessing ceremony by community elders'
       ],
@@ -113,11 +113,11 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
       date: '2026-03-22',
       time: '৬:৪৫ PM থেকে',
       venue: 'আরসিএফ কমিউনিটি হল, আলিবাগ',
-      description: 'পরিবার, বন্ধু ও সমাজের সাথে নবদম্পতিকে সম্মান জানানোর একটি জমকালো উদযাপন, যেখানে ঐতিহ্যবাহী বাঙালি রান্না ও সাংস্কৃতিক অনুষ্ঠান থাকবে।',
+      description: 'পরিবার, বন্ধু ও সমাজের সাথে নবদম্পতিকে সম্মান জানানোর একটি জমকালো উদযাপন, যেখানে রাতের খাবার ও সাংস্কৃতিক অনুষ্ঠান থাকবে।',
       rituals: [
         'দুই পরিবারের পক্ষ থেকে অতিথিদের স্বাগত',
         'সাংস্কৃতিক অনুষ্ঠান ও সংগীত',
-        'ঐতিহ্যবাহী বাঙালি ভোজ',
+        'রাতের খাবার',
         'ফটোগ্রাফি ও ভিডিও',
         'সমাজের বয়োজ্যেষ্ঠদের আশীর্বাদ অনুষ্ঠান'
       ],
@@ -175,11 +175,11 @@ const EVENTS_BY_LANGUAGE: Record<Language, EventDetails[]> = {
       date: '2026-03-22',
       time: '६:४५ PM पासून',
       venue: 'आरसीएफ कम्युनिटी हॉल, अलिबाग',
-      description: 'कुटुंब, मित्र आणि समाजासह नवविवाहित जोडप्याचा सन्मान करण्यासाठी एक भव्य उत्सव, ज्यामध्ये पारंपारिक बंगाली पक्वान्ने आणि सांस्कृतिक कार्यक्रम असतील.',
+      description: 'कुटुंब, मित्र आणि समाजासह नवविवाहित जोडप्याचा सन्मान करण्यासाठी एक भव्य उत्सव, ज्यामध्ये रात्रीचे जेवण आणि सांस्कृतिक कार्यक्रम असतील.',
       rituals: [
         'दोन्ही कुटुंबांकडून पाहुण्यांचे स्वागत',
         'सांस्कृतिक कार्यक्रम आणि संगीत',
-        'पारंपारिक बंगाली मेजवानी',
+        'रात्रीचे जेवण',
         'फोटोग्राफी आणि व्हिडिओ',
         'समाजातील वडीलधाऱ्यांकडून आशीर्वाद समारंभ'
       ],
