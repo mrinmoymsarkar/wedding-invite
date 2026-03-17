@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, MapPin, Heart } from 'lucide-react';
+import { Calendar, MapPin, Heart, Camera } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { WEDDING_CONFIG } from '../config/wedding-config';
@@ -9,6 +9,11 @@ import PDFInvitation from './PDFInvitation';
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
+  const receptionDate = new Date('2026-03-22T18:45:00+05:30');
+  const weddingDateObj = new Date('2026-03-09T00:00:00+05:30');
+  const now = new Date();
+  const weddingPast = now > weddingDateObj;
+  const allEventsPast = now > receptionDate;
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -160,11 +165,15 @@ const Hero: React.FC = () => {
             >
               <div className="flex items-center justify-center lg:justify-start gap-3 text-royal-charcoal/80 dark:text-bengali-ivory/80">
                 <Calendar className="h-5 w-5 text-bengali-gold" />
-                <span className="font-body text-lg tracking-wide">{t('hero.wedding_date')}</span>
+                <span className="font-body text-lg tracking-wide">
+                  {weddingPast && !allEventsPast ? t('hero.reception_date') : t('hero.wedding_date')}
+                </span>
               </div>
               <div className="flex items-center justify-center lg:justify-start gap-3 text-royal-charcoal/80 dark:text-bengali-ivory/80">
                 <MapPin className="h-5 w-5 text-bengali-gold" />
-                <span className="font-body text-lg tracking-wide">{WEDDING_CONFIG.wedding.mainVenue}</span>
+                <span className="font-body text-lg tracking-wide">
+                  {weddingPast && !allEventsPast ? WEDDING_CONFIG.venues.reception.name : WEDDING_CONFIG.wedding.mainVenue}
+                </span>
               </div>
             </motion.div>
 
@@ -176,13 +185,13 @@ const Hero: React.FC = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
             >
               <motion.button
-                onClick={() => document.querySelector('#rsvp')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.querySelector(allEventsPast ? '#gallery' : '#rsvp')?.scrollIntoView({ behavior: 'smooth' })}
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.98 }}
                 className="btn-royal flex items-center justify-center gap-3"
               >
-                <Heart className="h-4 w-4" />
-                <span>{t('hero.rsvp_button')}</span>
+                {allEventsPast ? <Camera className="h-4 w-4" /> : <Heart className="h-4 w-4" />}
+                <span>{allEventsPast ? t('hero.view_memories') : t('hero.rsvp_button')}</span>
               </motion.button>
 
               <PDFInvitation />

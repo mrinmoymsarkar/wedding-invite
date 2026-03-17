@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Check, AlertCircle, Calendar } from 'lucide-react';
+import { Send, Check, AlertCircle, Heart } from 'lucide-react';
 import { useWeddingEvents } from '../data/events';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -18,6 +18,8 @@ interface RSVPForm {
 const RSVP: React.FC = () => {
   const { t } = useLanguage();
   const weddingEvents = useWeddingEvents();
+  const receptionDate = new Date('2026-03-22T18:45:00+05:30');
+  const allEventsPast = new Date() > receptionDate;
   const [formData, setFormData] = useState<RSVPForm>({
     guestName: '',
     email: '',
@@ -89,6 +91,63 @@ const RSVP: React.FC = () => {
       setErrors(prev => ({ ...prev, [field]: undefined }));
     }
   };
+
+  if (allEventsPast) {
+    return (
+      <section id="rsvp" className="relative py-24 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-bengali-cream dark:bg-dark-900">
+          <div className="absolute inset-0 bg-royal-pattern opacity-30" />
+        </div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="mb-8"
+            >
+              <Heart className="h-16 w-16 mx-auto text-bengali-deep-red dark:text-bengali-gold" fill="currentColor" />
+            </motion.div>
+
+            <h2 className="heading-display text-4xl md:text-5xl lg:text-6xl text-royal-charcoal dark:text-bengali-ivory mb-4">
+              {t('rsvp.thankyou_title')}
+            </h2>
+
+            <p className="bengali-text text-xl md:text-2xl text-bengali-deep-red dark:text-bengali-gold mb-8">
+              {t('rsvp.thankyou_title_local')}
+            </p>
+
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <div className="w-16 h-px bg-gradient-to-r from-transparent to-bengali-gold/50" />
+              <div className="w-2 h-2 rotate-45 border border-bengali-gold/50" />
+              <div className="w-16 h-px bg-gradient-to-l from-transparent to-bengali-gold/50" />
+            </div>
+
+            <p className="font-body text-lg text-royal-charcoal/70 dark:text-bengali-ivory/70 max-w-2xl mx-auto leading-relaxed mb-10">
+              {t('rsvp.thankyou_message')}
+            </p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              viewport={{ once: true }}
+              className="elegant-card dark:elegant-card-dark rounded-lg p-6 md:p-8 max-w-md mx-auto"
+            >
+              <p className="bengali-text text-bengali-deep-red/80 dark:text-bengali-gold/80 text-base italic">
+                {t('rsvp.thankyou_blessing')}
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
 
   if (isSubmitted) {
     return (
